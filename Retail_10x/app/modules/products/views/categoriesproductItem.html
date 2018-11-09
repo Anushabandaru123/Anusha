@@ -1,0 +1,244 @@
+<div ng-include src="'modules/dashboard/views/header.html'" xmlns: xmlns:></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<section class="products">
+  <div ng-controller="categoriesCtrl">
+    <div class="container-fluid">
+
+      <div class="MaskLayer"
+           ng-class="{isClosed : !masked}">
+
+        <div class="MaskLayer-Content">
+          <p>
+
+          </p>
+        </div>
+      </div>
+
+      <div class="row row_margin">
+        <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding: 2px;">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 list-group">
+             <!-- <select id="mySelect" style="font-size:12px; padding:6px 6px;" class="form-control" ng-model="selectedvalue1" ng-change="selectData();">
+                <option value="{{xy.Name}}" selected="selected">
+                  {{xy.Name}}
+                </option>
+                <option class="indexfontsize" ng-repeat="xy in ListdeptProduct" value="{{xy.Name }}|{{ xy.id }}">
+                  {{xy.Name}}
+                </option>
+              </select>-->
+
+              <!--<ul>
+                <li ng-repeat="x in ListdeptProduct track by $index">
+                  <a href="" ng-click="traverse(x.subOptions[0].path, $index)" {{x.subOptions[0].path}}
+                     class="active" style="color:#000; ">{{ x.Name }}</span></a>
+                </li>
+              </ul>-->
+              <h4 style="margin-left: 14px" class="capital">  Departments:</h4>
+
+              
+              <div class="list-group" style=" height: 700px; overflow-y: auto">
+                <div id="mySelect" class="list-departmet-items" ng-class="{'selectedlist':x.Name==xy.Name} " ng-repeat="x in ListdeptProduct"   >
+                  <div  ng-if="x.Name==xy.Name"  ng-click="selectData(x.Name , x.id );" style="color: white">
+                 {{ x.Name}}
+                  </div>
+                  <div ng-if="x.Name!=xy.Name"  ng-click="selectData(x.Name , x.id );">
+                    {{ x.Name}}
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 dashbordbg-navbar ">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+                  <h3>{{option}}</h3>
+                </div>
+                <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+                  <div class="pathindicatorsize "><p class="startpathname">
+                <p class="startpathname capital">
+         <a ui-sref="dashBoard">{{'Retaillang.DASHBOARD' | i18n}}
+                  
+                </a>
+                      >
+                      <a ui-sref="departments" class="capital">
+                        {{'Retaillang.DEPARTMENT' | i18n}}</a></li>
+                      >
+                      <span ui-sref="categories" class="currentpathname capital">{{option}}
+
+
+        </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12  col-md-2  col-lg-2">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div ng-if="role=='retailer'">
+                    {{ 'Retaillang.select-area' | i18n }}
+                  </div>
+                  <div ng-if="role=='cpg'">
+                    {{ 'Retaillang.DataSource' | i18n }}
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div ng-if="role=='retailer'">
+
+                  
+    <select class="form-control deptbrdr " data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getSelectedProduct(selectedOption.store_id);"></select>
+
+
+
+                  </div>
+                  <div ng-if="role=='cpg'">
+                    <div ng-if="ctrl.treeDropdownstatus">
+                      <tree-dropdown class="tree-dropdown deptbrdr " data="ctrl.treeData" selected="ctrl.selected"             callback="getcpgrecord();"></tree-dropdown>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fontChange">
+                  <span class="glyphicon glyphicon-stop"></span>
+                  {{ 'Retaillang.ReportTimePeriod' | i18n }}
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div  id="reporttime-product" class="form-control indexfontsize deptbrdr " style="cursor: default;">
+                    <span></span>
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign salesdtpkr"></i>
+                    <b class="calendaralign"></b>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 chnageFontColor">
+                   <span class="glyphicon glyphicon-stop"></span>
+                  {{ 'Retaillang.CompareTimeperiod' | i18n }}
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                  <div class="right-inner-addon ">
+                    <i  class="glyphicon glyphicon-calendar fa fa-calendar calendaralign salesdtpkr"></i>
+                    <input type="text" name="daterange" class="form-control indexfontsize deptbrdr " style="cursor: default"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!--   <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4 fontChange">
+              <span class="glyphicon glyphicon-stop"></span> <span
+              ng-bind="ReportTimePeriod"> {{ReportTimePeriod}}</span>
+            </div>
+            <div class="col-xs-12 col-sm-8  col-md-4  col-lg-4 chnageFontColor">
+              <span class="glyphicon glyphicon-stop"></span> {{compareTimePeriod}}
+            </div>
+            <div class="  col-md-1 col-lg-2"></div> -->
+
+           <!-- <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" align="right">
+              <div class="btn-group" class="charttype-btn-group">
+                <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('line');"><img
+                  ng-src="{{imgline}}"></button>
+                <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('bar');"><img
+                  ng-src="{{imgbar}}"></button>
+                &lt;!&ndash;
+                <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('map');"><img style="width: 14px;height: 14px" ng-src="{{imgmap}}"></button>
+                        &ndash;&gt;
+              </div>
+            </div>-->
+          <!-- </div> -->
+          <br>
+
+          <hr>
+
+
+
+
+            <div class="row dashbordbg-baranddonutchart">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row topproducts">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <!--<h3>{{ 'dashboard.TopProducts' | i18n }}</h3>-->
+                    <h4 class="capital"> Categories </h4>
+                    <br>
+                    <div class="topproducts">
+                     <!-- <div ng-if="spin">
+                        <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+                              spinner-start-active="false"></span>
+                      </div>-->
+                      <div ng-if="alltopDepartments && categoriesdata.length > 0">
+
+                        <categories-directive id="Categoriesid" data="categoriesdata"
+                        chartheight="chartheight"></categories-directive>
+                      </div>
+                      <div ng-if="categoriesdata.length == 0">
+
+              <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+
+                      </div>
+
+                    </div>
+
+
+                  </div>
+
+              <!--    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    &lt;!&ndash;<h3>{{ 'dashboard.TopProducts' | i18n }}</h3>&ndash;&gt;
+                    <h4> Products</h4>
+                    <br>
+                    <div class="topproducts">
+                      <div ng-if="spin">
+                        <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+                              spinner-start-active="false"></span>
+                      </div>
+                      <div ng-if="alltopDepartments">
+                        <categories-directive id="chartid1" data="DeparmentData"></categories-directive>
+                      </div>
+                      &lt;!&ndash;<div ng-if="alltopDepartments">
+                        <manfacturer-directive id="chartid1" data="DeparmentData"></manfacturer-directive>
+                      </div>&ndash;&gt;
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <a class="allProducts space" ng-click="allproductshow();">{{ 'Retaillang.AllProducts' | i18n }}
+                          <span class="glyphicon glyphicon-chevron-right"></span></a>
+                      </div>
+                    </div>
+
+                  </div>-->
+                  <br>
+                </div>
+
+
+                <div style="margin-bottom: 233px"></div>
+                <hr>
+              </div>
+            </div>
+
+
+
+        </div>
+      </div>
+      <!---->
+
+    </div>
+    </div>
+
+</section>

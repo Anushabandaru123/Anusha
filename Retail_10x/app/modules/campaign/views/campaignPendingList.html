@@ -1,0 +1,150 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<section class="products">
+<div ng-controller="campaignListCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="row dashbordbg-navbar cmplistnav">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2 " style="padding-right:60px;">
+<div class="row cmplistverticalLine">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
+<div ng-if="campaign_status==='Pending' || campaign_status==='null'" class="selected-link " style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})">
+UPCOMING</a>
+</div>
+<div ng-if="campaign_status!=='Pending' && campaign_status!=='null'" class="campaign-link " style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})">
+UPCOMING</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="campaign_status==='Active' || campaign_status==='null'" class="selected-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+<div ng-if="campaign_status!=='Active' || campaign_status==='null'" class="campaign-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="campaign_status==='Archive'" class="selected-link cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a>
+</div>
+<div ng-if="campaign_status!=='Archive'" class="campaign-link cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a></div>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10" style="padding-right:38px;margin-left:0px;">
+<div ng-if="campaign_status=='Pending'">
+<div class='row campaignListmargin' ng-repeat="list in   campaignrecords">
+<div class="row" style="margin-top:-13px;">
+<div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">
+<div ng-if="campaign_status=='Pending' ">
+<h2 ng-click="CampainDetailBeforeLaunch(list)"
+    style=" outline: none; font-weight: bold; font-size:24px;color:black;">
+    {{list.CampaignsName}}</h2>
+</div>
+<div ng-if="campaign_status=='Active'|| campaign_status=='Archive'">
+<h2 ng-click="CampainDetailLaunch(list)"  style=" outline: none; font-weight: bold; font-size:24px;color:black;">
+  {{list.CampaignsName}}</h2>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5"  style="margin-top: 10px">
+<div class="row">
+<center>
+<div class="col-xs-7 col-sm-7 col-md-6 col-lg-5 compagin_font" style="padding: 0px;">
+<p><span style=" color: grey;" >From:</span>
+<span>{{list.sdate}}</span></p>
+</div>
+</center>
+<center>
+<div class="col-xs-5 col-sm-5 col-md-6 col-lg-7 compagin_font" style="padding: 0px;margin-top: 10px;">
+<span style="color: grey;" >To: </span>
+<span>{{list.edate}}</span>
+</div>
+</center>
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top:13px;">
+<div class="col-xs-12 col-sm-6  col-md-7  col-lg-7" >
+<!--{{list.description}}-->
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5" style="margin-top:-6px;">
+<div class="row">
+<center>
+<div class="col-xs-7 col-sm-7 col-md-6 col-lg-5 compagin_font" style="padding: 0px;">
+</div>
+</center>
+<center>
+<div class="col-xs-5 col-sm-5 col-md-6 col-lg-7 compagin_font" style="padding: 0px;margin-top: 10px;">
+<div ng-if="list.camp_status=== '1'"  >
+    Status: Incomplete 
+</div>
+<div ng-if="list.camp_status=== '2'"  >
+        Status: Saved
+</div>
+  
+<div ng-if="list.camp_status=== '3'"  >
+        Status: In Progress
+</div>
+<div ng-if="list.camp_status=== '4'"  >
+        Status: Approved
+</div>
+</div>
+</center>
+</div>
+</div>
+</div>
+<br><br>
+<div class="line-divider"></div> 
+</div>
+<div ng-show="len == 0 ">
+<div class="row campaigns-border campaignListmargin">
+<center><h2> No {{campaign_status+" "}} Campaigns</h2></center>
+</div>
+</div>
+</div>
+</div>    
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

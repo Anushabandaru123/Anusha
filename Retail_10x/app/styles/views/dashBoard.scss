@@ -1,0 +1,618 @@
+$logo-url: '../images/retail-logo.png';
+$ferroro-logo:'../images/ferrero-logo.png';
+$cardenas-logo:'../images/carnicerias.jpg';
+$calender-icon:'../images/calendar.png';
+
+
+
+@mixin image-background($background-image) {
+  background-image: url($background-image) !important;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+
+
+@mixin backgroundColor() {
+    background-color: #dddddd;
+}
+
+body {
+
+@include  backgroundColor();
+
+}
+
+.navbar-default {
+  background-color: white;
+  border-color: red;
+}
+
+/*.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+  color: Black;
+  background-color: transparent;
+  border-bottom: 4px solid red;
+
+}*/
+
+.navbar-default .navbar-nav > li > a {
+
+  color: Black;
+}
+
+.navbar {
+  position: fixed;
+  min-height: 50px;
+  margin-bottom: 0px !important;
+  /* border: 1px solid transparent; */
+}
+
+/*.navbar-brand{
+
+  margin-right: 100px;
+}*/
+
+@media (min-width: 800px) {
+  .navbar-brand {
+
+    margin-right: 100px;
+  }
+}
+
+.calendaralign {
+  float: right;
+
+}
+
+.rowBorder {
+  border: 9px solid white;
+  background-color: white;
+}
+
+.columnborder {
+
+  border: 2px solid white;
+  background-color: white;
+}
+
+.rowstyle {
+  margin-top: 5px;
+}
+
+.box {
+  padding: 0 5px 0 5px;
+}
+
+.box .inner {
+  background-color: #fff;
+}
+
+.button-comp {
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px -18px;
+  cursor: pointer;
+}
+
+.button-complg {
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 0px;
+  cursor: pointer;
+}
+
+.button3 {
+  //background-color: #f44336;
+  //margin-top: 15px;
+
+  background-color: #f44336;
+  /* margin-top: -10px; */
+  border-radius: 25px;
+  float: right;
+  margin-right: -10px;
+}
+
+/* Red */
+
+table {
+  border-collapse: collapse;
+  font-size: 10px;
+  width: 100%
+
+}
+
+th, td {
+  text-align: left;
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: #d9edf7
+}
+
+/*  for donut chart css*/
+#chartdiv {
+  width: 100%;
+  height: 400px;
+  font-size: 10px;
+}
+
+/*  for bar chart css*/
+
+#chart1div {
+  width: 100%;
+  height: 550px;
+  font-size: 11px;
+
+}
+
+.campaintitle {
+
+  color: orangered;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.campaingtitlename {
+
+  color: black;
+  margin-top: 20px;
+  margin-left: 2px;
+  //margin-left: -30px;
+}
+
+
+
+.compaingratio {
+  color: green;
+  margin-top: 35px;
+  font-size: 25px;
+}
+
+.compaingratiobig {
+  color: green;
+  margin-top: 0px;
+  font-size: 20px;
+}
+
+
+
+
+.logo {
+  @include image-background($logo-url);
+  /* width: 155px;
+   height: 45px;
+   background-color: white;*/
+
+  width: 155px;
+  height: 50px;
+
+  background-repeat: no-repeat;
+  background-position: 30% 50%;
+  background-size: 75%;
+  cursor: pointer;
+
+}
+
+
+
+.calender {
+  @include image-background($calender-icon);
+  /* width: 155px;
+   height: 45px;
+   background-color: white;*/
+
+  width: 155px;
+  height: 50px;
+
+  background-repeat: no-repeat;
+  background-position: 30% 50%;
+  background-size: 75%;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+.ferroro-logo {
+  @include image-background($ferroro-logo);
+  /* width: 155px;
+   height: 45px;
+   background-color: white;*/
+
+  width: 155px;
+  height: 50px;
+
+  background-repeat: no-repeat;
+  background-position: 30% 50%;
+  background-size: 75%;
+  cursor: pointer;
+
+}
+
+.cardenas-logo {
+  @include image-background($cardenas-logo);
+  /* width: 155px;
+   height: 45px;
+   background-color: white;*/
+
+  width: 155px;
+  height: 56px;
+
+  background-repeat: no-repeat;
+  background-position: 30% 50%;
+  background-size: 75%;
+  cursor: pointer;
+
+}
+
+
+
+.Loginlogo {
+  @include image-background($logo-url);
+  /* width: 155px;
+   height: 45px;
+   background-color: white;*/
+  width: 250px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-position: 30% 80%;
+  background-size: 75%;
+  cursor: pointer;
+
+}
+
+.right-inner-addon {
+  position: relative;
+}
+
+.right-inner-addon input {
+  padding-right: 0px;
+}
+
+.right-inner-addon i {
+  position: absolute;
+  right: 0px;
+  padding: 10px 12px;
+  pointer-events: none;
+}
+
+//LINE CHAT BOX STYLES......
+
+.page_dashboard_box_well {
+  min-height: 170px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  background-color: rgba(50, 149, 230, 0.08);
+  border: 1px solid rgba(50, 149, 230, 0.05);
+  border-radius: 2px;
+  box-shadow: inset 0 0px 0px rgba(50, 149, 230, 0.13);
+}
+
+.page_dashboard_box_number {
+  float: left;
+  width: 80%;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  font-size: 90%;
+  font-weight: bold;
+  color: #428dc9;
+  text-align: left;
+  overflow: hidden;
+}
+
+.page_dashboard_box_title {
+  width: auto;
+  height: 20px;
+  line-height: 27px;
+  font-size: 80%;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.page_dashboard_box_index_outer {
+  float: right;
+  width: 20%;
+  height: 40px;
+}
+
+.page_dashboard_box_index_title {
+  width: 100%;
+  height: 15px;
+  line-height: 15px;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #222222;
+  text-align: center;
+  overflow: hidden;
+}
+
+
+.page_salesRegion_box_index_title {
+  width: 100%;
+  height: 15px;
+  line-height: 15px;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #222222;
+  //text-align: center;
+  overflow: hidden;
+}
+
+.page_dashboard_box_index {
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+.page_dashboard_box_index.green {
+  background-color: #47A447;
+  height: 53%;
+}
+
+.page_dashboard_box_index.red {
+  background-color: #D9534F;
+  height: 53%;
+}
+
+.page_dashboard_box_tooltip {
+  width: 12px;
+  height: 30px;
+  margin-left: 2px;
+  display: inline-block;
+  background-image: url(../images/icon_help.png);
+  background-repeat: no-repeat;
+  background-position: 50% 40%;
+  background-size: 12px 12px;
+}
+
+.line_chart_box {
+  width: 100%;
+  height: 120px!important;
+  margin-bottom: -5px;
+  overflow: hidden;
+}
+
+#mapChartdiv {
+  height: 250px;
+}
+
+#mapChartdiv12 {
+  height: 250px;
+}
+
+.dashbordbg-navbar {
+  background-color: white;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.dashbordbg-linechart {
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.dashbordbg-baranddonutchart {
+  background-color: white;
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.dashbordbg-mapchart {
+  background-color: white;
+  padding: 0px;
+  margin-top: 4px;
+}
+
+.dashbordbg-campaign {
+  background-color: white;
+  margin-right: 2px;
+  padding:30px;
+}
+
+.fontChange {
+  color: #00b3ee;
+}
+
+.chnageFontColor {
+  color: #c50488;
+}
+
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    /* padding-bottom: 15px;*/
+  }
+}
+
+.dashbordbg-campaign-xs {
+  background-color: white;
+  margin-top: 10px;
+
+}
+
+.bordercompaign {
+
+  border: 1px solid #DDDDDD;
+  margin-top: 5px;
+  padding: 2px;
+}
+
+.space {
+
+  margin-left: 20px;
+}
+
+.partition {
+  margin-left: 1px;
+}
+
+.map_list_box {
+  border: none;
+  margin: 0px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0px;
+}
+
+
+
+.map_list_box_title {
+  margin: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: -10px;
+  margin-top: 10px;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  font-size: 12px;
+  padding: 10px 16px;
+  margin-bottom: 0px;
+  background-color: #fff;
+ /* border: 1px solid #ddd;*/
+}
+
+
+
+
+.navbar {
+  position: fixed;
+
+}
+
+.row_margin {
+  margin-top: 42px;
+}
+
+.fixedrow {
+  position: fixed;
+  //margin-bottom: 5px;
+}
+
+.allProducts {
+  color: red;
+  cursor: pointer;
+}
+.onestore {
+  color: black;
+  cursor: pointer;
+}
+
+.allProductslink {
+
+ margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.allProductslable {
+
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.topproducts {
+  min-height: 439px;
+}
+
+.topproductsbarchart {
+  min-height: 300px;
+}
+
+.dashboard-topproductbarstyle{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.dashboard-topdepartmentbarstyle{
+  padding-right: 15px;
+ // padding-left: 19px;
+}
+
+.active-menu{
+  background-color: transparent;
+  border-bottom: 4px solid red;
+}
+
+.navbar-default .navbar-nav > li > a.active-menu{
+  color: #FF6600;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: black;
+}
+
+.space-bottom{
+  margin-bottom: 20px;
+}
+
+.charttype-btn-group{
+  height: 2px;
+}
+.product-text{
+  color: rgba(51, 51, 51, 0.88);
+  padding-top: 0%;
+}
+.product-text-arrow{
+  color: rgba(11, 115, 6, 0.92);
+  padding-top: 0%;
+}
+
+.product-text-arrowred{
+  color: red;
+  padding-top: 0%;
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 13px 15px;
+    margin-top: 5px !important;
+}
+
+.amcharts-pie-slice {
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition-duration: 0.3s;
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  cursor: pointer;
+  box-shadow: 0 0 30px 0 #000;
+}
+
+.amcharts-pie-slice:hover {
+  transform: scale(1.1);
+  filter: url(#shadow);
+}       

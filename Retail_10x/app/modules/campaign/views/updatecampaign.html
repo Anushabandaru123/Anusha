@@ -1,0 +1,290 @@
+  <div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+  <div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+  <script type="text/ng-template" id="customTemplate.html">
+
+<a>
+<img ng-src="{{match.model.image}}" width="60">
+<span ng-bind-html="match.model.product | uibTypeaheadHighlight:query"></span>
+<span></span>
+<span ng-bind-html="match.model.price | uibTypeaheadHighlight:query"></span>
+</a>
+</script>
+<style>
+
+#scrollable-dropdown-menu .dropdown-menu {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+.dropdown-menu {
+    /*display: block;*/
+    height: 250px;
+    overflow: auto;
+  }
+</style>
+
+<section class="products">
+<div ng-controller="campaignUpdateCtrl">
+<div class="container-fluid">
+<div class="row row_margin dashbordbg-navbar">
+<div class="campaignForm">
+<div class="row">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-12 col-sm-6 col-md-6 col-lg-6">
+<h2 class="capital">Edit Campaign</h2>
+</div>
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="text-align:right">
+<span><!--{{ 'Retaillang.camp-step' | i18n }}--></span>
+</div>
+</div>
+<br>
+<br>
+<form name="userForm" ng-submit="RegisterCampaign('update');" validate>
+<!-- <div ng-repeat="update in  RegisterCampaigns">-->
+<div class="row">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+<h5 class="left-align capital">{{ 'Retaillang.camp-Name'|i18n }}</h5>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<label class="capital">{{ 'Retaillang.camp-Name' | i18n }}</label>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<input type="text" class="form-control" ng-model="campaignName" placeholder="Enter campaign name" required>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+<h5 class="left-align capital">
+{{ 'Retaillang.camp-product' | i18n }}</h5>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<label class="capital">{{ 'Retaillang.camp-product' | i18n }}</label>
+</div>
+<div class="right-inner-addon col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="row" ng-repeat="product in selectedProductarray" style="margin-bottom: 10px">
+<div ng-if="myfunc(product.id)">
+<div class="row">
+<div class="col-xs-1 col-sm-2 col-md-1 col-lg-1" style="margin-left:15px;">
+<img src="{{product.image}}" width="45px" height="45px"></P>
+</div>
+<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+<p style="padding:14px;">{{product.Name}}</P>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<a ng-click="removeproduct(product.Name);">
+<span style="color:blue;padding:17px;" class="glyphicon glyphicon-remove">
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div ng-show="productfield==true">
+<div class="row">
+<div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+<i class="glyphicon glyphicon-search"></i>
+<input type="text" ng-model="product"
+       class="form-control"
+       typeahead-min-length="3"
+       uib-typeahead="typeaheadList.product for typeaheadList in GetProductList($viewValue) "
+       typeahead-on-select="product"
+       typeahead-loading="loadingLocations"
+       typeahead-no-results="noResults" autocomplete="off"
+       typeahead-template-url="customTemplate.html"
+       required>
+</div>
+<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+<button type="button" class="form-control button-margin" ng-click="addProduct(product);">
+{{'Retaillang.camp-addbtn' | i18n }}
+</button>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+<div ng-if="Noproductsselected">
+<span style="color: red">
+      Please Add Product Details
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+<h5 class="left-align">{{ 'Retaillang.camp-desc' | i18n }}</h5>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<label>{{ 'Retaillang.camp-desc' | i18n }}</label>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<textarea type="text" class="form-control" ng-model="description" rows="4" placeholder="Enter Description.." required></textarea>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+<h5 class="left-align capital">
+  {{ 'Retaillang.camp-loc' | i18n }}</h5>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<label class="capital">{{ 'Retaillang.camp-loc' | i18n }}</label>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="checkbox" ng-repeat="loc in LocationList track by $index">
+<label class="col-sm-2 col-md-3 col-lg-3">
+<!-- value="{{loc.location}}|{{loc.location_id}}   ng-model="location_idarray[{{loc.location_id}}]" -->
+<input id="{{loc.location_id}}" type="checkbox" ng-model="location_id" ng-change="updateitemlocation(loc.location_id,this)" value="loc.location_id">
+{{loc.location}}</label>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="hidden-xs col-sm-4 col-md-4 col-lg-4"></div>
+<div class="col-xs-9 col-sm-8 col-md-8 col-lg-8">
+<div ng-if="NoLocationselected">
+<span style="color: red">
+      Please Fill Location Details
+</span>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="hidden-12 col-sm-2 col-md-2 col-lg-3"></div>
+<!-- for sm md and lg-->
+<div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">
+<h5 class="left-align capital">
+{{ 'Retaillang.camp-start' | i18n }}
+</h5>
+</div>
+<div class='col-xs-12 col-sm-2 col-md-2 col-lg-2 input-group date date-icon'>
+<input type="text" id="startcapaigndate" ng-model="campaignstartdate" class="form-control" placeholder="mm/dd/yyyy"  required>
+<label class="input-group-addon" for="startcapaigndate" style="cursor: pointer;">
+<span class="fa fa-calendar"></span>
+</label>  
+<!-- <input type='date' style="font-size: 12px" ng-model="startdate" class="form-control" required/> -->
+</div>
+<div class="col-xs-3 col-sm-1 col-md-1 col-lg-1">
+<h5 class="left-align capital">
+{{ 'Retaillang.camp-end' | i18n }}
+</h5>
+</div>
+<div class='col-xs-11 col-sm-2 col-md-2 col-lg-2 input-group date date-icon'>
+<input type="text" class="form-control" ng-model="campaignenddate" id="endcapaigndate" placeholder="mm/dd/yyyy" required>
+<label class="input-group-addon " for="endcapaigndate" style="cursor: pointer;">
+<span class="fa fa-calendar"></span>
+</label>   
+<!-- <input type='date' style="font-size: 12px" ng-model="enddate" class="form-control" required/> -->
+</div>
+</div><!--   date pickers row -->
+<br>
+<br>
+<div class="row" style="margin-bottom: 10px">
+<div class="hidden-xs col-sm-1 col-md-2 col-lg-2"></div>
+<div class="hidden-xs col-sm-3 col-md-2 col-lg-2">
+<h5 class="left-align capital">
+{{ 'Retaillang.camp-selectStore' | i18n }}</h5>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<label class="capital">
+{{ 'Retaillang.camp-selectStore' | i18n }}
+</label>
+</div>
+<div class="right-inner-addon col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="row" ng-repeat="list in selectedstores" style="margin-bottom: 10px">
+<div ng-if="myfunc(list.id)">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+<p style="color: #003bb3">{{list.storeName}}</p>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<a ng-click="removeproductstore(list.storeName);">
+<span style="color:grey;padding:8px;"
+      class="glyphicon glyphicon-remove">
+</span>
+</a>
+</div>
+</div>
+</div>
+<hr class="hr-class"></hr>
+</div>
+<div ng-if="list.storeName=='All Stores'">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+<p style="color: #003bb3">{{list.storeName}}</p>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+<a ng-click="removeproductstore(list.storeName);">
+<span style="color:grey;padding:8px;"
+      class="glyphicon glyphicon-remove"></a>
+</div>
+</div>
+</div>
+<hr class="hr-class"></hr>
+</div>
+<!--</div>-->
+</div>
+
+<div class="row">
+<div id="scrollable-dropdown-menu" class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+<i class="glyphicon glyphicon-search"></i>
+<input id="SelectStore" type="text"
+       ng-model="store"
+       class="form-control"
+       typeahead-min-length="3"
+       uib-typeahead="Lists.store_name for Lists in List | filter:$viewValue"
+       autocomplete="off">
+</div>
+<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+<button type="button" class="form-control button-margin " ng-click="addStore();">
+{{'Retaillang.camp-addbtn' | i18n }}
+</button>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
+<div ng-if="Nostoresselected">
+<span style="color: red">
+    {{'Retaillang.NoStoresselectederror' | i18n }} 
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="row" style="margin-top: 20px">
+<hr class="hr-line">
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<center>
+<button type="submit"
+       class="btn campaignForm-btn" invalid-checker="200">
+       {{ 'Retaillang.startcampaignbtn' | i18n }}
+</button>
+</center>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<br>
+<br>

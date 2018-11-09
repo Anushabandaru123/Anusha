@@ -1,0 +1,13 @@
+<!-- <div ng-if="chartdata.length>0" id="{{chartid}}" data="{{chartdata}}"   
+  style="min-width: 100%; height: 100px; margin: 0 auto"></div> -->
+
+
+
+<div ng-if="chartdata.length>0"  id="{{id}}" retailers="{{retailers}}" reportstarttime="{{reportstarttime}}" reportendtime="{{reportendtime}}" comparestarttime="{{comparestarttime}}" compareendtime="{{compareendtime}}"
+ product="{{product}}"  style="min-width: 100%; height: 100px; margin: 0 auto"></div>
+
+
+<div ng-if="chartdata.length==0">
+<div  style=" min-width: 100%; height: 100px; margin: 0 auto">
+	 <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+</div></div>

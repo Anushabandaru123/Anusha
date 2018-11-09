@@ -1,0 +1,279 @@
+<div ng-include src="'modules/dashboard/views/header.html'" xmlns: xmlns:></div>
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+<script type="text/ng-template" id="customTemplate.html">
+          <a>
+          <!-- <img ng-src="{{match.model.image}}" width="30"> -->
+          <span ng-bind-html="match.model.product | uibTypeaheadHighlight:query"></span>
+          <span></span>
+          <span ng-bind-html="match.model.price | uibTypeaheadHighlight:query"></span>
+          <br>
+          <span style="font-size:13px !important" ng-bind-html="match.model.upc | uibTypeaheadHighlight:query"></span>
+          </a>
+ </script>
+ <section class="products">
+ <div ng-controller="individualproductCtrl">
+ <div class="container-fluid">
+ <div class="MaskLayer" ng-class="{isClosed : !masked}">
+ <div class="MaskLayer-Content">
+ <p>
+ </p>
+ </div>
+ </div>
+<div class="row row_margin dashbordbg-navbar" >
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left:20px;padding-right:35px; ">
+
+<div class="row " ng-if="role=='cpg'">
+<div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+    <div class="row productDetails-filter" style="margin-bottom:-11px;padding-top: 15px;padding-bottom:4px;margin-left: -20px;margin-right:-9px margin-top:-7px">
+    <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >           <h5><b>SALES AREA</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd"> 
+              <div class=" newright-inner-addon" >
+                <i ng-if="!loadingLocations" class="glyphicon glyphicon-search prdghcolor" style="right:13px;padding: 9px 10px;">  </i>
+                <i ng-if="loadingLocations" class="loader" style="right:13px;padding: 16px 10px;"></i>            
+              <input class="form-controldropdown typeahead" type="text" id="dmaValue"
+                     ng-model="dma" typeahead-min-length="3"
+                     uib-typeahead="dmaList.name for dmaList in getDmaList($viewValue)"
+                     typeahead-loading="loadingLocations"
+                     typeahead-no-results="noResults" autocomplete="off"
+                     placeholder="Enter DMA"  
+                     typeahead-on-select="selectDMA(dma)"  
+                     required style="width:100%">             
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >         <h5><b>Retailers</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+              <div ng-if="ctrl.treeDropdownstatus">              
+                 <tree-dropdown class="tree-dropdown " data="ctrl.treeData" selectdata="ctrl.selected" callback="getcpgrecord();" style="padding-left:0px;">
+                 </tree-dropdown>
+              </div>
+          </div>
+        </div>
+      </div>
+
+     </div>
+   </div>
+</div>
+
+
+
+<div class="row">
+<div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 productDetails-filter" style="margin-left: -7px;">
+<div class="row">
+
+<div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" style="margin-top: 7px;"  ng-if="role=='retailer'">
+<div >
+<select class="form-control indidept_margin" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getSelectedProduct(selectedOption.store_id);"></select>
+</div>
+<!-- <div ng-if="role=='distributor'">
+<select class="form-control indidept_margin" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);"></select>
+</div> -->
+<!-- <div ng-if="role=='cpg'">
+<div ng-if="ctrl.treeDropdownstatus">
+<tree-dropdown class="tree-dropdown indidept_margin" data="ctrl.treeData" selected="ctrl.selected" callback="getcpgrecord();" ></tree-dropdown>
+</div>
+</div> -->
+</div>
+
+
+<div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" style="margin-top: 10px;">  
+<select class="form-control bgcolor prdctwidth" ng-options="names.name for names in reporttimeranges " ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);">
+</select>  
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 prdctmargin " style="padding-right: 0px;">
+<div class="row">
+<div class="col-xs-5 col-sm-4 col-md-5 col-lg-5 fontChange nopadding dtpkrfont dtmargin prdctalign" >
+<span class="glyphicon glyphicon-calendar">
+</span>
+  {{'Retaillang.ReportTimePeriod' | i18n }}: 
+</div>
+<div class="col-xs-7 col-sm-8 col-md-7 col-lg-7 leftpadding" 
+ style="padding-right: 12px;text-align:left;">
+<div style="cursor: default; " id="reporttime-individual" class="form-control prdctfont xspadding navpadding">
+<span></span>
+<i class="glyphicon glyphicon-calendar fa fa-calendar product_calendaralign"></i>
+<b class="product_calendaralign"></b> 
+</div> 
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 prdctmargin " style="padding-right: 0px;">
+<div class="row">
+<div class="col-xs-5 col-sm-4 col-md-5 col-lg-5 chnageFontColor nopadding dtpkrfont dtmargin prdctalign">
+<span class="glyphicon glyphicon-calendar"></span>
+        {{ 'Retaillang.CompareTimeperiod' | i18n }}:
+</div>
+<div class="col-xs-7 col-sm-8 col-md-7 col-lg-7 leftpadding"  style="padding-right: 12px;">
+<div class="prdct-right-inner-addon ">
+<i class="glyphicon glyphicon-calendar fa fa-calendar product_calendaralign "></i>
+<input type="text"  name="daterange" class="form-control prdctfont xspadding navpadding" style="cursor: default;"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="row" style="margin-top:20px">
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="margin-left: -15px;">
+<div class="row inventoryfont" style="color:black">COMPARE PRODUCTS:</div> 
+<div class="row" style="padding-right: 6px;">  
+<div class=" newright-inner-addon" >
+<!-- <i ng-if="!loadingLocations" class="glyphicon glyphicon-search prdghcolor" >  
+</i> -->
+<i ng-if="loadingLocations" class="loader detailsearch"> </i> 
+<input type="text" ng-model="product"
+       class="form-control typeahead indisearchbox"
+       typeahead-min-length="3"
+       uib-typeahead="typeaheadList.upc for typeaheadList in GetProductList($viewValue) "
+       typeahead-on-select="productselected(product)"
+       typeahead-loading="loadingLocations"
+       typeahead-no-results="noResults" autocomplete="off"
+       typeahead-template-url="customTemplate.html"
+       placeholder="Find Product or UPC to compare"
+      required style="cursor: pointer;">
+                   
+<!-- <input type="text" id="myInput" ng-model="searchKeyword" 
+      class="form-control typeahead indisearchbox"
+      placeholder="Find Product or UPC to compare"
+      style="cursor: pointer;"> -->
+</div>
+</div>
+<div class="row compareprdct">COMPARE RELATED PRODUCTS:</div>
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="list-group" style="height:470px;overflow-y:auto; overflow-x:hidden;color:#555">
+<div ng-repeat="x in productList">
+<div  ng-if="x.status=='plus'" id="mySelect" class="list-departmet-items">
+<div  ng-click="selectedProduct(x);" style="word-wrap: break-word;">
+      {{ x.productName}}
+</div>
+</div>
+<div ng-if="x.status=='minus'" id="mySelect" class="list-departmet-items selectedlist" >
+<div  ng-click="selectedProduct(x);" style="word-wrap:break-word;">
+     {{ x.productName}}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 " >
+<div class="line-divider" style="margin-top:10px; margin-bottom:20px"></div>
+<div ng-repeat="item in itemsList">
+<div ng-show="item.linechart.linechart">
+<div class='row'style="margin-top:5px;">
+<div class='col-xs-12 col-sm-3 col-md-2 col-lg-3'>
+<div class="row"> 
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 indiprdctupc" 
+     ng-click="gotoProductdetail(item.linechart.itemNumber)"><b>
+      {{item.linechart.productName}}</b>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 indiprdctitem"  ng-click="gotoProductdetail(item.linechart.itemNumber)">
+      UPC:#{{item.linechart.itemNumber}}
+</div> 
+</div>
+</div>
+<div class='col-xs-12 col-sm-9 col-md-10 col-lg-9'>
+<div class="row">              
+<div class='col-xs-12 col-sm-6 col-md-3 col-lg-3'>
+<div class="indidept_page_dashboard_box_title" > 
+    {{'Retaillang.linechart_box1_title' | i18n}}
+</div>
+<div class="indidept_page_dashboard_box_number capital">
+                     ${{ item.linechart.total | number:2}}
+                  </div>
+               </div>
+
+               <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3' style="margin-left: -30px;">
+                  <div class="indidept_page_dashboard_box_title"> 
+                       UNITS SOLD
+                  </div>
+                  <div class="indidept_page_dashboard_box_number capital">
+                      {{item.linechart.unitsold.unitSoldbyRp|number :2}}
+                  </div>
+               </div>
+
+               <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 product-text' style="margin-left: -29px;">
+                  <div class="indidept_page_dashboard_box_title capital">  
+                         Shopping Trips 
+                  </div>
+                  <div class="indidept_page_dashboard_box_number capital">
+                       <div ng-if="item.linechart.shoppingtrips >= 1" id="index_dashboard_sales" class="{{getindexStyle(item.linechart.shoppingtrips)}}"> 
+  {{item.linechart.shoppingtrips}}
+ <img class="" ng-src="images/arrow-up-green.png">
+ </div>
+ <div ng-if="item.linechart.shoppingtrips < 1" id="index_dashboard_sales" class="{{getindexStyle(item.linechart.shoppingtrips)}}"> 
+  {{item.linechart.shoppingtrips}}
+ <img class="" ng-src="images/arrow-down-red.png">
+ </div>
+                   </div>
+                </div>
+
+               <div class='col-xs-12 col-sm-5 col-md-3 col-lg-3 product-text' style=" margin-left: -15px;">
+                 <div class="indidept_page_dashboard_box_title capital" >                  
+                    Avg. Basket size
+                 </div>
+                 <div class="indidept_page_dashboard_box_number capital indpadding">
+                   <div ng-if="item.linechart.avgbasket >= 1" id="index_dashboard_sales" class="{{getindexStyle(item.linechart.avgbasket)}}"> 
+  {{item.linechart.avgbasket}}
+ <img class="" ng-src="images/arrow-up-green.png">
+ </div>
+ <div ng-if="item.linechart.avgbasket < 1" id="index_dashboard_sales" class="{{getindexStyle(item.linechart.avgbasket)}}"> 
+  {{item.linechart.avgbasket}}
+ <img class="" ng-src="images/arrow-down-red.png">
+ </div>
+                 </div>
+              </div>
+               <div class='col-xs-12 col-sm-1 col-md-1 col-lg-1 removemargin' >
+                
+                 <div class="glyphicon glyphicon-remove-circle" style="font-size: 23px;
+                   color: grey;" ng-click="removePrdct(item.linechart.itemNumber)"></div>
+                  
+              </div>
+           </div>
+         </div>
+     </div>
+     <div class="row ng-hide">
+      <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+          <productcompare-directive id="item.linechart.id" data="item.linechart.data" itemnumber="item.linechart.itemNumber" unitsold="item.linechart.unitsold" dates="reportdateobject"></productcompare-directive>
+        </div>
+     </div>
+     <div class="line-divider" style="margin-top:5px; margin-bottom:20px"></div>
+   </div> 
+ </div> 
+ </div>
+      
+ 
+ 
+ 
+ 
+ 
+
+
+      
+
+
+
+</div>
+</div>
+</div> 
+</div>
+</div>
+</div>
+</section>
+ 

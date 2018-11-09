@@ -1,0 +1,17 @@
+<div>
+	<ul class="list-group">
+		  <li class="list-group-item map_list_box"><h5 class="map_list_box_title">{{'Retaillang.TOPSALESREGIONS' | i18n}}</h5></li>
+
+		  <li class="list-group-item map_list_box" ng-repeat="list in data| orderBy:'-amt'|limitTo : 5">
+        <ul class="list-inline row">
+          <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <!-- <a class="onestore"> -->
+          {{list.region}}
+          <!-- </a> -->
+          </li>
+          <li class="col-xs-6 col-sm-6 col-md-6 col-lg-6">${{list.amt| number : fractionSize}}</li>
+        </ul>
+      </li>
+		 
+	</ul>
+</div>

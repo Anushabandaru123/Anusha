@@ -1,0 +1,10 @@
+
+
+<div ng-if="chartdata.length>0" id="{{chartid}}" data="{{chartdata}}" style="min-width:310px;height:{{chartheight}};margin: 1 auto"></div>
+
+
+
+<div ng-if="chartdata.length==0">
+<div  style=" min-width: 310px; height: 450px; margin: 0 auto">
+	 <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+</div></div>

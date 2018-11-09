@@ -1,0 +1,202 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<section class="products">
+  <div ng-controller="campaignListCtrl">
+    <div class="container-fluid">
+
+      <div class="row row_margin">
+        <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 list-group">
+
+              <div class="list-group">
+
+                <div class="indexfontsize" class="sidebar-menu-item">
+                  <div class="row capital" ng-show="role=='retailer'">
+
+                    <div class="indexfontsize col-xs-10 col-sm-10 col-md-11 col-lg-11 ellipsis">
+                      <div ng-if="campaign_status==='Pending' || campaign_status==='null'" class="selected-link">
+                        <a ui-sref="campaignListPending({status: 'Pending'})">Pending</a>
+                      </div>
+                      <div ng-if="campaign_status!=='Pending' && campaign_status!=='null'" class="campaign-link">
+                        <a ui-sref="campaignListPending({status: 'Pending'})">Pending</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row capital">
+                    <div class="indexfontsize col-xs-10 col-sm-10 col-md-11 col-lg-11 ellipsis">
+                      <div ng-if="campaign_status==='Active' || campaign_status==='null'" class="selected-link">
+                        <a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+                      </div>
+                      <div ng-if="campaign_status!=='Active' || campaign_status==='null'" class="campaign-link">
+                        <a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row capital">
+                    <div class="indexfontsize col-xs-10 col-sm-10 col-md-11 col-lg-11 ellipsis">
+                      <div ng-if="campaign_status==='Archive'" class="selected-link">
+                        <a ui-sref="campaignListArchive({status: 'Archive'})">Archive</a>
+                      </div>
+                      <div ng-if="campaign_status!=='Archive'" class="campaign-link">
+                        <a ui-sref="campaignListArchive({status: 'Archive'})">Archive</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11 dashbordbg-navbar ">
+
+          <div class="row campaign-addnewcampaign campaign-btnmargin">
+
+            <div ng-show="role=='retailer'">
+              <button type="submit" ui-sref="Campaigns" class="btn create-campign-btn">{{'Retaillang.NewCampaign' |
+                i18n}}
+              </button>
+            </div>
+
+            <div class="col-xs-7 col-sm-10  col-md-10 col-lg-10">
+              <h4 class="capital">{{campaign_status}} Campaigns</h4>
+            </div>
+
+
+            <!--                 <div class="hidden-xs hidden-sm hidden-md col-lg-12" ng-show="role=='retailer'" align="right">
+                              <button type="submit" ui-sref="Campaigns" class="btn-sm newCampaign-btn ">{{'Retaillang.NewCampaign' | i18n}}</button>
+                            </div>
+                            <div class="hidden-xs hidden-sm col-md-12 hidden-lg" ng-show="role=='retailer'" >
+                              <button type="submit" ui-sref="Campaigns" class="btn newCampaign-btn ">{{'Retaillang.NewCampaign' | i18n}}</button>
+                            </div>
+                            <div class="hidden-xs col-sm-12 hidden-md hidden-lg" ng-show="role=='retailer'" >
+                              <button type="submit" ui-sref="Campaigns" class="btn-sm newCampaign-btn ">{{'Retaillang.NewCampaign' | i18n}}</button>
+                            </div>
+                            <div class="col-xs-12 hidden-sm hidden-md hidden-lg" ng-show="role=='retailer'" >
+                              <button type="submit" ui-sref="Campaigns" class="btnxs newCampaign-btn ">{{'Retaillang.NewCampaign' | i18n}}</button>
+                            </div>
+             -->
+          </div>
+
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4">
+              <div class="pathindicatorsize ">
+                <p class="pathblack capital"><a ui-sref="dashBoard ">{{'Retaillang.DASHBOARD' | i18n}}</a>
+                  >
+                  <a ui-sref="campaignListPending({status: 'Pending'})" class="pathblack capital">{{'Retaillang.CAMPAIGNS' |
+                    i18n}}</a></li>
+                  >
+                  <span class="startpath capital">{{campaign_status}}</span></p></div>
+            </div>
+
+          </div>
+
+
+
+          <div ng-show="len == 0 ">
+            <div class="row campaigns-border campaignListmargin">
+
+              <center><h2>
+               No {{campaign_status+" "}} Campaigns</h2></center>
+              <!-- <div class="col-xs-0 col-sm-3 col-md-4 col-lg-4"></div>
+              <div class="col-xs-12 col-sm-10 col-md-8 col-lg-8" style="margin-top: 15px;">
+                <h2> No {{campaign_status+" "}} campaigns</h2>
+              </div> -->
+            </div>
+          </div><br>
+
+          <div ng-if="campaign_status=='Pending'">
+            <div class='row campaigns-border campaignListmargin' ng-repeat="list in campaignrecords">
+
+              <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="vertical-align: middle">
+                <center><img class=" img-responsive thumb" ng-src="{{nutella}}" width="150px" height="150px"/></center>
+              </div>
+
+              <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-9  col-md-9  col-lg-9">
+                    <div ng-if="campaign_status=='Pending' ">
+                      <h2 ng-click="CampainDetailBeforeLaunch(list.campaign_id)"
+                          style="outline: none;font-weight: bold;color:rgb(236, 92, 6)">{{list.CampaignsName}}</h2>
+                    </div>
+                    <div ng-if="campaign_status=='Active'|| campaign_status=='Archive'">
+                      <h2 ng-click="CampainDetailLaunch(list)" style="font-weight: bold;color:rgb(236, 92, 6)">
+                        {{list.CampaignsName}}</h2>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" align="right">
+                    <div style="color:green; text-transform: uppercase; font-size: 14px; margin-top: 20px ">
+                      <!--{{campaign_status}}--></div>
+                  </div>
+                </div>
+                <br>
+
+                <div class="row" style="margin-bottom:10px">
+                  <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+
+                    <div class="row">
+                      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <p><span style="color: grey;" class="capital">{{'Retaillang.camp-START'| i18n }}</span><span
+                          style="font-weight:bold;">{{list.sdate}}</span></p>
+                      </div>
+                      <div class="col-xs-6 col-sm-3 col-md-4 col-lg-4">
+                        <span style="color: grey;" class="capital">{{'Retaillang.camp-END'| i18n }}</span><span
+                        style="font-weight:bold;">{{list.edate}}</span>
+                        <p style="font-weight: bold;"> {{loc}}</p>
+                      </div>
+                      <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                        <div class="row">
+                          <div class="hidden-xs hidden-sm col-md-7 col-lg-6" align="right">
+                            <div style="color: grey; font-size:12px" class="capital">{{'Retaillang.instorelocation'| i18n }}</div>
+                          </div>
+                          <div class="col-xs-6 col-sm-7 hidden-md hidden-lg">
+                            <div style="color: grey;" class="capital">{{'Retaillang.instorelocation'| i18n }}</div>
+                          </div>
+                          <div class="col-xs-6 col-sm-5 col-md-5 col-lg-6">
+                            <div ng-repeat=" loc in  list.location">
+                              <p style="font-weight: bold;"> {{loc}}</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" style="margin-bottom:10px">
+                  <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+                    <div class="row" style="margin-bottom:10px">
+                      <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+                        <p style="font-weight: bold"> {{list.description}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- </div>-->
+
+
+              </div>
+            </div>
+
+
+            <!--main row ending...-->
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>

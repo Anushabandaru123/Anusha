@@ -1,0 +1,347 @@
+.campaignForm {
+    padding: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.campaignForm-label{
+    color: rgba(51, 51, 51, 0.88);
+    font-weight: normal;
+    text-align: center;
+}
+
+.campaignForm-btn{
+    background-color: rgba(251, 142, 29, 0.95);
+    border-radius: 0px;
+    border-color: rgba(51, 51, 51, 0.88);
+    align-content: center;
+    min-width: 10em;
+}
+.newCampaign-btn {
+    background-color: rgba(255, 69, 0, 0.8);
+    border-radius: 0px;
+    border-color: rgba(253, 140, 67, 0.94);
+    align-content: center;
+    margin: 0px 0 !important;
+}
+
+.campaign-name {
+    font-size: 25px;
+    color: rgba(54, 127, 193, 0.9);
+    font-weight: bold;
+}
+
+.campaign-discription {
+    font-size: 19px;
+    color: black;
+}
+
+.campaign-linechart-box{
+    min-height: 130px;
+    margin-bottom: 5px;
+    background-color: rgba(50, 149, 230, 0.08);
+    border: 1px solid rgba(50, 149, 230, 0.05);
+}
+
+.campaignForm-grp{
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 25px;
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 10px;
+    padding: 10px 10px;
+    pointer-events: none;
+}
+.searchbox{
+      overflow: hidden;
+      text-align: left;
+      padding: 15px;
+      box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
+      // visibility: collapse;
+}
+
+.linechart_box_title {
+    width: auto;
+    height: 20px;
+    line-height: 27px;
+    font-size: 100%;
+    font-weight: bold;
+    color: #000000;
+    text-align: left;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+
+.button-margin{
+  margin: 0px 0;
+  background-color: #eeeeee;
+  float: right;
+  width: 60px;
+}
+
+.btn-holder{
+  text-align: center;
+}
+
+.image-uploadbtn{
+    background-color: #eeeeee;
+      margin: 0px  !important;
+        color: #0e0101 !important;
+}
+.right-arrow{
+      color: pink;
+      font-size: 40px;
+
+}
+
+.hr-class{
+
+    color: #d6d6d6 !important;
+    background-color: #d6d6d6  !important;
+        border-top: 1px solid #d6d6d6 !important;
+         margin-top: 0px !important;
+       margin-bottom: 0px !important;
+       width:94%;
+}
+
+
+.hr-linegrey{
+  color: darkgray;
+}
+
+.hr-line{
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #9d9d9d;
+}
+.no-marign{
+  margin-top: 0px !important;
+     margin-bottom: 0px !important;
+     margin-bottom: 0px !important;
+}
+
+.hr{
+    /* margin-top: 20px; */
+    /* margin-bottom: 20px; */
+    border: 0;
+    border-top: 1px solid #eeeeee;
+}
+
+.newCampaign-btn{
+    background-color:red;
+    border-radius: 0px;
+    border-color: rgba(51, 51, 51, 0.88);
+    align-content: center;
+}
+
+.create-campign-btn{
+    background-color:red;
+    border-radius: 0px;
+    border-color: rgba(51, 51, 51, 0.88);
+    align-content: center;
+    line-height: 20px;
+    margin-top: 25px;
+    margin-right: 15px;
+    position:absolute;
+    top:0;
+    right:0;
+}
+
+@media (max-width: 320px) {
+  .create-campign-btn{
+    padding-right: 5%;
+    padding-left: 5%;
+    margin-top: 10px;
+    margin-right: 10px;
+    position: relative;
+    margin-left: 15px;
+    width: 85%;
+  }
+}
+
+.pathblack{
+  color: balck !important;
+}
+
+.campaigns-border {
+  border-top: 2px black;
+   //border-bottom:1pt solid black;
+  //  border-top:1pt solid black;
+  //   border-left:1pt solid black;
+    //  border-right:1pt solid black;
+  padding-top: 5px;
+  //padding-bottom: 20px;
+
+   margin-left: 0px !important;
+ margin-right: 0px !important;
+
+  box-shadow:0px 0px 5px 0px #888888;
+
+}
+
+@media (min-width: 750px) {
+  .ratio-padding{
+    margin-top: 90px;
+  }
+}
+
+.campaignListmargin{
+  margin-bottom:20px;
+}
+
+
+.compaignratioforlist {
+  color: green;
+  //font-size: 25px;
+}
+
+@media (min-width: 750px) {
+  .campaign-tablepadding{
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .campaign-btnmargin{
+  margin-right: 6px;
+  }
+}
+
+
+
+
+@media (max-width: 750px) {
+  .campaign-addnewcampaign{
+  margin-right: 0px;
+  }
+}
+
+
+
+.dashboardcampaign-linechart-box {
+    /* min-height: 170px; */
+    /* padding: 5px; */
+    /* margin-top: 15px; */
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgba(50, 149, 230, 0.08);
+    border: 1px solid rgba(50, 149, 230, 0.05);
+    border-radius: 2px;
+    box-shadow: inset 0 0px 0px rgba(50, 149, 230, 0.13);
+}
+
+
+.dashboardcampaignList-linechart-box {
+  /* min-height: 170px; */
+  /* padding: 5px; */
+  /* margin-top: 15px; */
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: rgba(50, 149, 230, 0.08);
+  border: 1px solid rgba(50, 149, 230, 0.05);
+  border-radius: 2px;
+  box-shadow: inset 0 0px 0px rgba(50, 149, 230, 0.13);
+}
+
+.dashboard-campaignratio{
+  padding: 30px 0px;
+  margin: 0px -16px;
+  text-align: center;
+}
+
+.campain-heading{
+  font-size:xx-large;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.campaign-img{
+  width: 130px;
+  height: 130px;
+}
+.allCampaignslink {
+
+ //margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.left-align{
+  text-align: right;
+}
+
+.date-icon {
+     float: left !important;
+}
+
+.selected-link{
+  margin-bottom: 10px;
+  font-size: initial;
+  font-weight: bold;
+}
+
+
+.status-link{
+  margin-bottom: 10px;
+//  font-size: initial;
+//  font-weight: bold;
+}
+.campaign-link{
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+
+ .line-divider{
+       margin-top: 0px;
+       margin-bottom: 0px;
+       border: 0;
+       border-top: 1px solid #a7a7a7;
+     }
+
+
+.line-dividercampaign{
+  margin-top: 0px;
+  margin-bottom: 4px;
+  border: 0;
+  border-top: 1px solid #a7a7a7;
+}
+
+
+.line-divider-dashboardcamapignList{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border: 0;
+  border-top: 2px solid #eeeeee;
+}
+
+
+.capital{
+
+  text-transform: uppercase;
+
+}
+
+
+.btn-startend {
+  padding: 0px 12px;
+  margin: 10px 0;
+  background-color: #9d9d9d;
+  border: 1px solid #ffffff;
+  border: none;
+  font-family: Proxima Nova, sans-serif;
+  color: #FFFFFF;
+}
+

@@ -1,0 +1,424 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+<style>
+  #example-five {
+    position: relative;
+  }
+
+  #example-five-checkbox {
+    display: none;
+  }
+
+  #example-five-checkbox:checked + #example-five:after {
+    content: "hide";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+  }
+
+
+</style>
+<section class="selesRegions">
+<div ng-controller="northgatePresentationCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="row dashbordbg-navbar cmplistnav">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding-right:60px;">
+<div class="row cmplistverticalLine">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital" style="margin-top:20px" >
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="campaign_status==='Pending'" class="selected-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})">UPCOMING</a>
+</div>
+<div ng-if="campaign_status!=='Pending'" class="campaign-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})">UPCOMING</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="campaign_status==='Active'" class="selected-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">ACTIVE</a>
+</div>
+<div ng-if="campaign_status!=='Active'" class="campaign-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">ACTIVE</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="campaign_status==='Archive'" class="selected-link  cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a>
+</div>
+<div ng-if="campaign_status!=='Archive'" class="campaign-link  cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a>
+</div>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 campdetailmargin" >
+<!-- first row -->
+<div class="row">
+<div class="col-xs-12 col-sm-5 col-md-7 col-lg-8" style="margin-left:0px;">
+<h3 class="capital cmppadding"><b>
+{{camprecord.CampaignsName}}
+</b>
+</h3>
+</div>
+<div class="col-xs-12 col-sm-7 col-md-5 col-lg-4">
+<div class="row" style="margin-top:25px;">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-5 compagin_font">
+<span style="color: grey;">
+      From:
+</span>
+<span>  {{startDate}}
+</span>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-7 compagin_font">
+<span style="color: grey;">
+      To:
+</span>
+<span > {{endDate}}
+</span>
+</div>
+</div>
+</div>
+</div>
+<br>
+<!-- second row -->
+<div class="row cmppadding"  >
+<!-- first column -->
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 " >
+<div class="page_dashboard_box_well cmpheight cmpwallheight">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cmpaginfilter">
+<!-- <div style="color:#999999;padding-left:3px;margin-top:10px;">  -->
+    FILTER
+<!-- </div> -->
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<select class="form-control capital cmpstore" ng-model="data.selectedStoreId" ng-change="getsalesDatabyStore(data.selectedStoreId);" >
+<option selected="selected" value="">
+{{ 'Retaillang.AllStores' | i18n }}
+</option>
+<option ng-repeat="states in storesforCampaign track by $index"      value={{states.id}}>
+{{states.store}}
+</option>
+</select>
+</div>
+</div>
+</div>
+</div>  
+<!-- second column -->
+<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+<div class="line-divider"></div>
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<!-- for lg and md -->
+<div class="hidden-xs hidden-sm col-md-12 col-lg-12 ">
+<div class="row" align="center" style="margin-top:0px;margin-bottom: 0px;">
+<div class="hidden-xs hidden-sm  col-md-6 col-lg-6">
+<div class="row">
+<div class="col-md-12 col-lg-12" style="margin-top:15px;">
+                                
+<!-- 
+<div style="color: green; font-size: 30px; font-weight: normal">
+    {{camprecord.campaignRatio}}%
+<span style="color: green" class=" fa fa-arrow-up "></span>
+</div> -->
+<div ng-if="camprecord.campaignRatioStatus=='increase'"
+  style="color: green;font-size: 30px;font-weight:normal;padding-left:0px ! important;">
+    {{camprecord.campaignRatio}}%
+<!--<span style="color:green ;font-weight: normal;" class=" fa fa-arrow-up ">
+</span> -->
+<img  ng-src="images/arrow-up-green.png">
+</div>
+
+<div ng-if="camprecord.campaignRatioStatus=='decrease'"
+  style="color: red; font-size: 30px; font-weight: normal;">
+  {{camprecord.campaignRatio}}%
+<!-- <span style="color: red;font-weight: medium;"  class=" fa fa-arrow-down "> -->
+<img  ng-src="images/arrow-down-red.png">
+</span>
+</div>
+</div>
+<div class="col-md-12 col-lg-12">
+<p style="color:grey;font-size:11px;font-weight:normal;margin-top:0px ! important">
+  COMPARED TO MONTHLY  AVERAGE</p>
+</div>
+</div>
+</div>
+<div class="hidden-xs hidden-sm  col-md-6 col-lg-6 verticalLine">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:26px;">
+<div  style=" color: green; font-size: 24px; font-weight: normal">       ${{ camprecord.total | number : 2}}
+<!--{{ camprecord.total | number : fractionSize}}-->
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="color:grey;font-size:11px;font-weight: normal;margin-top:0px ! important">
+CAMPAIGN SALES TO DATE
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>  
+<!-- for xs and sm -->
+<div class='col-xs-12 col-sm-12 hidden-md hidden-lg' compagin_top>
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-12 col-lg-12" align="center">
+<div class="row">
+<div class="col-md-12 col-lg-12" style="margin-top:10px;padding-left:0px ! important;">
+<!-- <div style="color: green; font-size: 24px; font-weight: medium">
+    {{camprecord.campaignRatio}}%
+<span style="color: green" class=" fa fa-arrow-up "></span>
+</div> -->
+
+<div ng-if="camprecord.campaignRatioStatus=='increase'"
+    style="color: green; font-size: 30px; font-weight: normal;padding-left:0px ! important;">
+  {{camprecord.campaignRatio}}%
+<!--<span style="color:green ;font-weight: normal;" class="fa fa-arrow-up ">
+    </span> -->
+<img  ng-src="images/arrow-up-green.png">
+</div>
+
+<div ng-if="camprecord.campaignRatioStatus=='decrease'"
+  style="color:red;font-size: 30px; font-weight: normal;">
+      {{camprecord.campaignRatio}}%
+<!--<span style="color: red;font-weight: medium;"  class=" fa fa-arrow-down "> -->
+<img  ng-src="images/arrow-down-red.png">
+</span>
+</div>
+</div>
+<div class="col-md-12 col-lg-12">
+<p style="color:grey;font-size:10px;font-weight:normal;margin-top:0px ! important;" class="capital">
+  COMPARED TO MONTHLY AVERAGE</p>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 verticalLine" align="center">
+<div class="row compagin_top">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">
+<div style="color:green;font-size:24px;font-weight: normal;">
+    ${{ camprecord.total | number :2}}
+<!--{{ camprecord.total | number : fractionSize}}-->
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="color:grey;font-size:10px;font-weight:normal;margin-top:0px ! important;">
+CAMPAIGN SALES TO DATE</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 verticalLine compagin_top">
+<div ng-if="show">
+<campign-table id="camprecord.campaign_id" data='camprecord'>
+</campign-table>
+</div>
+</div>
+</div>
+<div class="line-divider"></div>
+<br><br>
+<!-- line chart -->
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="campaign-linechart-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="spin">
+<span us-spinner="{radius:5, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+</div>
+<div class="compagin_linechart_box_title"> {{'Retaillang.linechart_box1_title' | i18n}}
+<!-- <span class="page_dashboard_box_tooltip">&nbsp;</span> -->
+</div>
+<div class="compagin_page_dashboard_box_number">
+    ${{ camprecord.total | number : 2}}
+</div>
+<div class="compagin_page_dashboard_box_index_outer">
+<div class="compagin_page_dashboard_box_index_title" style="padding-left:20px;">
+{{'Retaillang.Index' | i18n}}
+</div>
+<div class="{{getindexStyle(camprecord.index)}}" id="index_dashboard_sales">
+  {{camprecord.index}}
+</div>
+</div>
+<div ng-if="show">
+<campaignlist-directive id="camprecord.id" data="camprecord.datachart" record="camprecord"></campaignlist-directive>
+</div>
+</div>
+</div>
+<!-- <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="margin-top: 10px">
+<div class="campaign-linechart-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="spin">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false">
+</span>
+</div>
+<div class="compagin_linechart_box_title"> {{'Retaillang.linechart_box1_title' | i18n}}
+<! <span class="page_dashboard_box_tooltip">&nbsp;</span> -->
+<!-- </div>
+<div class="compagin_page_dashboard_box_number">
+    ${{ camprecord.total | number : 2}}
+</div>
+<div class="compagin_page_dashboard_box_index_outer">
+<div class="compagin_page_dashboard_box_index_title"style="padding-left:10px;">
+{{'Retaillang.Index' | i18n}}  
+</div>
+<div class="{{getindexStyle(camprecord.index)}}" id="index_dashboard_sales">
+    {{camprecord.index}}
+</div>
+</div> -->
+<!-- <div ng-if="show">
+<campaignlist-directive id="camprecord.id" data="camprecord.datachart" record="camprecord">
+</campaignlist-directive>
+</div>
+</div>
+</div> --> 
+<!-- 
+<div ng-show="role =='cpg'">
+<div class="line-divider"></div>
+<div class="row" style="margin-top: 5px">
+<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
+<div style="color: grey; font-size: 12px" class="capital">Retailer
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<p style="font-weight: bold; font-size: 12px"> 
+{{ camprecord.retailer}} </p>
+</div>
+</div>
+</div> -->
+</div>
+<br><br>
+<!-- bar chart -->
+<div class="row" style="margin-top:5px">
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+<label class="compagin_margin">SALES</label>
+<div ng-if="productsforapi.length>0">
+<div class="row" ng-repeat="record in productsforapi">
+<campiagnsaleschart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+    stores="stores" reportstarttime="salesDatareporttime" id="record.id"  reportendtime="reportendDate" comparestarttime="salesDatacomparetime" compareendtime="compareendDate" product="record" retailerid="campaignretailer"  style="height: 70px;">
+</campiagnsaleschart>
+      
+<div ng-if="productsforapi==undefined">
+<center>
+<span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div>
+</div>
+</div>  
+</div>
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+<div ng-show="role =='retailer'">
+<label class="capital compagin_margin">
+{{ 'Retaillang.campshoppingtrips' | i18n }}
+</label>
+</div>
+<div ng-show="role =='cpg'||role=='distributor'">
+<label class="capital compagin_margin">
+{{ 'Retaillang.campshoppingtrips' | i18n }}
+</label>
+</div>
+<div class="row">
+<div ng-if="productsforapi.length>0" ng-repeat="record in productsforapi">
+<!--<campiagnbarcharts class="col-xs-8 col-sm-9 col-md-10 col-lg-10" id="deptShareId" detail="currencydetailforshoppingtrips" data="departmentshareData" barchartname="ShoppingTripshover" style="height: 70px;">
+</campiagnbarcharts> -->
+<campiagnshoppingtripschart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" stores="stores" reportstarttime="salesDatareporttime" id="record.shoppingtripsId"  reportendtime="reportendDate" comparestarttime="salesDatacomparetime" compareendtime="compareendDate" product="record" retailerid="campaignretailer" style="height: 70px;">
+</campiagnshoppingtripschart>
+<!--<div class="col-xs-4 col-sm-3 col-md-2 col-lg-2"
+    style="padding-left: 0px;padding-right: 0px;">
+<div ng-if="STIndex>=1" class="product-text-arrow"> 
+     {{STIndex}}
+<span class='fa fa-arrow-up'></span>
+</div>
+<div ng-if="STIndex<1" class="product-text-arrowred" >
+    {{STIndex}}
+<span class='fa fa-arrow-down'></span>
+</div>
+</div> -->
+</div>
+
+<div ng-if="productsforapi.length==0">
+<center>
+<span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+<div ng-show="role =='cpg'">
+<label class="capital compagin_margin">BASKET SHARE</label>
+</div>
+<div ng-show="role =='retailer'||role=='distributor'">
+<label class="capital compagin_margin">BASKET SHARE
+</label>
+</div>
+<div class="row">
+<div ng-if="productsforapi.length>0" ng-repeat="record in productsforapi">
+<campiagnbasketchart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+    stores="stores" reportstarttime="salesDatareporttime" id="record.basketshareid"  reportendtime="reportendDate" comparestarttime="salesDatacomparetime" compareendtime="compareendDate" product="record" retailerid="campaignretailer" style="height: 70px;">
+</campiagnbasketchart>
+<!-- <campiagnbarcharts class="col-xs-8 col-sm-9 col-md-10 col-lg-10" id="basketId"  detail="currencyDetail"
+barchartname="avgbaskethover"  data="basketSharedata" style="height: 70px;"></campiagnbarcharts>
+ -->
+<!-- <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 "
+     style="padding-left: 0px;padding-right: 0px;">
+<div ng-if="ABtotal>=1" class="product-text-arrow"> 
+     {{ABtotal}}
+<span class='fa fa-arrow-up'></span>
+</div>
+<div ng-if="ABtotal<1" class="product-text-arrowred" >
+    {{ABtotal}}
+<span class='fa fa-arrow-down'></span>
+</div>            
+</div> -->
+</div>
+<div ng-if="productsforapi.length==0">
+<center>
+<span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div>
+</div>                        
+</div>
+</div>
+<!-- bar chart end -->
+</div>     
+<!-- second column end -->
+</div>
+<!-- second row end -->
+<br>
+<div class="line-divider"></div>
+<br>
+<!-- <a href="" class="downloadcsvfile">
+<span class="glyphicon glyphicon-download-alt">
+</span>DOWNLOAD CSV</a>  -->      
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+   

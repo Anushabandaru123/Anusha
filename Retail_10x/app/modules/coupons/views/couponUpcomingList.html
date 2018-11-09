@@ -1,0 +1,164 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<section class="products">
+<div ng-controller="couponListCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="row dashbordbg-navbar cmplistnav">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding-right:60px;">
+<div class="row cmplistverticalLine">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="coupon_status==='Pending'||coupon_status==='null'" class="selected-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="couponUpcomingList({status:'Pending'})">UPCOMING</a>
+</div>
+<div ng-if="coupon_status!=='Pending'&&coupon_status!=='null'" class="campaign-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="couponUpcomingList({status:'Pending'})">UPCOMING</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="coupon_status==='Active'||coupon_status==='null'" class="selected-link cmplistmargin">
+<a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+</div>
+<div ng-if="coupon_status!=='Active'||coupon_status==='null'" class="campaign-link cmplistmargin">
+<a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="coupon_status==='Archive'" class="selected-link cmplistmargin">
+<a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+</div>
+<div ng-if="coupon_status!=='Archive'" class="campaign-link cmplistmargin">
+<a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+</div>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10" style="padding-right:38px;margin-left:0px;">
+<!--<div ng-if="coupon_status=='Active'"> -->
+<div class="row">
+<div class="col-xs-4 col-sm-4 col-md-11 col-lg-11">
+</div>
+<div class="col-xs-4 col-sm-4 col-md-1 col-lg-1"
+ ng-if="role=='cpg'||role=='retailer'">
+<button class="button-comp button3" ui-sref="coupon">+</button>
+</div>
+</div>
+<div class='row campaignListmargin' ng-repeat="list in couponrecords">
+<div class="row" style="margin-top:-13px;">
+<div class="col-xs-12 col-sm-6  col-md-2  col-lg-2">
+<div ng-if="coupon_status=='Pending'">
+<!--<div ng-click="postcoupon(list.campaign_id)" class="capital "> -->
+<img class="img-responsive" ng-src="{{list.imagePath}}"  width="140" height="100">
+<!--</div>-->
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-6" style="margin-top: 10px">
+<div class="row" >
+<h4>  
+<div ng-if="list.couponStatus=='2'" 
+  ng-click="postcoupon(list)" class="capital">
+  {{list.couponName}}
+</div>
+<div ng-if="list.couponStatus=='3'" class="capital">{{list.couponName}}
+</div>
+</h4>
+</div>
+<div class="row">
+<div ng-if="list.dicount.discount_id==1">
+<h3 style="color: red;margin-top: 0px ! important">${{list.dicount.discount_lower}} Off</h3>
+</div>
+<div ng-if="list.dicount.discount_id==2">
+<h3 style="color: red;margin-top: 0px ! important">
+  Save {{list.dicount.discount_lower}}%</h3>
+</div>
+<div ng-if="list.dicount.discount_id==3">
+<h3 style="color: red;margin-top: 0px ! important">Buy {{list.dicount.discount_lower}} Get {{list.dicount.discount_upper}} Free</h3>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-4" align="right" >
+<div class="row" style="margin-top: 10px">
+<center>
+<div class="col-xs-7 col-sm-7 col-md-6 col-lg-6 compagin_font" style="padding: 0px;">
+<p><span style=" color: grey;" >From:</span>
+<span>{{list.sdate}}</span> 
+</p>
+</div>
+</center>
+<center>
+<div class="col-xs-5 col-sm-5 col-md-6 col-lg-6 compagin_font" style="padding: 0px;margin-top: 10px;">
+<span style="color: grey;" >To: </span>
+<span>{{list.edate}}</span> 
+</div>
+</center>
+</div>
+</div>
+</div>
+<div class="row" >
+<div class="col-xs-12 col-sm-6  col-md-3  col-lg-3">
+<!-- {{list.couponName}} -->
+</div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+<!-- <div ng-if="list.dicount.discount_id==1">
+Discount: Amount {{list.dicount.discount_lower}}{{list.dicount.discount_upper}} off
+</div> -->
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+<div class="row">
+<center>
+<div class="col-xs-7 col-sm-7 col-md-6 col-lg-5 compagin_font" style="padding: 0px;">
+</div>
+</center>
+<center>
+<div class="col-xs-5 col-sm-5 col-md-6 col-lg-7 compagin_font" style="padding: 0px;">
+<div ng-if="list.couponStatus=='2'">
+     Status: Saved
+</div>
+<div ng-if="list.couponStatus=='3'">
+     Status: Approved
+</div>
+</div>
+</center>
+</div>
+</div>
+</div>
+<br>
+<br>
+<div class="line-divider"></div> 
+</div>
+<div ng-show="len == 0 ">
+<div class="row campaigns-border campaignListmargin">
+<center><h2> No {{coupon_status+" "}} Coupons</h2></center>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+

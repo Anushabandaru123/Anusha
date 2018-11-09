@@ -1,0 +1,417 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+<script>
+
+.modal-title {
+    color: #333333;
+    font-weight: bold;
+}
+
+ .modal-footer {
+    border-top: 0px;
+    padding: 0px;
+    text-align: left;
+    background-color: #ffffff;
+    width: 347px;
+}
+</script>
+
+<section class="products">
+<div ng-controller="sendinviteCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="row dashbordbg-navbar chatpagenav">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding-right:60px;">
+<div class="row cmplistverticalLine">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="campaign_status==='Pending'" class="selected-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})">UPCOMING</a>
+</div>
+<div ng-if="campaign_status!=='Pending'" class="campaign-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="campaignListPending({status: 'Pending'})" >UPCOMING</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="campaign_status==='Active'|| campaign_status==='null'" class="selected-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+<div ng-if="campaign_status!=='Active'|| campaign_status==='null'" class="campaign-link cmplistmargin">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="campaign_status==='Archive'" class="selected-link cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a>
+</div>
+<div ng-if="campaign_status!=='Archive'" class="campaign-link cmplistmargin">
+<a ui-sref="campaignListArchive({status: 'Archive'})">PAST</a></div>
+</div>
+</div>
+<hr>
+<div>
+</div> 
+</div>
+</div>
+</div> 
+</div>
+</div>
+<!-- col 2 end here............... -->
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+<div class="row sendinvitebg" >
+<!-- first row..... -->
+<div class="row" style="margin-bottom:10px;">
+<div class="col-xs-12 col-sm-5 col-md-5 col-lg-7">
+<div style="margin-left:15px;color:black;font-size:24px;"> 
+    <h4><b>{{sendData.CampaignsName}}</b></h4>
+</div>  
+</div>
+<div class="col-xs-12 col-sm-7 col-md-7 col-lg-5 " ng-if="role=='retailer'&&campaignStatus!='4'">
+<button type="submit" class="cancelbtn" 
+data-toggle="modal" data-target="#CancelModal">CANCEL</button> <!-- ng-click="campaigndelete();" -->
+<button type="submit" class="campaignbtn btn" style="margin-top:9px;"  data-toggle="modal" data-target="#StartModal">APPROVE CAMPAIGN</button>
+<!-- ng-click="startCampaign();"   -->
+</div>
+</div>
+<!-- first row end..... -->
+<div class="invite-line-divider"></div>
+<!-- second row............... -->
+<div class="row" >
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="overflow-y:scroll;overflow-x:hidden;color:#555;height:450px;">
+<div class="row capital sentproductfont" style="margin-top:10px;margin-left:20px;">
+  products
+</div>
+<div  ng-repeat = "record in ProductData " ng-class="{'selectedclassname': prdctselected.prdctName == record.prdctName}" > 
+<div class="row" ng-if="(prdctselected.prdctName == record.prdctName)&& (record.prdctName.length>0)"  style="margin-left:15px;margin-top:10px;"  ng-click="selectedProduct(record.prdctName,record)"  >
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentproductdetail">
+    {{ record.manufacturer}}
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentproductfont">
+    {{record.prdctName}}
+</div>
+</div>
+                     
+<div class="row" ng-if="(prdctselected.prdctName!= record.prdctName)&&(record.prdctName.length>0)"  style="margin-left:15px;margin-top:10px;"  ng-click="selectedProduct(record.prdctName,record)">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentproductdetail">
+    {{ record.manufacturer}}
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentproductfont">
+    {{record.prdctName}}
+</div>
+</div>
+</div>
+</div>
+<!-- col 6...................... -->
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div  ng-repeat="ProductData in selectedPrdctDetail"> 
+<div class="row" style="background-color:white;min-height:500px;">
+<!-- first row in col 6........ -->
+<div class="row sentlist">
+<div class="col-xs-6 col-sm-8 col-md-8 col-lg-8 sentlistfont">
+    {{ProductData.prdctName}}
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 sentlistfont" style="text-align:right;">
+    Size:<span>{{ProductData.prdctsize}}</span>
+</div>
+<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 sentlistfont">
+{{ProductData.prdctId}}
+</div> -->
+</div>
+<!-- second row in col 6........ -->
+<div class="row sentproimgfont">
+<div class="row " style="margin-top:5px; margin-left: 0px;">
+<div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 ">
+<img src="{{logo}}"  style="width:55px;height:50px;">
+</div>
+<div class="col-xs-8 col-sm-8 col-md-9 col-lg-10">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 ">
+<div class="row" style="font-size:14px;">
+    <b>{{ProductData.personName}}</b>
+</div>
+<div class="row sentperson">
+    {{ProductData.personDesignation}}
+</div>
+<div class="row sentperson">
+    {{ ProductData.PrdctTitle}}
+</div> 
+</div>
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+<div class="row sentperson" style="margin-top:17px;">
+  {{ProductData.personNumber}}
+</div>
+<div class="row sentperson">
+    {{ProductData.personId}}
+</div>
+</div>
+</div>
+</div> 
+</div>
+ <!-- third row in col 6........ -->
+<!-- ***************chat window************** -->
+<div class="row" id="scrollArea" exec-on-scroll-to-top="handleScrollToTop"
+ style="margin-top:10px;margin-left:20px;margin-right: 10px;padding: 0px;height: 500px;overflow-y: auto;overflow-x: hidden;">
+<div ng-if="pageloader"> 
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-2" spinner-start-active="false"></span>
+</div>
+<div  ng-repeat="e in chatHistory"> 
+<div class="row" style="margin-left: 0px;">
+<div class="row sentproductdetail"> {{e.Day}}
+<span style="color:black;font-size:12px">{{e.Time}}</span>
+</div>
+<div class="row sentproductdetail" style="margin-top:0px;"> {{e.chatdate}}
+</div>
+<div class="row sentinfo">
+    {{e.eventOccour}} 
+<div class="row" ng-if="e.eventOccour1 !==''" style="margin-left:5px;">
+{{e.eventOccour1}}
+</div>
+<div class="row" ng-if="e.eventOccour2 !== ''" style="margin-left:5px;">{{e.eventOccour2}}
+</div>
+<div class="row sentinfo" ng-if="e.eventOccour3 !==''" style="margin-top:5px;">
+{{e.eventOccour3}}
+</div>
+</div>
+</div>
+<!-- chat window........ -->
+<!-- forth row in col 6........ -->
+<div class="row" style="margin-left: 0px;">
+<div class="chat" ng-if="e.CustomerMsg !== ''">
+<div class="message">
+ <img  src="{{logo}}" />
+<!-- <img ng-if="e.avatar==null||e.avatar==undefined" src="{{logo}}" />
+<img ng-if="e.avatar" src="{{e.avatar}}" /> -->
+<div><p> {{e.CustomerMsg}}</p></div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="chat" ng-if="e.RetailerMsg !== ''">
+<div class="message me">
+<img src="{{logo}}" />
+<div><p> {{e.RetailerMsg}}</p></div>
+</div>
+</div>
+</div>
+</div>
+<a id="bottom"></a>
+</div>
+</div>
+<div class="row" style="margin-top:10px;">
+<div class="col-xs-10 col-sm-10 col-md-11 col-lg-11 " >
+<input type="text" placeholder="Enter Message"  
+        ng-model="user.chatText" class="form-control senttextmargin senttxtboxmargin" >
+</div>
+<div class="col-xs-1 col-sm-2 col-md-1 col-lg-1">
+<button type="submit" ng-click="sendChatMessage();" class="sentaddButon" >ADD
+</button> 
+<!--<button type="submit" ng-click="fetchPreviousMessages();" class="sentaddButon" >prvious</button> --> 
+</div>
+</div>   
+ <br>
+<div class="xsline-divider"></div>
+<br>
+</div>
+</div>
+<!-- col 6 end........... -->
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="font-size:12px;">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 sentcolmargin sentleftmargin" >
+    From: <b> {{sendData.startdate}}</b>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 sentcolmargin sentleftmargin">
+    To: <b> {{sendData.enddate}}</b>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentcolmargin sentleftmargin">
+      Deadline: <b>{{sendData.DeadlineDate}}</b>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentcolmargin sentleftmargin">
+    <b>Ad Sheet:</b>
+</div>
+<div class="row sentleftmargin">
+<div class="col-xs-3 col-sm-4 col-md-3 col-lg-3 ">
+<div ng-if="file_type=='pdf'">
+<img src="{{pdf}}" style="width:24px;height:22px;margin-left:11px;">
+</div>
+<div ng-if="file_type=='xls'">
+<img src="{{xls}}" style="width:35px;height:19px;margin-left:11px;">
+</div>
+<div ng-if="file_type=='txt'">
+<img src="{{txt}}" style="width:35px;height:19px;margin-left:11px;">
+</div>
+</div>
+<div class="col-xs-9 col-sm-8 col-md-9 col-lg-9 sentsheetfont " style="margin-left:-6px;">
+<!-- <div ng-repeat="sheet in sendData.sheetName"> -->
+<!-- {{sheet.original_file_name}} -->
+<a href="{{sendData.sheetName[0].file_path}}" target="_blank">
+    {{sendData.sheetName[0].original_file_name}}</a>
+  <!--</div> -->
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentcolmargin sentleftmargin">
+    <b>Promotion Type:</b><br>
+<div style="margin-left:10px;margin-top:5px;">
+<div ng-repeat="record in sendData.promotionType">
+    {{record}}
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sentcolmargin sentleftmargin">
+<b>Stores:</b><br>
+<div style="margin-left:10px;margin-top:5px;">
+<div ng-repeat="store in sendData.stores">
+  {{store}}
+</div>
+</div>
+</div>
+</div>
+<br>           
+<div class="invite-line-divider" style="margin-left: -16px;">
+</div>
+<div ng-repeat="sheet in sendData.sheetName"
+    ng-if="$index>0"> 
+<!--{{sheet.original_file_name}} -->
+<a href="{{sheet.file_path}}" target="_blank">
+     {{sheet.original_file_name}}</a>
+</div>
+<div ng-if="addsheetList.length>0" class="row" ng-repeat="list in addsheetList">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+<div ng-if="fileuploadspinner"> 
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false">
+</span>
+</div>
+<a href="{{list.file_path}}" target="_blank">
+  {{list.orginalName}}
+</a>
+</div>
+</div>
+<div class="row sentcolmargin" style="text-align:center;">
+<span id="myfile" class="cmpcolor">
+<button type="submit" id="myfile" class="uploadbtn">
+    UPLOAD FILES
+</button> 
+</span>
+<fileupload-directive></fileupload-directive>
+<input id="fileupload" type="file" name="files[]"   class="hidden" onchange="angular.element(this).scope().getadsheetDetails()" multiple />
+</div>
+<br>
+</div>
+</div>
+</div>
+</div>
+<!-- col 10 end here......... -->
+          
+
+<div  class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-6 col-sm-4 col-xs-4"></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<center>
+<div class="modal fade" id="CancelModal" role="dialog" style="margin-top: 100px">
+<div class="modal-dialog" >
+<div class="modal-contents model-invalid">
+<div class="modal-header" >
+<h4 class="model-invalid-title"> Delete Campaign</h4>
+</div>
+</div>
+<div class="modal-body">
+<br>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="titlepromocode"><span class="glyphicon glyphicon-remove-sign msgred"></span>
+    Do you want to delete this campaign?<br>
+</div>
+</div>
+</div>
+</div><br>
+</div>
+<div class="modal-footer" style="padding-bottom: 8px">
+<center>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary capital" data-dismiss="modal">
+      Cancel
+</button>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary capital" data-dismiss="modal" ng-click="campaigndelete();">
+      Delete
+</button>
+</div>
+</div>
+</center>
+</div>
+</div>
+</center>
+</div>
+<div class="col-lg-4 col-md-2 col-sm-4 col-xs-4"></div>
+</div>
+</div>
+<div  class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-6 col-sm-4 col-xs-4"></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<center>
+<div class="modal fade" id="StartModal" role="dialog" style="margin-top: 100px">
+<div class="modal-dialog" >
+<div class="modal-contents model-invalid">
+<div class="modal-header" >
+<h4 class="model-invalid-title"> Approve Campaign</h4>
+</div>
+</div>
+<div class="modal-body">
+<br>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="titlepromocode"><span class="glyphicon glyphicon-remove-sign msgred"></span>
+    Do you want to approve this campaign??<br>
+</div>
+</div>
+</div>
+</div>
+<br>
+</div>
+<div class="modal-footer" style="padding-bottom: 8px">
+<center>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary capital" data-dismiss="modal">
+    Cancel
+</button>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary capital" ng-click="startCampaign();" data-dismiss="modal" >Approve
+</button>
+</div>
+</div>
+</center>
+</div>
+</div>
+</center>
+</div>
+<div class="col-lg-4 col-md-2 col-sm-4 col-xs-4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

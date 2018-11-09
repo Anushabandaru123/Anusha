@@ -1,0 +1,17 @@
+<div>
+ <ul class="list-group">
+      <li class="list-group-item map_list_box"><h5 class="map_list_box_title">{{'Retaillang.TOPSTORES' | i18n}}</h5></li>
+
+
+      <li class="list-group-item map_list_box" ng-repeat="list in data| orderBy:'-amt'|limitTo : 5">
+        <ul class="list-inline row">
+          <li ng-if="role=='retailer'" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><a class="onestore" ng-click="getstorefunction(list)" style="text-transform: uppercase">{{list.content}}</a></li>
+          <li ng-if="role=='cpg'"
+           class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+           <a class="onestore" ng-click="getstorefunction(list)" style="text-transform: uppercase">{{list.retailerName+' '+list.content}}</a></li>
+          <li ng-class="{topstorespadding:role =='cpg'}" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">${{list.amt| number : 2}}</li>
+        </ul>
+      </li>
+
+    </ul>
+</div>

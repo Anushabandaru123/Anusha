@@ -1,0 +1,189 @@
+.indexfontsize {
+
+  font-size: 12px;
+
+}
+
+.downloadcsvfile {
+
+  color: orangered;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+
+.pathindicatorsize {
+
+  margin-top: 5px;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.startpathname {
+
+  color: grey;
+}
+
+.startpath {
+
+  color:#35ab10 !important;
+}
+
+.currentpathname {
+
+  color: green;
+}
+
+.sidebar-menu-item {
+  position: relative;
+  display: block;
+  padding: 0px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #ddd;
+}
+
+.page-title {
+  margin: 20px;
+  font-size: 40px;
+  font-family: initial;
+  font-weight: initial;
+  line-height: 2.1;
+  color: inherit;
+}
+
+.charttype_radio_outer {
+  float: right;
+  width: auto;
+  margin-top: 0px;
+  text-align: left;
+}
+
+.charttype_radio_outer_btn {
+  padding: 5px 14px;
+  margin: -15px 0;
+  background-color: rgba(255, 253, 251, 0.69);
+  border: none;
+  font-family: Proxima Nova, sans-serif;
+  color: #FFFFFF;
+  position: relative;
+  float: left;
+  border-radius: 4px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.36);
+}
+button.charttype_radio_outer_btn * {
+  width: 14px;
+  height: 14px;
+}
+
+/* */
+
+.logoutmargin {
+
+  margin-right: 9px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  width: 12em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+/**/
+
+
+.MaskLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(128,128,128, .5);
+  -webkit-transition: opacity linear 0.25s;
+  transition: opacity linear 0.25s;
+  pointer-events: auto;
+}
+.MaskLayer.isClosed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.MaskLayer-Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: transparent;
+
+  padding: 10px;
+
+  margin: -55px 0 0 -55px;
+
+  height: 100px;
+  width: 100px;
+
+  text-align: center
+}
+.chartdivstyle {
+	width	: 100%;
+	height	: 500px;
+}
+
+
+.selectedlist {
+  background-color: #777777;
+  color: white;
+
+}
+
+
+.list-departmet-items {
+  position: relative;
+  display: block;
+  font-size: 12px;
+  padding: 10px 16px;
+  margin-bottom: 0px;
+  /* background-color: #fff;*/
+  border-bottom: 1px solid #9c9c9c;
+  border-top: 1px solid #9c9c9c;
+
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.timerangedropdownpadding{
+  padding-top: 19px;
+}
+
+@media (min-width: 1200px) {
+.reporttimepadding{
+  padding-right:25px !important;
+}
+.comparetimelabelpadding{
+  padding:0px;
+}
+}
+@media (min-width: 1300px) {
+  .dropdownpadding{
+    padding-left: 110px;
+  }
+}
+@media (min-width:992px) and (max-width:1300px){
+  .paddingfortimerange{
+  padding-right:25px !important;
+  }
+}
+@media (min-width: 650px) and (max-width: 1290px) {
+  .dropdownpadding{
+    padding-left: 70px;
+  }
+}

@@ -1,0 +1,209 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<style>
+  .overlay {
+    position: fixed;
+    top: 10;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .popup {
+    margin: 15% auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+  }
+
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .popup .close:hover {
+    color: #06D85F;
+  }
+
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+
+  @media screen and (max-width: 700px) {
+    .box {
+      width: 70%;
+    }
+
+    .popup {
+      width: 70%;
+    }
+  }
+
+</style>
+
+<section class="products">
+  <div ng-controller="campaignStartCtrl">
+    <div class="container-fluid">
+
+
+      <div class="row row_margin dashbordbg-navbar">
+
+
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+
+            <div ng-repeat="cams in RegisterCampaigns">
+
+              <div class="row">
+                <div class="col-sm-2 col-md-2 col-lg-2"></div>
+                <div class="hidden-xs col-sm-8 col-d-8 col-lg-8">
+                  <div class=" col-sm-2 col-md-2 col-lg-2"></div>
+                  <h2>{{ 'Retaillang.campaign' | i18n }}{{cams.campaignName}}</h2>
+                </div>
+              </div>
+              <br>
+
+              <div class="row">
+                <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                  <div class="row" align="right">
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <img class="img-responsive thumb" ng-src="{{nutella}}"/>
+                    </div> -->
+                  </div>
+                </div>
+
+
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                  <div class="row">
+                   
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="row">
+                        <!--<div class="col-xs-1"></div>-->
+                        <div class="col-xs-11 col-sm-12 col-md-11 col-lg-11">
+                          <div ng-repeat="itemlocation in cams.location">
+                            <p style="font-weight: bold; font-size: 18px">{{itemlocation.locName}} campaign for
+                              {{cams.description}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+    <div class="row" style="margin-top: 10px">
+
+    <div class="col-xs-6 col-sm-4  col-md-4 col-lg-3" style="text-align:right">
+    <br>
+      <label class="capital">{{ 'Retaillang.instorelocation' | i18n }}</label>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3" style="margin-top: 0px">
+    <br>
+      <div ng-repeat="itemlocation in cams.location">
+          {{itemlocation.locName}}
+      </div>
+      </div>
+      </div>
+      <div class="row" style="margin-top: 10px">
+      <div class=" col-xs-6 col-sm-4 col-md-3 col-lg-3" style="text-align:right">
+      <label class="capital">{{ 'Retaillang.camp-Date' | i18n }}</label>
+      </div>
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        {{ cams.startdate| date :  "MMMM dd, yyyy" }} to {{cams.enddate | date : "MMMM dd, yyyy"}}
+      </div>
+      </div>
+      <div class="row" style="margin-top: 10px">
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" style="text-align:right">
+      <label class="capital">{{ 'Retaillang.storeparticipating' | i18n }} </label>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-3">
+      <div ng-repeat="selectedstoreitem in cams.selectedstores">
+        {{ selectedstoreitem.storeName }}
+      </div>
+      </div>
+      </div>
+      <div class="row" style="margin-top: 10px">
+      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" style="text-align:right">
+      <label class="capital">{{ 'Retaillang.camp-product' | i18n }}</label>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-8 col-lg-3">
+      <div ng-repeat="productitem in cams.product">
+            {{productitem.Name}}
+      </div>
+      </div>
+      </div>
+        <br>
+      </div>
+      </div>
+
+              </div><!-- ...row.. -->
+            </div>
+            <hr/>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12" style="align-content: flex-end">
+              <div class="row">
+                <div class="col-xs-7 col-sm-9 col-md-9 col-col-lg-9">
+                  <div class="col-xs-0 col-sm-6 col-md-6 col-lg-6">
+                  </div>
+                  <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+                    <center>
+                      <button class="btn- btn-primary" ng-click="launchcampaign()" style="background: orange"> LAUNCH
+                        CAMPAIGN
+                      </button>
+                    </center>
+                  </div>
+                </div>
+                <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3" style="margin-top: 20px">
+                  <a style="color: #00b3ee; font-weight: bold " ui-sref="campaignUpdate">{{ 'Retaillang.Editbtn' | i18n
+                    }}</a> &nbsp;&nbsp;
+                  <a style="cursor:pointer;color: #00b3ee; font-weight: bold" ng-click="showpopup()">{{
+                    'Retaillang.Cancelbtn' | i18n }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br><br>
+      </div>
+    </div>
+
+    <div id="deleteCampiagnPopup" class="modal">
+      <div class="popup">
+        <a class="close" data-dismiss="modal">&times;</a>
+        <div class="content"><br/><br/>
+          <center><h4>{{ 'Retaillang.camp-popupmessage' | i18n }} </h4></center>
+        </div>
+        <center>
+          <button ui-sref="Campaigns" data-dismiss="modal" class="btn- btn-primary" style="background: RED">DELETE
+          </button>
+        </center>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+
+</section>

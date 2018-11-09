@@ -1,0 +1,39 @@
+
+    <!-- <div class='row'>
+    <div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'> -->
+
+    <div ng-if="spin">
+            <span us-spinner="{radius:5, width:3, length: 5}" spinner-key="spinner-1" spinner-start-active="false"></span>
+          </div>
+      <table>
+        <thead>
+         <tr>
+          <th>&nbsp;</th>
+          <th class="tablecolor">{{ 'Retaillang.camp-STARTS'| i18n }}</th>
+          <th class="tablecolor">{{ 'Retaillang.camp-TODAY'| i18n }}</th>
+        </tr>
+        </thead>
+        <br>
+        <tbody>
+        <!-- <tr>
+          <td>{{ 'Retaillang.camp-Date'| i18n }}</td>
+          <td>{{data.sdate}}</td>
+          <td> {{data.edate}}</td>
+        </tr> -->
+        <tr>
+          <td  class="tablecolor">{{ 'Retaillang.camp-Sales'| i18n }}</td>
+          <td><b>${{data.startsale| number : 2}}</b></td>
+          <td><b>${{data.endsale| number : 2}}</b> </td>
+        </tr>
+        <tr >
+          <td class="tablecolor">{{ 'Retaillang.camp-UnitsSold'| i18n }}</td>
+          <td><b>{{data.startunitsold| number : 2}}</b></td>
+          <td><b>{{data.endunitsold| number : 2}}</b></td>
+        </tr>
+        </tbody>
+      </table>
+  <!--   </div>
+    <div class='col-xs-3 col-sm-3 col-md-3 col-lg-3 dashboard-campaignratio'>
+      <h2><span class='glyphicon glyphicon-arrow-up compaingratio'>{{data.campaignRatio}}%</span></h2>
+    </div>
+    </div> -->

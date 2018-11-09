@@ -1,0 +1,43 @@
+<section>
+  <header><h3 class="icon logo"></h3></header>
+  <div class="header">
+    <div class="navbar bigger navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-nav-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="js-nav-collapse">
+          <ul class="nav navbar-nav">
+            <li ui-sref-active="active"><a ui-sref="Nav.user-mgmt">User Management</a><span class="caret"></span></li>
+            <li ui-sref-active="active"><a ui-sref="Nav.event-mgmt">Event Management</a><span class="caret"></span></li>
+            <li ui-sref-active="active"><a ui-sref="Nav.comm">Communication</a><span class="caret"></span></li>
+
+            <div class="btn-group">
+              <button class="btn btn-default text-single-R-DB-16">{{profileName.first_name}} {{profileName.last_name}}
+              </button>
+              <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+              </button>
+              <ul class="dropdown-menu" role="menu">
+
+                <li role="presentation" class="logout text-single-R-DB-16" name="logout" id="logout"
+                    ng-model="logoutStatus" ng-click="dataLogout()">Logout
+                </li>
+                <hr></hr>
+                <li role="presentation" class="settings text-single-R-DB-16" name="settings" id="settings"
+                    ng-model="settingsStatus" ng-click="dataSettings()">Settings
+                </li>
+
+              </ul>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ui-view="usermanager"></div>
+</section>

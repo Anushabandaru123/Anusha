@@ -1,0 +1,487 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+<style>
+  #example-five {
+    position: relative;
+  }
+
+  #example-five-checkbox {
+    display: none;
+  }
+
+  #example-five-checkbox:checked + #example-five:after {
+    content: "hide";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+  }
+
+
+</style>
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+<section class="selesRegions">
+  <div ng-controller="couponDetailCtrl">
+    <div class="container-fluid">
+      <div class="row row_margin">
+
+        <div class="row dashbordbg-navbar cmplistnav">
+         <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2 " style="padding-right:60px;">
+          <div class="row cmplistverticalLine">
+            <div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+             <div class="list-group">
+
+             <div class="indexfontsize" class="sidebar-menu-item">
+                  <div class="row capital" >
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  ">
+                      <div ng-if="campaign_status==='Pending' || campaign_status==='null'" class="selected-link " style="margin-left:20px;margin-top:20px;">
+                        <a ui-sref="couponUpcomingList({status: 'Pending'})">UPCOMING</a>
+                      </div>
+                      <div ng-if="campaign_status!=='Pending' && campaign_status!=='null'" class="campaign-link " style="margin-left:20px;margin-top:20px;">
+                        <a ui-sref="couponUpcomingList({status: 'Pending'})">UPCOMING</a>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row capital">
+                    <div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+                      <div ng-if="coupon_status==='Active' || coupon_status==='null'" class="selected-link cmplistmargin">
+                        <a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+                      </div>
+                      <div ng-if="coupon_status!=='Active' || coupon_status==='null'" class=
+                      "campaign-link cmplistmargin">
+                        <a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+                      </div>
+                    </div>
+                  </div>
+                <hr>
+                  <div class="row capital">
+                    <div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+                      <div ng-if="coupon_status==='Archive'" class="selected-link cmplistmargin">
+                        <a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+                      </div>
+                      <div ng-if="coupon_status!=='Archive'" class="campaign-link cmplistmargin">
+                        <a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 campdetailmargin" ng-if="couponData" >
+
+          <!-- first row -->
+
+          <div class="row ">
+            <div class="col-xs-12 col-sm-5 col-md-7 col-lg-8">
+            <div class="row">
+            <h3 class="capital cmppadding">
+                <b>{{couponData.couponName}}</b></h3>
+                 <!-- <b>Nutella</b></h3>  -->
+            </div>
+            <div class="row cmppadding">
+            
+            
+            <div ng-if="couponData.dicount.discount_id==1">
+          <h3 style="color: red;margin-top: 0px ! important">${{couponData.dicount.discount_lower}} Off</h3>
+         </div>
+
+          <div ng-if="couponData.dicount.discount_id==2">
+          <h3 style="color: red;margin-top: 0px ! important">
+          Save {{couponData.dicount.discount_lower}}%</h3>
+         </div>
+
+          <div ng-if="couponData.dicount.discount_id==3">
+          <h3 style="color: red;margin-top: 0px ! important">Buy {{couponData.dicount.discount_lower}} Get {{couponData.dicount.discount_upper}} Free</h3>
+         </div>
+         </div>
+         </div>
+         
+
+         <div class="col-xs-12 col-sm-7 col-md-5 col-lg-4 " >
+         <div class="row " style="margin-top:25px;">
+         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 compagin_font">
+            <span style="color: grey;"> From:</span><span> 
+            {{couponData.sdate}}
+            <!-- 07/07/2017 -->
+             </span>
+               </div>
+         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 compagin_font">
+             <span style="color: grey;">To: </span><span>
+             {{couponData.edate}}
+             <!-- 09/07/2017 -->
+           </span>
+                 </div>      
+           </div>
+          </div>
+          </div>
+
+          
+          <br>
+
+
+          <!-- second row -->
+          <div class="row cmppadding">
+
+              <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                 
+
+                 <!-- <div class="page_dashboard_box_well cmpheight cmpwallheight">
+                   <div class="row">
+                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cmpaginfilter">
+
+                   FILTER
+                  </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <select class="form-control capital cmpstore" ng-model="data.selectedStoreId"
+                            ng-change="getsalesDatabyStore(data.selectedStoreId);" >
+                      <option selected="selected" value="">{{ 'Retaillang.AllStores' | i18n }}
+                      </option>
+                      <option ng-repeat="states in storesforCampaign track by $index" value={{states.id}}>
+                        {{states.store}}
+                      </option>
+                    </select>
+                  </div>
+                  </div>
+                  </div> -->
+
+                    <img class="img-responsive" ng-src="{{couponData.imagePath}}"  width="140" height="100">
+          
+
+
+                  </div>
+
+                    <!-- second column in second row -->
+                  <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                     <div class="line-divider"></div>
+                     
+                  <div class="row">
+                   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+                    <!-- for lg and md -->
+
+                  <div class="hidden-xs hidden-sm col-md-12 col-lg-12 ">
+                     <div class="row" align="center" style="margin-top:0px;margin-bottom: 0px;">
+
+          <div class="hidden-xs hidden-sm  col-md-6 col-lg-6">
+          <div class="row">
+
+          <div class="col-md-12 col-lg-12 " style="margin-top:15px;">
+         <div ng-if="couponData.campaignRatioStatus=='increase'">
+          <div style="color: green; font-size: 30px; font-weight: normal;padding-left:0px ! important;">
+                {{couponData.CouponRatio}}%
+                                
+          <!-- <span style="color:green ;font-weight: normal;" class=" fa fa-arrow-up ">
+          </span> -->
+
+          <img  ng-src="images/arrow-up-green.png">
+
+
+          </div>
+          </div>
+
+          <div ng-if="couponData.campaignRatioStatus=='decrease'"
+            style="color: red; font-size: 30px; font-weight: normal;">
+                {{couponData.CouponRatio}}%
+                                 
+              <!-- <span style="color: red;font-weight: medium;"  class=" fa fa-arrow-down ">
+              </span> -->
+              <img  ng-src="images/arrow-down-red.png">
+
+                 </div>
+                </div>
+
+            <div class="col-md-12 col-lg-12">
+            <p style="color: grey; font-size:11px;font-weight: normal; margin-top:0px ! important" class="capital"> 
+                 COMPARED TO MONTHLY AVERAGE
+              </p>
+            </div>
+
+            </div>
+            </div>
+
+                    <div class="hidden-xs hidden-sm  col-md-6 col-lg-6 verticalLine">
+                      <div class="row">
+                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:26px;">
+                           <div style=" color: green; font-size: 24px; font-weight: normal">    
+                              ${{ couponData.total |number : 2}}
+                             <!-- $305 -->
+                           </div>
+                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                           <p style="color: grey; font-size: 11px;font-weight: normal; margin-top:0px ! important">
+                            COUPON SALES TO DATE</p>
+                       </div>
+                     </div>
+                   </div>
+                </div>
+             </div>
+                
+                         <!-- for xs and sm -->
+
+         <div class="col-xs-12 col-sm-12 hidden-md hidden-lg compagin_top">
+           <div class="row">
+
+             <div class="col-xs-12 col-sm-6 hidden-md hidden-lg" align="center">
+                <div class="row">
+
+                   <div class="col-xs-12 col-sm-12 " style="margin-top:10px;padding-left:0px ! important;">
+                       <div style="color: green; font-size: 24px; font-weight: medium;">
+                              {{couponData.CouponRatio}}%
+                              <!-- 18% -->
+                       <!--    <span style="color: green" class=" fa fa-arrow-up ">
+                          </span> -->
+                          <img  ng-src="images/arrow-up-green.png">
+                       </div>
+
+                       <div ng-if="couponData.campaignRatioStatus=='decrease'"
+                            style="color: red; font-size: 24px; font-weight: medium;">
+                             {{couponData.CouponRatio}}%
+                             <!-- 18% -->
+                          <!-- <span style="color: red;font-weight: medium;"  class=" fa fa-arrow-down ">
+                          </span> -->
+                          <img  ng-src="images/arrow-down-red.png">
+                      </div>
+                  </div>
+                  <div class="col-md-12 col-lg-12">
+                     <p style="color: grey; font-size: 10px;font-weight: normal;margin-top:0px ! important;" class="capital">
+                     COMPARED TO MONTHLY AVERAGE</p>
+                  </div>
+                 </div>
+                </div>
+
+
+    <div class="col-xs-12 col-sm-6 col-md-12 col-lg-12 verticalLine " align="center">
+    <div class="row compagin_top">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:10px;">
+    <div style=" color: green; font-size: 24px;font-weight: normal;">
+    <div class="comparedfont">
+              ${{ couponData.total | number :2}}
+    </div>
+    </div></div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <p style="color: grey; font-size: 10px;font-weight: normal;margin-top:0px ! important;">
+          COUPON SALES TO DATE</p>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 verticalLine compagin_top" >
+                      <!-- <div ng-if="show"> -->
+       <coupon-table data='couponData'></coupon-table>
+                      <!-- </div> -->
+      </div>
+      </div>
+                
+
+                 <div class="line-divider"></div>
+                 <br>
+                 <br>
+
+
+                      <!-- line chart -->
+
+
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div class="campaign-linechart-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div ng-if="spin">
+     <span us-spinner="{radius:5, width:5, length: 10}" spinner-key="spinner-1"
+      spinner-start-active="false"></span>
+     </div>
+      <div class="compagin_linechart_box_title"> {{'Retaillang.linechart_box1_title' | i18n}}
+        <!--  <span
+         class="page_dashboard_box_tooltip">&nbsp;</span> -->
+
+      </div>
+       <div class="compagin_page_dashboard_box_number">
+           ${{ couponData.total | number : 2}}
+                          <!-- $305 -->
+      </div>
+
+    <div class="compagin_page_dashboard_box_index_outer">
+    <div class="compagin_page_dashboard_box_index_title" style="padding-left:20px;">{{'Retaillang.Index' | i18n}}</div>
+    <div class="{{getindexStyle(couponData.index)}}" id="index_dashboard_sales">
+                          
+          {{couponData.index}}
+    </div>
+    </div>
+
+    <div >
+                      
+
+    <couponlist-directive 
+                id="couponData.id" 
+                data="couponData.datachart" 
+                record="couponData">
+    </couponlist-directive>
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
+                   
+
+                   <!-- bar chart -->
+    <div class="row" style="margin-top:5px">
+
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:15px;">
+    <label class="compagin_margin">SALES</label>
+   
+    <div class="row">
+    <div ng-if="couponData.products.length>0">
+
+  <couponsaleschart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+    retailers="couponData.retailers" 
+    reportstarttime="couponData.salesDatareporttime" 
+    id="productId"  
+    reportendtime="couponData.reportendDate" 
+    comparestarttime="couponData.salesDatacomparetime" 
+    compareendtime="couponData.compareendDate" 
+    product="couponData.productsforapi"
+    productName="couponData.ProductList"
+    style="height: 100px;">
+    </couponsaleschart>
+    
+    </div>
+
+    <div ng-if="productChartData.length==0">
+       <center><span style="color: black">
+       {{ 'Retaillang.NoresultFound' | i18n }}
+     </span></center>
+     </div>
+     </div>
+      
+      </div>
+
+     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:15px;">
+
+      <div ng-show="role =='retailer'">
+      <label class="capital compagin_margin">
+              {{ 'Retaillang.campshoppingtrips' | i18n }}</label>
+      </div>
+
+                      <div ng-show="role =='cpg'">
+                         <label class="capital compagin_margin">SHOPPING TRIPS</label>
+                      </div>
+
+
+                       
+    <div class="row">
+    <div ng-if="couponData.products.length>0">
+     <couponshoppingtripschart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+    retailers="couponData.retailers" 
+    reportstarttime="couponData.salesDatareporttime" 
+    id="deptShareId"  
+    reportendtime="couponData.reportendDate" 
+    comparestarttime="couponData.salesDatacomparetime" 
+    compareendtime="couponData.compareendDate" 
+    product="couponData.productsforapi"
+    productName="couponData.ProductList"
+    retailerid="couponData.retailers"
+    style="height: 100px;">
+    </couponshoppingtripschart>
+
+
+
+                         <!--  <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2 product-text-arrow"
+                                style="padding-left: 0px;padding-right: 0px;">
+                            {{STIndex}}<span class='fa fa-arrow-up'></span>
+                          </div> -->
+
+                         </div>
+
+                        <div ng-if="couponData.products.length==0">
+                         <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+                         </span></center>
+                      </div>
+                       </div>
+                    
+                  </div>
+
+
+     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:15px;">
+      <div ng-show="role =='cpg'">
+      <label class="capital compagin_margin">BASKET SHARE</label>
+      </div>
+
+              <div ng-show="role =='retailer'">
+                       <label class="capital compagin_margin">
+                        BASKET SHARE</label>
+                      </div>
+
+   <div class="row">
+    <div ng-if="couponData.products.length>0">
+
+
+    <couponbasketchart class="col-xs-8 col-sm-9 col-md-10 col-lg-10" 
+    retailers="couponData.retailers" 
+    reportstarttime="couponData.salesDatareporttime" 
+    id="basketId"  
+    reportendtime="couponData.reportendDate" 
+    comparestarttime="couponData.salesDatacomparetime" 
+    compareendtime="couponData.compareendDate" 
+    product="couponData.productsforapi"
+    productName="couponData.ProductList"
+    retailerid="couponData.retailers"
+    style="height: 100px;">
+    </couponbasketchart>
+
+                         <!-- <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 product-text-arrow"
+                              style="padding-left: 0px ! important;padding-right: 0px ! important;">{{ABtotal}}
+                           <span class='fa fa-arrow-up'></span>
+                         </div> -->
+                       </div>
+
+                      <div ng-if="basketSharedata.length==0">
+                     <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+                     </span></center>
+                    </div>
+                   </div>
+                
+             </div>
+
+            </div>  
+<!-- bar chart end -->
+            </div>  
+            <!-- col10 end here -->
+
+ 
+
+        </div>
+    </div>
+      
+
+       <!-- second row end -->
+    <br>
+
+   <!-- <div class="line-divider"></div> -->
+   <br>
+   <!--  <a href="" class="downloadcsvfile"><span class="glyphicon glyphicon-download-alt"></span>DOWNLOAD CSV</a>  -->      
+                   
+                       
+
+      </div>
+        
+          </div>
+          </div>
+          </div>
+        </div>
+        </section>
+
+
+

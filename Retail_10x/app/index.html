@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Retail 10x</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+
+
+  <link rel="icon" type="image" href="http://54.173.120.23/image/retailer-icon.ico">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="styles/main.css">
+  <!--<link rel="stylesheet" href="modules/dashboard/scripts/export.css" type="text/css" >-->
+
+
+  <!-- endbuild -->
+
+  <link href="http://xreyvision.com/retail10x/css/customRetail10x.css" rel="stylesheet"/>
+
+  <link
+    href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,greek,latin-ext,greek-ext,cyrillic,vietnamese,cyrillic-ext'
+    rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <!--<link href="https://www.amcharts.com/lib/3/plugins/export/export.css" media="all" rel="stylesheet" type="text/css" />-->
+  <!--<link rel="stylesheet" src="modules/dashboard/scripts/export.css"  media="all" rel="stylesheet" type="text/css" >-->
+</head>
+<body ng-app="retail10xApp">
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<div class="container-fluid">
+  <div ui-view="">
+    
+    
+  </div>
+</div>
+
+
+<script>
+
+</script>
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-localization/angular-localization.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-cache/dist/angular-cache.js"></script>
+<script src="bower_components/ng-idle/angular-idle.js"></script>
+<script src="bower_components/JsBarcode/dist/JsBarcode.all.min.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+
+
+<script src="modules/libraries/scripts/ammap.js"></script>
+
+
+<script src="modules/libraries/scripts/usaLow.js"></script>
+<script src="modules/shared/scripts/serviceFactory.js "></script>
+<script src="modules/shared/scripts/localisationModule.js "></script>
+<script src="modules/shared/scripts/sharedCrudeService.js"></script>
+<script src="modules/dashboard/scripts/dashBoardController.js"></script>
+<script src="modules/dashboard/scripts/idleController.js"></script>
+<script src="modules/dashboard/scripts/dashBoardModule.js"></script>
+<script src="modules/dashboard/scripts/dashBoardRoute.js"></script>
+<script src="modules/dashboard/scripts/dashBoardService.js"></script>
+<script src="modules/dashboard/scripts/datepickerController.js"></script>
+<script src="modules/dashboard/scripts/headerController.js"></script>
+<script src="modules/dashboard/scripts/pubnub-service.js"></script> 
+<script src="modules/libraries/scripts/amcharts.js"></script>
+<script src="modules/libraries/scripts/light.js"></script>
+<script src="modules/libraries/scripts/pie.js"></script>
+<script src="modules/libraries/scripts/responsive.min.js"></script>
+<script src="modules/libraries/scripts/serial.js"></script>
+<script src="modules/libraries/scripts/FileSaver.js"></script>
+<script src="modules/libraries/scripts/jszip.js"></script>
+<script src="modules/libraries/scripts/xlsx.js"></script>
+<script src="modules/libraries/scripts/fabric.js"></script>
+<script src="modules/libraries/scripts/blob.js"></script>
+
+ <script src="modules/libraries/scripts/vfs_fonts.js"></script>
+ <!--
+<script src="modules/libraries/scripts/pdfmake.js"></script> -->
+
+<script src="modules/products/scripts/prdctprintcontroller.js"></script>
+<script src="modules/products/scripts/productController.js"></script>
+<script src="modules/products/scripts/individualprdctprintcontroller.js"></script>
+<script src="modules/products/scripts/productdetailController.js"></script>
+<script src="modules/products/scripts/allproductController.js"></script>
+<script src="modules/products/scripts/productModule.js"></script>
+<script src="modules/products/scripts/productRoute.js"></script>
+<script src="modules/products/scripts/productService.js"></script>
+<script src="modules/products/scripts/individualproductController.js"></script>
+<script src="modules/products/scripts/manufacturerController.js"></script>
+<script src="modules/products/scripts/departmentController.js"></script>
+<script src="modules/products/scripts/categoriesProductItemController.js"></script>
+<script src="modules/products/scripts/manufactureDetailController.js"></script>
+
+<!--<script src="modules/libraries/scripts/jquery.js"></script>-->
+
+<script src="modules/libraries/scripts/angular-spinner.js"></script>
+<script src="modules/libraries/scripts/spin.min.js"></script>
+<script src="modules/libraries/scripts/bootstrap-datepicker.js"></script>
+<script src="modules/login/scripts/loginController.js"></script>
+<script src="modules/login/scripts/loginModule.js"></script>
+<script src="modules/login/scripts/loginRoute.js"></script>
+<script src="modules/login/scripts/loginService.js"></script>
+<script src="modules/salesregions/scripts/salesRegionController.js"></script>
+<script src="modules/salesregions/scripts/storeComparisionController.js"></script>
+<script src="modules/salesregions/scripts/salesRegionModule.js"></script>
+<script src="modules/salesregions/scripts/salesRegionRoute.js"></script>
+<script src="modules/salesregions/scripts/salesRegionService.js"></script>
+<script src="modules/campaign/scripts/sendinvitecontroller.js"></script>
+<script src="modules/campaign/scripts/savecampaigncontroller.js"></script>
+<script src="modules/campaign/scripts/campaignController.js"></script>
+<script src="modules/campaign/scripts/campaignModule.js"></script>
+<script src="modules/campaign/scripts/campaignRoute.js"></script>
+<script src="modules/campaign/scripts/campaignService.js"></script>
+<script src="modules/campaign/scripts/CampaignStartController.js"></script>
+<script src="modules/campaign/scripts/northgatePresentationController.js"></script>
+<script src="modules/campaign/scripts/campaignUpdateController.js"></script>
+<script src="modules/campaign/scripts/campaignListController.js"></script>
+<script src="modules/campaign/scripts/northgatePresentationController.js"></script>
+<script src="modules/campaign/scripts/CampaignDetailsBeforeLunchController.js"></script>
+
+<script src="modules/componets/scripts/campaignShoppingtripschart.js"></script>
+<script src="modules/componets/scripts/campaignBasketchart.js"></script>
+<script src="modules/componets/scripts/barchartdirectives.js"></script>
+<script src="modules/componets/scripts/campaignSaleschart.js"></script>
+<script src="modules/componets/scripts/allproductsdirective.js"></script>
+<script src="modules/componets/scripts/pieChartDirective.js"></script>
+<script src="modules/componets/scripts/topdepartmentsDirective.js"></script>
+<script src="modules/componets/scripts/campignSalesTableDir.js"></script>
+<script src="modules/componets/scripts/mapchartDirective.js"></script>
+<script src="modules/componets/scripts/topproductsDirective.js"></script>
+<script src="modules/componets/scripts/topSalesResionDirective.js"></script>
+<script src="modules/componets/scripts/topStoresDirective.js"></script>
+<script src="modules/componets/scripts/salesperformanceDirective.js"></script>
+<script src="modules/componets/scripts/campiagnbarcharts.js"></script>
+<script src="modules/componets/scripts/storebarchart.js"></script>
+<script src="modules/componets/scripts/tree-dropdown.js"></script>
+<script src="modules/componets/scripts/productcompareDirective.js"></script>
+<script src="modules/componets/scripts/categoriesproductItemDirective.js"></script>
+
+<script src="modules/componets/scripts/categoriespiechart.js"></script>
+
+<script src="modules/componets/scripts/categoriesDirective.js"></script>
+
+<script src="modules/componets/scripts/campaignlistDirective.js"></script>
+
+<script src="modules/componets/scripts/storecomparisionlinechart.js"></script>
+
+<script src="modules/componets/scripts/manufacturerDirective.js"></script>
+
+
+<script src="modules/componets/scripts/topregionsbarchartDirective.js"></script>
+
+<script src="modules/componets/scripts/salesregionmapDirective.js">
+</script>
+
+
+<script src="modules/componets/scripts/departmentsdirective.js">
+</script>
+
+<script src="modules/componets/scripts/alldepartmentsdirective.js"></script>
+
+<script src="modules/componets/scripts/fileuploadDirective.js"></script>
+
+<script src="modules/componets/scripts/departmentsdonutchartdirective.js"></script>
+
+<script src="modules/componets/scripts/departmentpiechart.js"></script>
+
+<script src="modules/componets/scripts/couponfileuploadDirective.js"></script>
+
+<script src="modules/componets/scripts/ManufactureDonutchartDirective.js"></script>
+
+<script src="modules/componets/scripts/worstsellersDirective.js">
+</script>
+
+<script src="modules/componets/scripts/topsalesregionbarchartDirective.js">
+</script>
+
+<script src="modules/componets/scripts/topstoresbarchartDirective.js">
+</script>
+
+<script src="modules/componets/scripts/manufacturersundercategory.js">
+</script>
+
+<script src="modules/componets/scripts/couponSalesTableDir.js">
+</script>
+
+
+<script src="modules/componets/scripts/couponlistDirective.js">
+</script>
+
+<script src="modules/componets/scripts/manufacturerpiechart.js">
+</script>
+
+<script src="modules/componets/scripts/Couponbarchart.js">
+</script>
+
+
+
+<script src="modules/componets/scripts/couponBasketchart.js">
+</script>
+
+<script src="modules/componets/scripts/couponShoppingtripschart.js">
+</script>
+
+<script src="modules/componets/scripts/couponSaleschart.js">
+</script>
+
+<script src="modules/componets/scripts/Productdropdown.js">
+</script>
+
+<script src="modules/componets/scripts/multiselect-dropdown.js">
+</script>
+
+<script src="modules/componets/scripts/ngEnterDirective.js">
+</script>
+<script src="modules/componets/scripts/typeheadonfocusDirective.js">
+</script>
+
+
+<script src="modules/coupons/scripts/savecouponController.js"></script>
+<script src="modules/coupons/scripts/couponactivelistController.js"></script>
+<script src="modules/coupons/scripts/couponactiveDetailController.js"></script>
+<script src="modules/coupons/scripts/couponController.js"></script>
+<script src="modules/coupons/scripts/couponModule.js"></script>
+<script src="modules/coupons/scripts/couponRoute.js"></script>
+<script src="modules/coupons/scripts/couponService.js"></script>
+
+
+
+<script src="modules/admin/scripts/manageUserService.js"></script>
+<script src="modules/admin/scripts/manageUserModule.js"></script>
+<script src="modules/admin/scripts/manageUserRoute.js"></script>
+<script src="modules/admin/scripts/manageUserController.js"></script>
+
+
+
+
+
+<!-- end -->
+
+
+<!-- endbuild -->
+
+<script type="text/javascript" src="http://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+
+<script type="text/javascript" src="http://cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBj0cuZmQ3hdIjVUsf4SVpb7eNdk1aNw6g&callback=" asyncdefer></script>
+
+
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.3.0.js"></script> 
+
+ <!-- <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>  -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/js/bootstrap-datepicker.min.js"></script>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.1/css/datepicker3.min.css"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
+
+
+
+
+   <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script> 
+ 
+ <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" /> 
+
+ 
+
+
+<script src="http://blueimp.github.com/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+
+<script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+
+ 
+
+
+<script src="https://cdn.pubnub.com/pubnub-3.7.21.js">
+  
+</script>
+<script src="https://cdn.pubnub.com/sdk/pubnub-angular/pubnub-angular-3.2.1.js"></script>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.js">
+</script>
+
+
+
+
+
+</body>
+</html>

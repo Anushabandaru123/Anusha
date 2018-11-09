@@ -1,0 +1,8 @@
+
+  1) for installing grunt 
+
+    npm install -g grunt-cli bower yo generator-karma generator-angular  For Windows pc
+               
+  2)npm install
+
+  3)bower install

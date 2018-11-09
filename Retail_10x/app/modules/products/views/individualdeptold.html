@@ -1,0 +1,390 @@
+<div ng-include src="'modules/dashboard/views/header.html'" xmlns: xmlns:></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+<script type="text/ng-template" id="customTemplate.html">
+       
+          <a>
+          <img ng-src="{{match.model.image}}" width="30">
+          <span ng-bind-html="match.model.product | uibTypeaheadHighlight:query"></span>
+          <span></span>
+          <span ng-bind-html="match.model.price | uibTypeaheadHighlight:query"></span>
+          </a>
+ </script>
+
+
+ <section class="products">
+ <div ng-controller="individualproductCtrl">
+ <div class="container-fluid">
+ <div class="MaskLayer" ng-class="{isClosed : !masked}">
+ <div class="MaskLayer-Content">
+ <p>
+ </p>
+ </div>
+ </div>
+
+  <div id="printSectionId">
+  <div class="row row_margin dashbordbg-navbar" >
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-left:20px;
+       padding-right:35px; ">
+        <div class="row ">
+        <div class="col-xs-12  col-sm-12 col-md-12 col-lg-12 productDetails-filter" style="margin-left: -7px;">
+         <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2" style="margin-top: 7px;">
+           <div ng-if="role=='retailer'">
+             <select class="form-control indidept_margin" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getSelectedProduct(selectedOption.store_id);"></select>
+           </div>
+
+           <!-- <div ng-if="role=='distributor'">
+           <select class="form-control indidept_margin" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);"></select>
+           </div> -->
+
+           <div ng-if="role=='cpg'">
+              <div ng-if="ctrl.treeDropdownstatus">
+               <tree-dropdown class="tree-dropdown indidept_margin" data="ctrl.treeData" selected="ctrl.selected" callback="getcpgrecord();" ></tree-dropdown>
+             </div>
+           </div>
+         </div>
+
+         <div class="col-xs-12 col-sm-6 col-md-2 col-lg-2 " style="margin-top: 10px;">  <select class="form-control bgcolor prdctwidth" ng-options="names.name for    names in reporttimeranges " ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);"></select>  
+         </div>
+
+         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 prdctmargin" style="padding-right: 0px;margin-top:15px">
+            <div class="row">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 fontChange" >
+                 <div class="glyphicon glyphicon-calendar fa fa-calendar " style="margin-left: 16px;">
+                 </div>      
+             </div>
+ 
+             <div class="col-xs-7 col-sm-4 col-md-6 col-lg-5 fontChange" style="margin-top:2px;">
+                {{ 'Retaillang.ReportTimePeriod' | i18n }}:
+             </div>
+             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 reportmargin" style="margin-top:2px;">
+                 <div  id="reporttime-individual"  style="cursor:default;" class="prdctdetailRT">
+                  <span></span>    
+                 </div>
+             </div>
+          </div>
+         </div>
+  
+         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 prdctmargin " style="padding-right: 0px;margin-top:15px ">
+           <div class="row">
+             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 chnageFontColor " >
+                <div class="glyphicon glyphicon-calendar fa fa-calendar " style="margin-left: 16px;"></div>      
+             </div> 
+             <div class="col-xs-7 col-sm-4 col-md-6 col-lg-5 chnageFontColor" style="margin-top:2px;">
+                 {{ 'Retaillang.CompareTimeperiod' | i18n }}:
+             </div>
+             <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 comparemargin" >
+                 <div  class="prdctdetailRT">{{comparetime}}</div> 
+             </div> 
+          </div>
+       </div>
+    </div>
+  </div>
+
+   
+  <div class="row" style="margin-top:20px">
+     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 " style="margin-left: -15px;">
+        <div class="row inventoryfont" style="color:black">COMPARE PRODUCTS:</div> 
+
+         <div class="row" style="padding-right: 6px;">  
+                <div class=" newright-inner-addon " >
+                <!-- <i class="glyphicon glyphicon-search prdghcolor" ></i> -->
+                 <input type="text" ng-model="product"
+                   class="form-control typeahead indisearchbox"
+                   typeahead-min-length="3"
+                   uib-typeahead="typeaheadList.product for typeaheadList in GetProductList($viewValue) "
+                   typeahead-on-select="productselected(product)"
+                   typeahead-loading="loadingLocations"
+                   typeahead-no-results="noResults" autocomplete="off"
+                   typeahead-template-url="customTemplate.html"
+                   placeholder="Find Product or UPC to compare"
+                   required style="cursor: pointer;">
+                </div>
+            </div>
+
+           <div class="row compareprdct">COMPARE RELATED PRODUCTS:</div>
+
+           <div class="row capital">
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="list-group" style="height:470px;overflow-y:auto; overflow-x:hidden;color:#555">
+                <div ng-repeat="x in productList" >
+                  <div  ng-if="x.status=='plus'" id="mySelect" class="list-departmet-items">
+                    <div  ng-click="selectedProduct(x);" style="word-wrap: break-word;">
+                      {{ x.productName}}
+                   </div>
+                  </div>
+
+                  <div ng-if="x.status=='minus'" id="mySelect" class="list-departmet-items selectedlist" >
+                     <div  ng-click="selectedProduct(x);" style="word-wrap:break-word;">
+                       {{ x.productName}}
+                     </div>
+                  </div>
+                </div>
+               </div>
+             </div>
+           </div>
+     
+     </div>
+
+      <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 " >
+        <div class="line-divider" style="margin-top:10px; margin-bottom:20px"></div>
+
+         <div ng-repeat="item in itemsList">
+ <div ng-show="item.barchart.barchart">
+ <div class="row ">
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 indmargin" style="padding-right:35px;">
+ <div class="panel-group" id="accordion">
+ <div class="panel panel-default">
+ <div class="panel-heading">
+ <h4 class="panel-title panel_margin plnelheight" >
+ <div class='row' style="margin-top:5px;">
+ <div class='col-xs-12 col-sm-3 col-md-2 col-lg-3'>
+ <div class="row">
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 18px;" ng-click="gotoProductdetail(item.linechart.itemNumber)">
+ <b> {{item.barchart.productName}}</b>
+ <br>
+ <br>
+ </div>
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555;margin-top:-13px;padding-left: 0px ! important;" ng-click="gotoProductdetail(item.linechart.itemNumber)">
+  UPC#:{{item.barchart.itemNumber}}
+ </div>
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-9 col-md-10 col-lg-9 '>
+ <div class="row product-text">
+ <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3'>
+ <div class="indidept_page_dashboard_box_title"> 
+      {{'Retaillang.linechart_box1_title' | i18n}}
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+      ${{ item.barchart.total | number:2}}
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-6 col-md-2 col-lg-2'>
+ <div class="indidept_page_dashboard_box_title"> 
+      UNITS SOLD
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+      {{item.barchart.unitsold.unitSoldbyRp|number :2}}
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 product-text'>
+ <div class="indidept_page_dashboard_box_title"> 
+ <span class="capital">
+               Shopping Trips
+ </span>
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+ <div class="{{getindexStyle(item.barchart.shoppingtrips)}}" id="index_dashboard_sales"> 
+    {{item.barchart.shoppingtrips}}
+ <span class="{{getarrowStyle(item.barchart.shoppingtrips)}}">
+ </span>
+ </div>
+ </div>
+ </div>
+
+ <div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 product-text'>
+ <div class="indidept_page_dashboard_box_title"> 
+ <span class="capital">
+              Avg. Basket size
+ </span>
+
+ <a data-toggle="collapse" ng-click="lineChartArrowClick(item.barchart.itemNumber)" data-parent="accordion" data-target="{{'#'+item.barchart.itemNumber}}"> 
+ <span class="glyphicon ghfont" ng-class="item.barchart.arrowdircetion" style="color:red"></span>
+ </a>
+ </div>
+ <div class="indidept_page_dashboard_box_number capital indpadding">
+ <div class="{{getindexStyle(item.barchart.avgbasket)}}" id="index_dashboard_sales"> {{item.barchart.avgbasket}}
+ <span class="{{getarrowStyle(item.barchart.avgbasket)}}"> </span>
+ </div>
+ </div>
+ </div>
+ </div>      
+ </div>
+ </div>
+ </h4>
+ </div>
+      
+ <div id="{{item.barchart.itemNumber}}" class="panel-collapse collapse in">
+ <div class="panel-body" >
+ <div class="row">
+ <div class="col-xs-12 col-sm-3 col-md-4 col-lg-4"></div>
+ <div class='col-xs-12 col-sm-9 col-md-8 col-lg-8'>
+ <div class="row">
+ <div class='col-xs-12 col-sm-8 col-md-9 col-lg-9'>
+ <div class="page_dashboard_box_well ">
+ <div class="row" >
+ <div class="col-md-12 col-lg-12" >
+ <div class="indidept_page_dashboard_box_index_outer" style="margin-top:0px; margin-right:18px;">
+ <div class="indidept_page_dashboard_box_index_title" style="padding-left:10px;">Index</div>
+ <div class="{{getjatStyle(item.barchart.index)}}" id="index_dashboard_sales" >{{item.barchart.index}}
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-md-12 col-lg-12">
+ <productchartbar id="item.barchart.id" data="item.barchart.data"
+  itemnumber="item.barchart.itemNumber" unitsold="item.barchart.unitsold" dates="reportdateobject"></productchartbar>
+ </div> 
+ </div> 
+ </div>
+ </div>
+
+ <div class='col-xs-12 col-sm-4 col-md-3 col-lg-3 sortmargin' >
+ <div class="btn-group" class="charttype-btn-group">
+ <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('line',item.barchart.itemNumber);">  
+ <img ng-src="{{imgline}}">
+ </button>
+ <span>
+ <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('bar',item.barchart.itemNumber);">   
+ <img ng-src="{{imgbar}}">
+ </button> 
+ </span>   
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div> 
+ <br>
+ <div class="line-divider"></div>
+ <br>
+ </div>
+ </div>
+ </div>
+ <div class="page-break"></div>
+ <div ng-show="item.linechart.linechart">
+ <div class='row'>
+ <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12 indmargin' style="padding-right:35px;">
+ <div class="panel-group" id="accordion">
+ <div class="panel panel-default">
+ <div class="panel-heading">
+ <h4 class="panel-title panel_margin plnelheight">
+ <div class='row'style="margin-top:5px;">
+ <div class='col-xs-12 col-sm-3 col-md-2 col-lg-3'>
+ <div class="row"> 
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 18px;">
+   <div ng-click="gotoProductdetail(item.linechart.itemNumber)"><b>{{item.linechart.productName}}</b></div>
+    <br>
+ </div>
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555;margin-top:6px;padding-left: 0px ! important;" ng-click="gotoProductdetail(item.linechart.itemNumber)">
+            UPC#:{{item.linechart.itemNumber}}
+ </div> 
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-9 col-md-10 col-lg-9'>
+ <div class="row">
+ <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+ <div class="row">
+ <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3'>
+ <div class="indidept_page_dashboard_box_title"> 
+        {{'Retaillang.linechart_box1_title' | i18n}}
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+       ${{ item.linechart.total | number:2}}
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-6 col-md-2 col-lg-2'>
+ <div class="indidept_page_dashboard_box_title"> 
+       UNITS SOLD
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+        {{item.linechart.unitsold.unitSoldbyRp|number :2}}
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 product-text'>
+ <div class="indidept_page_dashboard_box_title"> 
+ <span class="capital">
+               Shopping Trips
+ </span>
+ </div>
+ <div class="indidept_page_dashboard_box_number capital">
+ <div class="{{getindexStyle(item.linechart.shoppingtrips)}}" id="index_dashboard_sales">  
+  {{item.linechart.shoppingtrips}}
+ <span class="{{getarrowStyle(item.linechart.shoppingtrips)}}">
+ </span>
+ </div>
+ </div>
+ </div>
+ <div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 product-text'>
+ <div class="indidept_page_dashboard_box_title"> 
+ <span class="capital">
+              Avg. Basket size
+ </span>
+ <a data-toggle="collapse" data-parent="accordion" ng-click="changeArrowAvgBasket(item.linechart.itemNumber)" data-target="{{'#'+item.linechart.itemNumber+$index}}">
+ <span class="glyphicon  ghfont" ng-class="item.linechart.arrowdircetion" style="color:red"></span>
+ </a>
+ </div>
+ <div class="indidept_page_dashboard_box_number capital indpadding">
+ <div class="{{getindexStyle(item.linechart.avgbasket)}}" id="index_dashboard_sales"> {{item.linechart.avgbasket}}
+ <span class="{{getarrowStyle(item.linechart.avgbasket)}}"> </span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div> 
+ </div>
+ </h4>
+ </div>
+      
+ <div id="{{item.linechart.itemNumber+$index}}" class="panel-collapse collapse">
+ <div class="panel-body">
+ <div class="row">
+ <div class='col-xs-12 col-sm-2 col-md-3 col-lg-3'>
+ </div>
+ <div class='col-xs-12 col-sm-7 col-md-7 col-lg-7'>
+ <div class="page_dashboard_box_well indboxheight">
+ <div class="row">
+ <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+ <div class="indidept_page_dashboard_box_index_outer">
+ <div class="indidept_page_dashboard_box_index_title" style="padding-left:10px;">Index</div>
+ <div class="{{getjatStyle(item.linechart.index)}}" id="index_dashboard_sales">{{item.linechart.index}}</div>
+ </div>  
+ </div>
+ <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+ <productcompare-directive id="item.linechart.id" data="item.linechart.data" itemnumber="item.linechart.itemNumber" unitsold="item.linechart.unitsold" dates="reportdateobject"></productcompare-directive>
+ </div>
+ </div>
+ </div>  
+ </div>
+ <div class='col-xs-12 col-sm-3 col-md-2 col-lg-2 sortmargin' >
+ <div class="btn-group" class="charttype-btn-group">
+ <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('line',item.linechart.itemNumber);">   
+ <img ng-src="{{imgline}}"></button>
+ <span>
+ <button type="button" class="charttype_radio_outer_btn"  ng-click="selectgraph('bar',item.linechart.itemNumber);">   <img ng-src="{{imgbar}}" ></button> 
+ </span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div> 
+ </div>
+ </div>
+ </div>
+ </div>
+ <br>
+ <div class="line-divider"></div>
+ <br>
+ </div>
+ </div>
+
+      </div>
+
+
+
+</div>
+</div>
+</div> 
+ <!-- <a href="" class="downloadcsvfile"><span class="glyphicon glyphicon-download-alt"></span>DOWNLOAD CSV</a> -->
+ </div>
+ </div>
+ </section>
+ 

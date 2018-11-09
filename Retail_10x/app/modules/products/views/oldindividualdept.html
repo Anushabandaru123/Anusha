@@ -1,0 +1,485 @@
+<div ng-include src="'modules/dashboard/views/header.html'" xmlns: xmlns:></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<section class="products">
+  <div ng-controller="individualproductCtrl">
+    <div class="container-fluid">
+
+      <div class="MaskLayer"
+           ng-class="{isClosed : !masked}">
+
+        <div class="MaskLayer-Content">
+          <p>
+
+          </p>
+        </div>
+      </div>
+
+
+
+   <div class="row row_margin">
+  <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding: 0px;">
+   <div class="row">
+     <div class="col-sm-12 col-md-12 col-lg-12 list-group">
+   
+
+    <select id="mySelect" class="form-control" ng-model="selectedvalue1" ng-change="selectData();">
+     <option value="{{xy.Name}}" selected="selected">
+         {{xy.Name}}
+      </option>
+     <option class="indexfontsize" ng-repeat="xy in ListdeptProduct" value="{{xy.Name }}|{{ xy.id }}">
+       {{xy.Name}}
+      </option>
+    </select>
+    
+
+
+
+
+
+
+
+
+
+
+     <!--  <div class="list-group">
+     <br>
+       
+      <div class="indexfontsize"  ng-repeat="x in productList " class="sidebar-menu-item">
+     <div class="row" ng-click="selectedProduct(x);">
+    <div class="indexfontsize col-xs-10 col-sm-10 col-md-11 col-lg-11 ellipsis">
+         {{x.productName }}
+     </div>
+     <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+       <div ng-if="x.status=='plus'">
+          +
+       </div>
+      <div ng-if="x.status=='minus'">
+            -
+        </div>
+        </div>
+        </div>
+        </div>
+        </div> -->
+
+
+
+
+
+
+
+
+
+
+<div class="list-group" style=" height: 700px; overflow-y: auto">
+        <div ng-repeat="x in productList" > 
+
+               
+                <div ng-if="x.status=='plus'" id="mySelect" class="list-departmet-items " >
+                <div class="row capital">
+                <div class="col-xs-10 col-sm-10 col-md-9 col-lg-10">
+                 <div   ng-click="selectedProduct(x);" style="word-wrap: break-word;">
+                 {{ x.productName}}
+                  </div>
+                  
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+                 <div   ng-click="selectedProduct(x);" >
+                   +
+                  </div>
+                  
+                </div>
+                </div>
+            
+
+                </div>
+                <div ng-if="x.status=='minus'" class="selectedlist list-departmet-items" id="mySelect" >
+                <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-9 col-lg-10">
+
+             <div   ng-click="selectedProduct(x);" style="color: white">
+                 {{ x.productName}}
+                 </div>
+                  </div>
+                  <div class="col-xs-2 col-sm-2 col-md-3 col-lg-2">
+                 <div   ng-click="selectedProduct(x);" >
+                   -
+                  </div>
+                  </div>
+                </div>
+
+
+                </div>
+
+
+               
+                </div>
+              </div>
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       </div>
+        </div>
+        </div>
+        <center>
+      <div ng-if="spin">
+        <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+        spinner-start-active="false"></span>
+          </div>
+        </center>
+
+      <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 dashbordbg-navbar ">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4">
+      <div class="row">
+    <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+       <h3>{{option}}</h3>
+    </div>
+  <div class="col-xs-12 col-sm-12  col-md-12  col-lg-12">
+  <div class="pathindicatorsize "><p class="startpathname">
+    <p class="startpathname">
+    <a ui-sref="dashBoard">{{'Retaillang.DASHBOARD' | i18n}}>
+      
+    </a>
+        
+   <a ng-if="role=='retailer'" ui-sref="allproducts">{{'Retaillang.PRODUCTS' | i18n}}
+   </a>
+    <a ng-if="role=='cpg'" ui-sref="products">{{'Retaillang.PRODUCTS' | i18n}}
+   </a>
+
+   </li>
+    >
+    <a  ng-if="role=='cpg'" ui-sref="products-department">   {{'Retaillang.DEPARTMENT' | i18n}}</a>
+    <a  ng-if="role=='retailer'" ui-sref="departments">   {{'Retaillang.DEPARTMENT' | i18n}}</a>
+      </li>
+        >
+        <span class="currentpathname">{{option}}
+        </span>
+        </p>
+        </div>
+       </div>
+        </div>
+        </div>
+       <div class="col-xs-12 col-sm-12  col-md-2  col-lg-2">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div ng-if="role=='retailer'">
+        {{ 'Retaillang.select-area' | i18n }}
+      </div>
+       <div ng-if="role=='cpg'">
+      {{ 'Retaillang.DataSource' | i18n }}
+       </div>
+       </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div ng-if="role=='retailer'">
+
+     <!--  <div ng-if="showselectedstore">
+      <select style="font-size: 12px;   padding-right: 0px!important;" class="form-control" ng-model="data.selectedStoreId"
+      ng-change="getSelectedProduct(data.selectedStoreId);">
+       <option value="" selected="selected">
+         {{selectedstoreidname}}
+       </option>
+       <option value="All stores" selected="selected">
+           {{ 'Retaillang.AllStores' | i18n }}
+         </option>
+       <option ng-repeat="states in List track by $index" value={{states.store_id}}>
+           {{states.store_name}}
+        </option>
+       </select>
+       </div> -->
+
+
+       <!--  <div ng-if="showselectearea">
+       <select  style="font-size: 12px;    padding-right: 0px!important;" class="form-control" ng-model="data.selectedStoreId"
+      ng-change="getSelectedProduct(data.selectedStoreId);">
+        <option value="" selected="selected">
+          {{ 'Retaillang.AllStores' | i18n }}
+          </option>
+      <option ng-repeat="states in List track by $index" value={{states.store_id}}>
+       {{states.store_name}}
+         </option>
+         </select>
+            </div> -->
+
+
+      <select class="form-control" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getSelectedProduct(selectedOption.store_id);"></select>
+
+
+
+
+           </div>
+      <div ng-if="role=='cpg'">
+       <div ng-if="ctrl.treeDropdownstatus">
+       <tree-dropdown class="tree-dropdown" data="ctrl.treeData" selected="ctrl.selected"             callback="getcpgrecord();"></tree-dropdown>
+        </div>
+       </div>
+      </div>
+       </div>
+       </div>
+     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+     <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         {{ 'Retaillang.ReportTimePeriod' | i18n }}
+     </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+     <div  id="reporttime-individual" class="form-control indexfontsize" style="cursor: default;">
+      <span></span>
+    <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+    <b class="calendaralign"></b>
+      </div>
+      </div>
+       </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      {{ 'Retaillang.CompareTimeperiod' | i18n }}
+  </div>
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+  <div class="right-inner-addon ">
+    <i  class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+     <input type="text" name="daterange" class="form-control indexfontsize" style="cursor: default"/>
+      </div>
+     </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4 fontChange">
+    <span class="glyphicon glyphicon-stop"></span> <span
+  ng-bind="ReportTimePeriodp"> {{ReportTimePeriodp}}</span>
+  </div>
+   <div class="col-xs-12 col-sm-8  col-md-4  col-lg-4 chnageFontColor">
+     <span class="glyphicon glyphicon-stop"></span> {{compareTimePeriod}}
+    </div>
+    <div class="  col-md-1 col-lg-2"></div>
+    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" align="right">
+      <div class="btn-group" class="charttype-btn-group">
+     <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('line');"><img
+        ng-src="{{imgline}}"></button>
+     <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('bar');"><img
+        ng-src="{{imgbar}}"></button>
+        <!--
+        <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('map');"><img style="width: 14px;height: 14px" ng-src="{{imgmap}}"></button>
+                -->
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <hr>
+
+          <div ng-show="selectedgraph=='bar'">
+            <!-- <div ng-if="showproducts"> -->
+
+
+            <!-- <div ng-repeat=" product in selectedproductList"> -->
+
+    <div ng-repeat="product in selectedItemsDataAraayforbarchart">
+    <div class='row'>
+     <div class='col-xs-12 col-sm-6 col-md-2 col-lg-2'>
+     <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+     <!--  <center><img class=" img-responsive thumb" ng-src="{{imagebuffer}}" width="100px" height="100px"/>
+     </center> -->
+       </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center">
+     
+
+       <b> {{product.productName}}</b>
+      <br>
+      <br>
+      </div>
+       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555">
+       <b>UPC#</b>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555">
+       {{product.itemNumber}}
+      </div>
+
+
+
+      </div>
+     </div>
+
+
+     <div class='col-xs-12 col-sm-8 col-md-6 col-lg-7'>
+
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+
+
+            <div class="page_dashboard_box_index_outer">
+     <div class="page_dashboard_box_index_title">Index</div>
+     <div class="{{getjatStyle(product.index)}}" id="index_dashboard_sales">{{product.index}}</div>
+      </div>
+
+      
+        </div>
+        </div>
+       <div class="row">
+        <div class="col-md-12 col-lg-12">
+     <productchartbar id="product.id" data="product.data"
+       itemnumber="product.itemNumber"></productchartbar>
+      </div>
+
+    <!-- <div class="col-md-12 col-lg-12">
+    <p class="indexfontsize space" class="product-text">CURRENT CAMPAIGN: <span class="sales-chart-heading">15% OFF {{product.productname}}</span></p>
+      </div> -->
+
+       </div>
+        </div>
+      <div class='col-xs-6 col-sm-8 col-md-2 col-lg-2 product-text'>
+       <div><span class="indexfontsize capital">
+    <!-- {{ 'Retaillang.SHAREOFSANDWICHSPREAD' | i18n }} -->
+       Avg. Basket size
+       <!-- {{product.avgbasket}} -->
+       </span></div>
+       <div><span class="indexfontsize capital">
+        <!-- {{ 'Retaillang.SHAREOFBASKET' | i18n }} -->
+        Shopping Trips
+       <!-- {{product.SHAREOFBASKET}} --></span></div>
+        </div>
+       <div class='col-xs-6 col-sm-4 col-md-2 col-lg-1 '>
+
+       <!-- {{product.index}} -->
+
+          <div class="{{getindexStyle(product.avgbasket)}}" id="index_dashboard_sales"> {{product.avgbasket}}
+           <span class="{{getarrowStyle(product.avgbasket)}}"> </span>
+           </div>
+
+
+       <div class="{{getindexStyle(product.shoppingtrips)}}" id="index_dashboard_sales">  {{product.shoppingtrips}}
+           <span class="{{getarrowStyle(product.shoppingtrips)}}">
+            </span>
+            </div>
+
+          <!-- {{product.sob}} -->
+
+
+         </div>
+        </div>
+         <hr>
+        </div>
+            <!-- </div> -->
+        </div>
+
+      <div ng-show="selectedgraph=='line'">
+
+     <!--<productcompare-directive id="chartdiv1" data="chartData" ></productcompare-directive> -->
+  <!-- <div ng-repeat=" product in selectedproductListLine"> -->
+    <div ng-repeat=" product in selectedItemsDataAraayforlinechart">
+      <div class='row'>
+     <div class='col-xs-12 col-sm-6 col-md-2 col-lg-2 offset1'>
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+   <!--  <center><img class=" img-responsive thumb" ng-src="{{imagebuffer}}" width="100px" height="100px"/>
+    </center> -->
+      </div>
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 18px;">
+      <b> {{product.productName}}</b>
+      <br>
+      <br>
+      </div>
+       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555">
+       <b>UPC#</b>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;font-size: 14px;color: #555">
+       {{product.itemNumber}}
+      </div>
+      </div>
+       </div>
+     <div class='col-xs-12 col-sm-8 col-md-6 col-lg-7'>
+        <div class="row">
+       <div class="col-md-12 col-lg-12">
+       <div class="page_dashboard_box_well">
+       <div class="page_dashboard_box_title"> {{'Retaillang.linechart_box1_title' | i18n}}
+       <span class="page_dashboard_box_tooltip">&nbsp;
+       </span></div>
+        <div class="page_dashboard_box_number capital">
+       
+       sales: ${{ product.total | number:2}}
+
+        &nbsp;&nbsp; &nbsp;units sold: {{product.unitsold.unitSoldbyRp|number :2}}
+        </div>
+          
+          
+         
+          
+       <div class="page_dashboard_box_index_outer">
+     <div class="page_dashboard_box_index_title">Index</div>
+     <div class="{{getjatStyle(product.index)}}" id="index_dashboard_sales">{{product.index}}</div>
+      </div>
+      <!--<salesperformance-directive id="product.id" data="product.data"></salesperformance-directive>-->
+        <productcompare-directive id="product.id" data="product.data" itemnumber="product.itemNumber" unitsold="product.unitsold"
+       dates="reportdateobject"></productcompare-directive>
+      </div>
+      </div>
+       <!--  <div class="col-md-12 col-lg-12">
+      <p class="indexfontsize space" class="product-text">{{ 'Retaillang.CURRENTCAMPAIGN' | i18n }} <span class="sales-chart-heading">15% OFF {{product.productname}}</span></p>
+        </div> -->
+       </div>
+        </div>
+    <div class='col-xs-6 col-sm-8 col-md-2 col-lg-2 product-text'>
+    <div><span class="indexfontsize capital">
+       <!-- {{ 'Retaillang.SHAREOFSANDWICHSPREAD' | i18n }} -->
+       Avg. Basket size
+       <!-- {{product.avgbasket}} -->
+      </span></div>
+      <div><span class="indexfontsize capital">
+        <!-- {{ 'Retaillang.SHAREOFBASKET' | i18n }} -->
+        Shopping Trips
+      <!-- {{product.SHAREOFBASKET}} --></span></div>
+    </div>
+    <div class='col-xs-6 col-sm-4 col-md-2 col-lg-1'>
+
+      <!-- {{product.index}} -->
+
+          <div class="{{getindexStyle(product.avgbasket)}}" id="index_dashboard_sales"> {{product.avgbasket}}
+          <span class="{{getarrowStyle(product.avgbasket)}}"> </span>
+           </div>
+
+
+            <div class="{{getindexStyle(product.shoppingtrips)}}" id="index_dashboard_sales">  {{product.shoppingtrips}}
+           <span class="{{getarrowStyle(product.shoppingtrips)}}">
+            </span>
+            </div>
+
+
+
+        </div>
+        <hr>
+         </div>
+        </div>
+        <div ng-show="selectedgraph=='map'">
+         <p> WELCOME INSIDE MAP </p>
+      </div>
+   <!--  <div class="row dashbordbg-navbar" style="margin-top: 600px">
+      </div> -->
+ <!--  <a href="" class="downloadcsvfile"><span class="glyphicon glyphicon-download-alt"></span>DOWNLOAD CSV</a> -->
+  </div>
+  </div>
+  </div>
+</div>
+
+</section>

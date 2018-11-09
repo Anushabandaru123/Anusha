@@ -1,0 +1,92 @@
+<!--<div ng-include src="'modules/dashBoard/views/Header.html'"></div>-->
+
+<section class="login container-fluid loginheight" >
+
+  <center>  
+  <div style="cursor:default"  class="Loginlogo" ></div></center>
+
+  <form class="panel panel-default jumbotron login" name="myForm">
+    <div class="form-group" >
+
+      <!--  <svg id="barcode"></svg> -->
+      <div class="loginHeader">
+        <h2 style="cursor:default" class="form-signin-heading">
+        {{ 'Retaillang.login' | i18n }}</h2>
+
+      </div>
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input type="text"
+                 class="form-control input-underline  input-lg " name="username" id="username" ng-model="user.username"
+                 placeholder="Enter Username" required/>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <input type="password" class="form-control input-underline input-lg " name="password" id="password"
+                 ng-model="user.password" placeholder="Enter Password" required/>
+        </div>
+
+      </div>
+
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div>
+            <button type="submit" class="full-width btn  button-loginscreen " id="submit"
+                    ng-model="status" ng-click="dataLogin()" invalid-checker="200">{{ 'Retaillang.Login-submit' | i18n }}
+            </button><!--text-single-R-W-24-->
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+
+<div  class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-4"></div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    <center>
+    <div class="modal fade" id="myModal" role="dialog" style="margin-top: 100px">
+      <div class="modal-dialog" >
+        <div class="modal-contents model-invalid">
+          <div class="modal-header" >
+            <!--<button type="button" class="close" data-dismiss="modal" style="color: red">&times;</button>-->
+            <h4 class="model-invalid-title">{{'Retaillang.loginfailed'|i18n}} </h4>
+          </div>
+        </div>
+        <div class="modal-body">
+          <br>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="titlepromocode"><span class="glyphicon glyphicon-remove-sign msgred"></span>
+                {{'Retaillang.invalid-msg'|i18n}}<br>
+              </div>
+            </div>
+          </div>
+        </div><br>
+      </div>
+      <div class="modal-footer" style="padding-bottom: 8px">
+        <center><button type="button" class=" btn btn-primary"  data-dismiss="modal">{{'Retaillang.btnok'|i18n}}</button></center>
+      </div>
+    </div>
+    </center>
+</div>
+    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-4"></div>
+
+  </div>
+
+</div>
+
+</section>

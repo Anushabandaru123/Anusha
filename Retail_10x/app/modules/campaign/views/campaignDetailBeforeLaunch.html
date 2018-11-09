@@ -1,0 +1,465 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+<style>
+  #example-five {
+    position: relative;
+  }
+
+  #example-five-checkbox {
+    display: none;
+  }
+
+  #example-five-checkbox:checked + #example-five:after {
+    content: "hide";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+  }
+
+
+</style>
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+<section class="products">
+<div ng-controller="campaignforelunchCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital" >
+<div class="indexfontsize col-xs-10 col-sm-11 col-md-11 col-lg-11 ellipsis">
+<div ng-if="campaign_status==='Pending' || campaign_status==='null'" class="selected-link">
+<a ui-sref="campaignListPending({status: 'Pending'})">Pending</a>
+</div>
+<div ng-if="campaign_status!=='Pending' && campaign_status!=='null'" class="campaign-link">
+<a ui-sref="campaignListPending({status: 'Pending'})">Pending</a>
+</div>
+</div>
+</div>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-11 col-md-11 col-lg-11 ellipsis">
+<div ng-if="campaign_status==='Active'" class="selected-link">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+<div ng-if="campaign_status!=='Active'" class="campaign-link">
+<a ui-sref="campaignListActive({status: 'Active'})">Active</a>
+</div>
+</div>
+</div>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-11 col-md-11 col-lg-11 ellipsis">
+<div ng-if="campaign_status==='Archive'" class="selected-link">
+<a ui-sref="campaignListArchive({status: 'Archive'})">Archive</a>
+</div>
+<div ng-if="campaign_status!=='Archive'" class="campaign-link">
+<a ui-sref="campaignListArchive({status: 'Archive'})">Archive</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-10 col-md-11 col-lg-11 dashbordbg-navbar" ng-repeat="sm in selectedcampaignDetails">
+<div class="row campaign-addnewcampaign campaign-btnmargin">
+<div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+<h3 class="capital">{{sm.campaign_name}}</h3>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+<div class="row" style="margin-top:25px;">
+<div class="col-xs-7 col-sm-6 col-md-6 col-lg-5">
+<p>
+<span style="color:grey;font-size:12px;padding-left:0px ! important;">
+      From:
+</span>
+<span style="font-weight: bold;font-size:12px;">
+<b> {{sm.start_date|date:"MM/dd/yyyy"}} </b>
+</span></p>
+</div>
+<div class="col-xs-5 col-sm-6 col-md-6 col-lg-7 nopadding">
+<p>
+<span style="color: grey;font-size:12px;">
+      To:
+</span>
+<span style="font-weight: bold;font-size:12px; ">
+<b> {{sm.end_date | date : "MM/dd/yyyy"}}</b>
+</span></p>
+</div>
+</div>
+</div>
+</div>
+<br>
+<br>
+<!-- second row -->
+<div class="row">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+<div class="page_dashboard_box_well cmpheight">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="color:#999999;padding-left:3px;" class="capital">
+{{ 'Retaillang.storeparticipating' | i18n }}
+</div>
+</div>
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div ng-repeat="stores in sm.campaign_location |limitTo:6">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="font-weight: bold; font-size: 12px"> {{stores.split('|')[1]}}</div>
+ <!-- &lt;!&ndash;{{s.store+' '+s.id }}&ndash;&gt;-->
+</div>
+</div>
+</div>
+<div id="demo1" class="collapse">
+<div ng-repeat="stores in storesforCampaignall">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="font-weight: bold; font-size: 12px">{{stores.storeName}}</div>
+<!-- &lt;!&ndash;{{s.store+' '+s.id }}&ndash;&gt;-->
+</div>
+</div>
+</div>
+</div>
+<div ng-show="storeallLenghth > 6">
+<div style="color: #00b3ee" data-toggle="collapse" data-target="#demo1">
+<input type="checkbox" id="example-five-checkbox"/>
+<label style="font-weight:100;cursor: pointer" id="example-five" for="example-five-checkbox"> 
+more stores 
+</label>
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10">
+<div class="line-divider"></div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p><span style="color: grey; font-size: 13px" class="capital">
+{{ 'Retaillang.products' | i18n }}
+</span>
+</p>
+</div>
+</div>
+<div class="row" style="margin-top: 2px">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-repeat="accpet in sm.products">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="font-weight: bold; font-size: 13px">
+{{accpet.split('|')[0]}}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 dashbordbg-navbar" ng-repeat="sm in selectedcampaignDetails">
+<div class="row campaign-addnewcampaign campaign-btnmargin">
+<div ng-show="role=='retailer'">
+<button type="submit" ui-sref="Campaigns" class="btn create-campign-btn">
+{{'Retaillang.NewCampaign' |i18n}}
+</button>
+</div>
+<div class="col-xs-7 col-sm-9  col-md-10  col-lg-10">
+<h3 class="capital">{{sm.campaign_name}} </h3>
+</div>
+</div>
+<div class="row" style="margin-top: 5px">
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+<div class="pathindicatorsize">
+<p class="pathblack capital"><a ui-sref="dashBoard ">{{'Retaillang.DASHBOARD' | i18n}}></a>
+  >
+<a ui-sref="Campaigns" class="pathblack capital">{{'Retaillang.CAMPAIGNS' | i18n}}</a></li>
+  >
+<a ng-if="campaign_status=='Pending'" ui-sref="campaignListPending({status: 'Pending'})" class="pathblack capital">
+{{campaign_status}}
+</a>
+</li>
+<a ng-if="campaign_status=='Active' || campaign_status=='Archive'" ui-sref="campaignList({status: 'Active'})" class="pathblack capital">
+{{campaign_status}}
+</a>
+</li>
+>
+<span class="startpath capital">
+{{sm.campaign_name}} 
+</span>
+</p>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="row ">
+<div class="hidden-xs col-sm-3 col-md-3 col-lg-2">
+<img class="img-responsive thumb" ng-src="{{nutella}}" width="225px" height="225px"/>
+</div>
+<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<center>
+<img class="img-responsive thumb" ng-src="{{nutella}}" width="225px" height="225px"/>
+</center>
+</div>
+<div class="col-xs-12 col-sm-9 col-md-9 col-lg-10">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<h4 style="font-weight: bold"> {{sm.description}}</h4>
+</div>
+</div>
+<div class="line-dividercampaign"></div>
+<div class="row" style="margin-top: 0px">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="row">
+<div class="col-xs-6 col-sm-3 col-md-3 col-lg-2">
+<p>
+<span style="color: grey; font-size: 13px" class="capital">
+{{ 'Retaillang.camp-start' | i18n }}
+</span>
+<span style="font-weight: bold; font-size: 13px">
+{{sm.start_date | date : "MM/dd/yyyy"}}
+</span>
+</p>
+</div>
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-4">
+<p>
+<span style="color: grey; font-size: 13px" class="capital">
+{{ 'Retaillang.camp-end' | i18n }}
+</span>
+<span style="font-weight: bold; font-size: 13px"> 
+  {{endDate | date : "MM/dd/yyyy"}}
+</span>
+</p>
+</div>
+<div class="col-xs-0 col-sm-2 col-md-2 col-lg-2"></div>
+<div ng-if="showlaunchlable" class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<br>
+<p style=" font-size: 13px">
+<span style="font-weight: bold" class="capital">
+{{ 'Retaillang.camp-LaunchDate' | i18n }}
+</span>
+<span style="color:green;font-weight: bold">
+ in {{diffDays}} Days
+ </span>
+ </p>
+</div>
+<div ng-if="showlaunchlable" class="hidden-xs col-sm-5 col-md-4 col-lg-4" align="center">
+<p style=" font-size: 13px">
+<span style="font-weight: bold">
+{{ 'Retaillang.camp-LaunchDate' | i18n }}
+</span>
+<span style="color:green;font-weight: bold">
+ in {{diffDays}} Days
+ </span>
+ </p>
+</div>
+<div ng-if="showcampaignstatus" class="col-xs-12 hidden-sm hidden-md hidden-lg">
+<br>
+<p style=" font-size: 13px">
+<span style="font-weight: bold" class="capital"> 
+Campaign Status :
+</span>
+<span style="color:green;font-weight: bold">
+ {{campaignstatus}}
+</span>
+</p>
+</div>
+<div ng-if="showcampaignstatus" class="hidden-xs col-sm-5 col-md-4 col-lg-4" align="center">
+<p style="font-size:13px">
+<span style="font-weight:bold" class="capital">
+      Campaign Status :
+</span>
+<span style="color:green;font-weight: bold">
+{{campaignstatus}} 
+</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div class="line-dividercampaign"></div>
+<div class="row" style="margin-top: 0px">
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+<p>
+<span style="color: grey;  font-size: 13px" class="capital">
+{{ 'Retaillang.instorelocation' | i18n }}
+</span>
+</p>
+</div>
+<div class="col-xs-6 col-sm-8 col-md-8 col-lg-8" ng-repeat="loc in sm.location">
+<p style="font-weight:bolder;font-size: 13px">{{loc}}</p>
+</div>
+</div>
+<div class="line-dividercampaign"></div>
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p>
+<span style="color: grey; font-size: 13px" class="capital">
+{{ 'Retaillang.products' | i18n }}
+</span>
+</p>
+</div>
+</div>
+<div class="row" style="margin-top: 2px">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-repeat="accpet in sm.products">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="font-weight: bold; font-size: 13px">
+{{accpet.split('|')[0]}}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="color: grey; font-size: 13px" class="capital">
+{{ 'Retaillang.storeparticipating' | i18n }}
+</p>
+</div>
+<br>
+</div>
+<div class="row" style="margin-top: 2px">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<!--<div ng-repeat="stores in sm.campaign_location ">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<p style="font-weight: bold; font-size: 15px" >{{stores.split('|')[1]}}</p>
+</div>
+</div>
+</div>-->
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div ng-repeat="stores in sm.campaign_location |limitTo:6">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="font-weight: bold; font-size: 12px"> {{stores.split('|')[1]}}</div>
+<!-- &lt;!&ndash;{{s.store+' '+s.id }}&ndash;&gt;-->
+</div>
+</div>
+</div>
+<div id="demo1" class="collapse">
+<div ng-repeat="stores in storesforCampaignall">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="font-weight: bold; font-size: 12px">{{stores.storeName}}
+</div>
+<!-- &lt;!&ndash;{{s.store+' '+s.id }}&ndash;&gt;-->
+</div>
+</div>
+</div>
+</div>
+<div ng-show="storeallLenghth > 6">
+<div style="color:#00b3ee" data-toggle="collapse" data-target="#demo1">
+<input type="checkbox" id="example-five-checkbox"/>
+<label style="font-weight:100;cursor:pointer" id="example-five"
+      for="example-five-checkbox"> 
+      more stores 
+</label>
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="line-dividercampaign" style="margin-top: 50px"></div>
+<div class="row">
+<div class="col-xs-12 col-sm-5 col-md-8 col-lg-8">
+<!-- <div class=" col-sm-1 col-md-1 col-lg-1"></div> -->
+<!-- <a href="" class="downloadcsvfile" value="CSV" ng-click="exportCSV(CSV);">
+<span class="glyphicon glyphicon-download-alt">
+</span> &nbsp;{{ 'Retaillang.DOWNLOADCSV' | i18n }}</a> -->
+</div>
+<div class="col-xs-5 col-sm-3 col-md-2 col-lg-2" ng-show="role=='retailer'">
+<div class="col-xs-1 col-sm-1  col-md-0 col-lg-1"></div>
+<button class="btn btn-primary" ui-sref="campaignUpdate" style="background: orange">
+  EDIT
+</button>
+</div>
+<div class="col-xs-5 col-sm-3 col-md-2 col-lg-2" ng-show="role=='retailer'">
+<div class="col-xs-1 col-sm-1  col-md-1 col-lg-1"></div>
+<button class="btn btn-primary" ng-click="cancelmodal()" style="background: orange">
+    CANCEL
+</button>
+</div>
+</div>
+<div style="margin-top: 50px"></div>
+</div>
+</div><!--main row ending...-->
+</div>
+<div style="margin-top: 50px"></div>
+</div>
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-6 col-sm-4 col-xs-4"></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<center>
+<div class="modal fade" id="cancelcampaign" role="dialog" style="margin-top: 100px">
+<div class="modal-dialog">
+<div class="modal-contents model-invalid">
+<div class="modal-header">
+<!--<button type="button" class="close" data-dismiss="modal" style="color: red">&times;</button>-->
+<h4 class="model-invalid-title">{{'Retaillang.cancel-campaign-confirm'|i18n}}
+</h4>
+</div>
+</div>
+<div class="modal-body">
+<br>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="titlepromocode">
+ {{'Retaillang.cancel-campaign'|i18n}}<br>
+</div>
+</div>
+</div>
+</div>
+<br>
+</div>
+<div class="modal-footer" style="padding-bottom: 8px">
+<center>
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary" data-dismiss="modal">
+{{ 'Retaillang.Cancelbtn' |i18n }
+</button>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+<button type="button" class=" btn btn-primary capital" ng-click="campaigndelete();">
+{{'Retaillang.confirm'|i18n}}
+</button>
+</div>
+</div>
+</center>
+</div>
+</div>
+</center>
+</div>
+<div class="col-lg-4 col-md-2 col-sm-4 col-xs-4"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>

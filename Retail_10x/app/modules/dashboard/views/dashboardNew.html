@@ -1,0 +1,767 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+<div ui-view></div>
+
+<section class="dashBoard">
+<div ng-controller="dashBoardCtrl">
+<div class="container-fluid">
+<div class="row row_margin ">
+<div class="col-xs-offset-0 col-sm-7 col-md-8 col-lg-8">       
+<div class="row firstdashbordbg-navbar ">
+
+<div class="row newdashbordbg-navbar dbmar" ng-if="role=='retailer'|| role=='distributor'">
+ 
+<div class="col-xs-12 col-sm-12  col-md-3  col-lg-3 newdemo " >
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd" >
+<div ng-if="role=='retailer'" class="capital">
+    {{'Retaillang.select-area' | i18n}}
+</div>
+<!-- <div ng-if="role=='cpg'" class="capital">
+  {{'Retaillang.select-area' | i18n}}
+</div> -->
+<div ng-if="role=='distributor'" class="capital">
+      Brands
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+<div ng-if="role=='retailer'">
+<select class="form-controldropdown" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getRecord(selectedOption.store_id);"></select>
+</div>
+<div ng-if="role=='distributor'">
+<select class="form-controldropdown" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);"></select>
+</div>
+<!-- <div ng-if="role=='cpg'">
+<div ng-if="ctrl.treeDropdownstatus">
+<tree-dropdown class="tree-dropdown " data="ctrl.treeData" selected="ctrl.selected" callback="getcpgrecord();" style="padding-left:0px;"></tree-dropdown>
+</div>
+</div> -->
+
+
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 newdemo" >
+<div class="row" >
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 19px;">
+  <!-- {{ 'Retaillang.ReportTimePeriod' | i18n }} -->
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<select class="form-control bgcolor" ng-options="names.name for names in reporttimeranges" ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);"  ></select>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 newdemo" >
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fontChange">
+<span class="glyphicon glyphicon-stop"></span>
+      {{ 'Retaillang.ReportTimePeriod' | i18n }}
+<!-- <span ng-bind="ReportTimePeriod" style="font-size: 11px;"></span> -->
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div style="cursor:default" id="reportrange" class="dash_form-control dashformfont">
+<span></span>
+<i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i><b class="newcalendaralign"></b>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 newdemo" >
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 chnageFontColor">
+<span class="glyphicon glyphicon-stop" ></span> 
+      {{ 'Retaillang.CompareTimeperiod' | i18n }}
+<!-- <span style="font-size:11px;">{{compareTimePeriod}}  </span> -->
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+<div class="dash-right-inner-addon">
+<input style="cursor:default" type="text" name="daterange" class="dash_form-control dashformfont" />
+<i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+<b class="newcalendaralign"></b>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row newdashbordbg-navbar dbmar"  ng-if="role=='cpg'">
+<div class="row" style="margin-top:-7px">
+<div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 newdemo ">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital">
+<h5><b>SALES AREA</b></h5>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd"> 
+<div class=" newright-inner-addon" >
+<i ng-if="!loadingLocations" class="glyphicon glyphicon-search prdghcolor" style="right:13px;padding: 9px 10px;">  </i>
+<i ng-if="loadingLocations" class="loader" style="right:13px;padding: 16px 10px;">
+</i>           
+<input class="form-controldropdown typeahead" type="text" 
+       id="dmaValue"
+       ng-model="dma" typeahead-min-length="3"
+       uib-typeahead="dmaList.name for dmaList in getDmaList($viewValue)"
+       typeahead-loading="loadingLocations"
+       typeahead-no-results="noResults" autocomplete="off"
+       placeholder="Enter DMA"  
+       typeahead-on-select="selectDMA(dma)"  
+       required style="width:100%">             
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" ><h5><b>Retailers</b></h5>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+<div ng-if="ctrl.treeDropdownstatus">              
+<tree-dropdown  class="tree-dropdown " data="ctrl.treeData" selectdata="ctrl.selected" callback="getcpgrecord();" style="padding-left:0px;">
+</tree-dropdown>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" ><h5><b>Brands</b></h5>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+<select class="form-controldropdown" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);" style="width:100%;color:black;">
+</select>
+</div>
+</div>
+</div>
+</div> 
+<div class="row" style="margin-top:5px;margin-left:0px">
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 newdemo" style="margin-top:5px;margin-left: -7px; ">
+<select class="form-control bgcolor Dashtimerangewidth" ng-options="names.name for names in reporttimeranges" ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);" >
+</select>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 newdemo Dashtimerangemargin" style="margin-top:5px;">
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 fontChange cpgdashbord" style="padding-left: 23px">
+<span class="glyphicon glyphicon-stop"></span>
+      {{ 'Retaillang.ReportTimePeriod' | i18n }}
+</div>
+<div class="col-xs-12 col-sm-8 col-md-7 col-lg-7" style="padding-left:0px! important">
+<div style="cursor:default" id="reportrange" class="dash_form-control dashformfont">
+<span></span>
+<i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i><b class="newcalendaralign"></b>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 newdemo" style="margin-top:5px;">
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 chnageFontColor cpgdashbord">
+<span class="glyphicon glyphicon-stop" ></span> 
+      {{ 'Retaillang.CompareTimeperiod' | i18n }}
+</div>
+<div class="col-xs-12 col-sm-8 col-md-7 col-lg-7 " style="padding-left:0px! important">
+<div class="dash-right-inner-addon">
+<input style="cursor:default" type="text" name="daterange" class="dash_form-control dashformfont" />
+<i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+<b class="newcalendaralign"></b>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row space-bottom">
+</div>
+<!--LINE CHART DIV***-->
+
+<div class="row dashbordbg-linechart">
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<div class="page_dashboard_box_well">
+<div ng-if="SalesPerformancespinner"> 
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false">
+</span>
+</div>
+<div ng-if="SalesPerformance && LineChartData1.length>0">
+<div class="page_dashboard_box_title"> 
+    {{'Retaillang.linechart_box1_title' | i18n}}
+<span>&nbsp;</span></div>
+<div class="page_dashboard_box_number">
+    ${{ total | number : 2}}
+</div>
+<div class="page_dashboard_box_index_outer">
+<div class="page_dashboard_box_index_title">
+      {{'Retaillang.Index' | i18n}}
+</div>
+<div class="{{getjatStyle(spIndex)}}" id="index_dashboard_sales">{{spIndex}}
+</div>
+</div>
+<salesperformance-directive id="salesperformanceId" data="LineChartData1" detail="currencyDetail">
+</salesperformance-directive>
+<!-- <linechart id="lineChartdiv1" dataindex="1"
+</linechart>-->
+</div>
+<div ng-if="LineChartData1.length == 0">
+<center>
+<span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<div class="page_dashboard_box_well">
+<div ng-if="ShoppingTripsspinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+</div>
+<div ng-if="ShoppingTrips && LineChartData2.length>0">
+<div ng-if="role=='retailer'">
+<div class="page_dashboard_box_title"> 
+      {{'Retaillang.linechart_box2_title' | i18n}}
+<!-- <span class="page_dashboard_box_tooltip">&nbsp;</span>-->
+</div>
+</div>
+<div ng-if="role=='cpg'||role=='distributor'">
+<div class="page_dashboard_box_title"> 
+    {{'Retaillang.cpgShareofCategory' | i18n}}
+<!-- <span class="page_dashboard_box_tooltip">&nbsp;</span> -->
+</div>
+</div>
+<div class="page_dashboard_box_number" ng-if="role=='retailer'">
+<!-- {{ShoppingTripsTotal}}-->
+    {{ ShoppingTripsTotal | number : fractionSize}}
+</div>
+<div class="page_dashboard_box_number" ng-if="role!='retailer'">
+<!-- {{ShoppingTripsTotal}}-->
+      {{ ShoppingTripsTotal | number : fractionSize}}%
+</div>
+<div class="page_dashboard_box_index_outer">
+<div class="page_dashboard_box_index_title">
+    {{'Retaillang.Index' | i18n}}
+</div>
+<div class="{{getjatStyle(stIndex)}}" id="index_dashboard_sales2">    {{stIndex}}
+</div>
+</div>
+<salesperformance-directive id="shoppingtripsId" data="LineChartData2"
+                     detail="currencydetailforshoppingtrips">
+</salesperformance-directive>
+</div>
+<div ng-if="LineChartData2.length == 0">
+<center>
+<span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<div class="page_dashboard_box_well">
+<div ng-if="AvgBasketspinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+</div>
+<div ng-if="AvgBasket && LineChartData3.length>0">
+<div ng-if="role=='retailer'">
+<div class="page_dashboard_box_title"> 
+    {{'Retaillang.linechart_box3_title' | i18n}}
+<!--<span class="page_dashboard_box_tooltip">&nbsp;</span>-->
+</div>
+</div>
+<div ng-if="role=='cpg'||role=='distributor'">
+<div class="page_dashboard_box_title"> 
+    {{'Retaillang.cpgShareofBasket' | i18n}}
+<!-- <span class="page_dashboard_box_tooltip">&nbsp;</span> -->
+</div>
+</div>
+<div class="page_dashboard_box_number" ng-if="role=='retailer'">
+      <!-- 12{{avgBasketTotal}}-->
+      ${{ avgBasketTotal | number : 2}}
+</div>
+<div class="page_dashboard_box_number" ng-if="role!='retailer'">
+    <!-- 12{{avgBasketTotal}}-->
+    {{ avgBasketTotal | number : 2}}%
+</div>
+<div class="page_dashboard_box_index_outer">
+<div class="page_dashboard_box_index_title">
+{{'Retaillang.Index' | i18n}}</div>
+<div class="{{getjatStyle(ABtotal)}}" id=" index_dashboard_sales3">     {{ABtotal}}
+</div>
+</div>
+<salesperformance-directive id="AvgBasketId" data="LineChartData3"
+                  detail="currencyDetail">
+</salesperformance-directive>
+</div>
+<div ng-if="LineChartData3.length == 0">
+<center>
+<span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+</div>
+<div class="line-divider"></div>
+<!--  here Bar chart and Dount chart -->
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 dashboard-topproductbarstyle">
+<div class="row topproducts dashbordbg-baranddonutchart">
+<!--<h3>{{ 'dashboard.TopProducts' | i18n }}</h3>-->
+<h5 class="space allProductslable capital"> 
+<b>{{'Retaillang.Best-Selling' | i18n}}</b></h5>
+<div ng-if="TopProductsspinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner- 1" spinner-start-active="false"></span>
+</div>
+<div ng-if="TopProducts && barChartData.length>0">
+<topproducts-directive id="topproductsId" 
+                data="barChartData">
+</topproducts-directive>
+</div>
+<div ng-if="barChartData.length == 0">
+<center>
+<span style="color: black">
+      {{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 dashboard-topproductbarstyle">
+<div class="row topproducts dashbordbg-baranddonutchart">
+<h5 class="space allProductslable capital"> 
+<b>{{'Retaillang.Worst-Selling' | i18n}}</b></h5>
+<div ng-if="worstsalesspinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+</div>
+<div ng-if="worstsellers && worstsellersdata.length>0">
+<p style="font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;{{barchart.data[0].storename}} </p>
+<worstsellers-directive id="worstsellersId"  data="worstsellersdata">
+</worstsellers-directive>
+</div>
+<div ng-if="worstsellersdata.length == 0">
+<center><span style="color: black">
+    {{ 'Retaillang.NoresultFound' | i18n }}
+</span></center>
+</div> 
+</div>
+</div> -->
+<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 dashboard-topdepartmentbarstyle">
+<div class="row topproducts dashbordbg-baranddonutchart">
+<!-- <h3 class="space">{{ 'dashboard.Categories' | i18n }}</h3>-->
+<div ng-if="role=='cpg'||role=='distributor'">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+</div>
+<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+<h5 class="allProductslable capital"><b>
+    {{'Retaillang.TopCategories' | i18n}}  </b></h5>
+</div></div>
+</div>
+<div ng-if="role=='retailer'">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
+</div>
+<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+<h5 class="allProductslable capital" style="margin-left: 7px;">
+<b>{{'Retaillang.Departments' | i18n}}</b></h5>
+</div>
+</div>
+</div>
+<div ng-if="showpiechartspinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false">
+</span>
+</div>
+<div ng-if="showpiechart && topdepartmentsData.length>0" class="piechartmargin">
+<topdepartments-directive id="topdepartmentsId"
+                      data="topdepartmentsData" index="donutchartindex" color="indexcolor">
+</topdepartments-directive>
+<div class="row allProductslink">
+<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11"  align="right">
+<div ng-if="role=='retailer'">
+<a class="allProducts capital" ui-sref='allproducts'>{{'Retaillang.AllProducts' | i18n }}
+<span></span>
+<span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<div ng-if="role=='cpg'">
+<a class="allProducts capital" ui-sref='allproducts'>
+    {{'Retaillang.AllProducts' | i18n }}
+<span></span>
+<span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- placeholder for top products No data-->
+<div ng-if="topdepartmentsData.length == 0">
+<center><span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="line-divider"></div>
+    <!--**MAP CHART DIV***-->
+<div class="row dashbordbg-mapchart">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="row allProductslable">
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin-top:30px;">
+<!-- <mapchart></mapchart> -->
+<google-map-component 
+              ng-if="geoSalesData[0]" 
+              data="geoSalesData[0]"
+              callstore="gotostore(args ,'withmap')">
+</google-map-component>
+<div ng-if="geoSalesData.length == 0"> 
+<br><br><br>      
+<center>
+<span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+</span></center>
+</div> 
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<!-- top sales resion -table -->
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<h5 class="map_list_box_title"><b>
+{{'Retaillang.TOPSALESREGIONS' | i18n}}
+</b></h5>
+</div>
+</div>
+<div ng-if="topregions&&topregions.length>0">
+<topsalesregionbarchart-directive ng-if="topsalesregionchart"
+                     data="topregions" id="salesregionchartid">
+</topsalesregionbarchart-directive>
+</div>
+<div ng-if="topregions==undefined||topregions.length == 0">       
+<center><span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<h5 class="map_list_box_title"><b>{{'Retaillang.TOPSTORES' | i18n}}</b></h5>
+</div>
+</div>
+<div ng-if="topstoresList&&topstoresList.length>0">
+<topstoresbarchart-directive ng-if="topstoreschart" data="topstoresList" id="topstoreschartid">
+</topstoresbarchart-directive>
+</div>
+<div ng-if="topstoresList.length == 0">       
+<center>
+<span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-5 col-md-4 col-lg-4" >
+<div class="">
+<div class="row partition">
+<div class="col-md-12 col-lg-12 dashbordbg-campaign">
+<md-card>
+<div class="row">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+<h3 class="space" style="font-size:24px;font-weight:slablight;margin:0px;">Campaigns</h3>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 hidden-lg">
+<div ng-if="role=='retailer'">
+<button class="button-comp button3" ui-sref="Campaigns">+</button>
+</div>
+<!--<div ng-if="role=='cpg'">
+<button class="button-comp button3" ui-sref="Campaigns">+</button>
+</div> -->
+</div>
+<div class="hidden-xs hidden-sm hidden-md col-lg-2">
+<div ng-if="role=='retailer'">
+<button class="button-complg button3" ui-sref="Campaigns">+</button>
+</div>
+<!-- <div ng-if="role=='cpg'">
+<button class="button-complg button3" ui-sref="Campaigns">+</button>
+</div> -->
+</div>
+</div>
+
+
+<div ng-if="showCampaignList">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<!--  <br> -->
+<md-card ng-repeat="comp in camprecords">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12"  >
+<h4 style="outline: none;font-size:20px;" class="campaingtitlename" ng-click="campaigndetail(comp)">
+<b>
+    {{comp.CampaignsName}}</b> </h4>
+</div>
+</div>
+                        
+  <div class="row" ng-show="false" style="padding:30px">
+  <div class="dashboardcampaignList-linechart-box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div ng-if="spin">
+   <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+  </div>
+  <div class="linechart_box_title"></div>
+  <div class="page_dashboard_box_number">
+      ${{ comp.total | number : 2}}
+  </div>
+  <div class="page_dashboard_box_index_outer">
+  <div class="page_dashboard_box_index_title">{{'Retaillang.Index' | i18n}}
+  </div>
+  <div class="{{getjatStyle(comp.index)}}" id="index_dashboard_sales">
+    {{comp.index}}
+  </div>
+  </div>
+  <campaignlist-directive ng-show="false" id="comp.id" data="comp.datachart" record="comp">
+  </campaignlist-directive>
+  </div>
+  </div>
+  <div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 nopadding"  style="margin-top:7px;">
+  <span class="dtfont">
+    {{comp.sdate1}}</span>
+      To  
+  <span class="dtfont">
+      {{comp.edate1}}</span>
+  </div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 dbmargin  nopadding leftpadding" style="padding: 0px;">
+ <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+  <div ng-if="comp.campaignRatioStatus=='increase'">
+  <div  style="color:#009800;" class="cmpfont">{{comp.campaignRatio}}%
+  <img class="" ng-src="images/arrow-up-green.png">
+  <!-- <span style="color: #009800;font-weight:medium;" class="fa fa-arrow-up">
+  </span> -->
+  </div>
+  </div>
+ <div ng-if="comp.campaignRatioStatus=='decrease'">
+ <div  style="color: red; " class="cmpfont">
+  {{comp.campaignRatio}}%
+  <img class="" ng-src="images/arrow-down-red.png">
+ <!-- <span style="color:red;font-size:30px;font-weight:normal;" class=" fa fa-arrow-down"></span> -->
+  </div>
+  </div>
+   </div>
+  </div>
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+  <p style="color: grey;font-size: 11px; font-weight: normal; margin-top:0px;" >
+         COMPARED TO MONTHLY AVERAGE</p>
+  </div>
+  </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 dbmargin leftpadding">
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+  <div style=" color: #009800; font-size: 24px">
+   ${{ comp.total | number : 2}}
+  </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+  <p style="color: grey; font-size: 11px;font-weight: normal;margin-top:0px;">CAMPAIGN SALES TO DATE</p>
+  </div>
+  </div>
+  </div>
+  </div>
+
+<div class="line-divider-dashboardcamapignList"></div>
+  <div class='row'>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <campign-table id="comp.campaign_id" data='comp'>
+  </campign-table>
+  </div>
+  </div>
+ <br>
+<br>
+</md-card>
+  <div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="right">
+  <a class="allProducts capital" ui-sref="campaignListActive({status: 'Active'})">
+    Active Campaign
+  <span class="glyphicon glyphicon-chevron-right" ></span></a>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+    <div ng-if="hideCampaignList">
+      <div class="row ">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      </div>
+     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <!-- <h3>No Results Found</h3> -->
+    </div>
+    </div>
+    </div>
+    </md-card>
+    </div>
+    <!-- couponlist........... -->
+<div class="col-md-12 col-lg-12 dashbordbg-campaign" style="margin-top:20px;" ng-if="role!='distributor'" >
+<div class="row">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+<h3 class="space" style="font-size:24px;font-weight:slablight;margin-left:2px;">Coupons</h3>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"
+      ng-if="role=='cpg'||role=='retailer'">
+<button class="button-comp button3" ui-sref="coupon">+</button>
+</div>
+</div>
+<div class="row" ng-repeat="comp in couponrecords" style="margin-top:25px;"> 
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+<center>
+<img class=" img-responsive thumb" ng-src="{{comp.imagePath}}" width="100%" height="100%"/></center>
+</div>
+<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+<div class="row" ng-click="CouponDetailBeforeLaunch(comp)" style="color:grey;font-size:18px;">
+<h4>  {{comp.couponName}}</h4>
+</div>
+<div class="row" style="margin-top:-5px;color:red;font-size:28px;">
+<div ng-if="comp.dicount.discount_id==1">
+<h3 style="color: red;margin-top: 0px ! important">${{comp.dicount.discount_lower}} Off</h3>
+</div>
+<div ng-if="comp.dicount.discount_id==2">
+<h3 style="color: red;margin-top: 0px ! important">
+    Save {{comp.dicount.discount_lower}}%</h3>
+</div>
+<div ng-if="comp.dicount.discount_id==3">
+<h3 style="color: red;margin-top: 0px ! important">Buy {{comp.dicount.discount_lower}} Get {{comp.dicount.discount_upper}} Free</h3>
+</div>
+</div>
+<div class="row" style="margin-top: 0px;">
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 couponarrow" >
+<!-- <span class='fa fa-arrow-up'>
+</span>{{comp.campaignRatio}}%  -->
+<div ng-if="comp.campaignRatioStatus=='increase'">
+<div style="color: #009800; margin-top: 0px;">
+<!-- <span style="color: #009800;" class="fa fa-arrow-up ">
+</span>   --> 
+      {{comp.campaignRatio+'%'}}
+<img class="" ng-src="images/arrow-up-green.png">
+</div>
+</div>
+<div ng-if="comp.campaignRatioStatus=='decrease'">
+<div style="color: red;margin-top: 0px;">
+<!-- <span style="color: red;" class=" fa fa-arrow-down ">
+</span>  --> 
+    {{comp.campaignRatio+'%'}}
+<img class="" ng-src="images/arrow-down-red.png">
+</div>
+</div>
+</div>
+<!--  </div> -->
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="padding:0px;">
+<div ng-if="comp.products.length>0">
+<couponbarcharts 
+    retailers="comp.retailers" 
+    reportstarttime="comp.salesDatareporttime" 
+    id="comp.couponId"  
+    reportendtime="comp.reportendDate" 
+    comparestarttime="comp.salesDatacomparetime" 
+    compareendtime="comp.compareendDate" 
+    product="comp.productsforapi"
+    productName="comp.ProductList"
+    reporttime="ccouponreporttime"
+    comparetime="couponcomparetime"
+    style="height: 100px;">
+    </couponbarcharts> 
+<div class="hidden-xs hidden-sm hidden-md  hidden-lg">
+<!--  <couponlist-directive 
+               id="comp.id" 
+               data="comp.datachart" 
+               record="comp">
+</couponlist-directive> -->
+</div>
+</div>
+</div>
+</div>
+</div>         
+</div>
+
+<div class="row" ng-if="couponrecords.length>0">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="right">
+<a class="allProducts capital" ui-sref="couponactiveList({status: 'Active'})" >
+       ACTIVE COUPONS
+<span class="glyphicon glyphicon-chevron-right" >
+</span></a>
+</div>
+</div>
+</div>
+</div>
+ <!--  -->
+
+<!-- 
+     <div ng-if="role=='cpg'">
+    <div class="col-md-12 col-lg-12 dashbordbg-campaign" style="margin-top:20px;">
+        
+
+    <div class="row">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+    <h3 class="space" style="font-size:24px;font-weight:slablight;margin-left:2px;">Coupons</h3>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 hidden-lg">
+         <button class="button-comp button3" ui-sref="coupon">+</button>
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-2">
+      <button class="button-complg button3" ui-sref="coupon">+</button>
+    </div>
+    </div>
+
+    <div class="row" ng-repeat="comp in CouponListData" style="margin-top:25px;"> 
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <center><img class=" img-responsive thumb" ng-src="{{comp.img}}" width="100%" height="100%"/>
+    </center>
+    </div>
+   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+   <div class="row " style="color:grey;font-size:18px;">
+          {{comp.name}}
+  </div>
+
+  <div class="row " style="margin-top:-5px;color:red;font-size:28px;">
+         {{comp.discount}}
+  </div>
+
+  <div class="row" style="margin-top: 22px;">
+  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 couponarrow" >
+      <span class='fa fa-arrow-up'></span>{{comp.index}}
+  </div>
+  </div>
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 " style="margin-top: -63px;margin-left: 44px;">
+     <couponbarcharts id="comp.id" data="comp" ></couponbarcharts>
+  </div>         
+ </div>
+  </div>
+  </div>
+
+
+  <div class="row allCampaignslink">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="right">
+      <a class="allProducts capital" >
+         ACTIVE COUPONS
+        <span class="glyphicon glyphicon-chevron-right" >
+          </span></a>
+      </div>
+    </div>
+  </div> 
+     -->
+    <!--end of coupon List -->
+</div>
+</div>
+</div>
+</div> 
+</div>
+</div>
+</section>

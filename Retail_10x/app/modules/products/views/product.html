@@ -1,0 +1,346 @@
+  <div ng-include src="'modules/dashboard/views/header.html'"></div>
+  <style>
+
+  .dropdown-menu {
+    
+    height: 280px;
+    overflow: auto;
+  }
+
+
+
+  </style>
+
+  <div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+  <script type="text/ng-template" id="customTemplate.html">
+       
+          <a>
+          <img ng-src="{{match.model.image}}" width="50">
+          <span ng-bind-html="match.model.product | uibTypeaheadHighlight:query"></span>
+        <span></span>
+         <span ng-bind-html="match.model.price | uibTypeaheadHighlight:query"></span>
+
+
+          </a>
+       
+
+      </script>
+
+  <section class="products">
+    <div ng-controller="productCtrl">
+      <div class="container-fluid">
+        <div class="row row_margin">
+          <div ng-show=" selectoption=='Detergents'">
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 list-group">
+
+                  <div ng-show="selectoption=='Department'&& selectoption!='Detergents'">
+                    <div class="list-group">
+                      <br>
+                      <div class="indexfontsize" ng-repeat="x in departments" class="sidebar-menu-item">
+                        {{x.departmentDescription}}
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div ng-show="selectoption=='Detergents'&& selectoption!='Department'">
+                    <div class="list-group">
+                      <br>
+                      <div class="indexfontsize" ng-repeat="x in detergents" class="sidebar-menu-item">
+                        <div class="row">
+                          <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+                            {{x}}
+                          </div>
+                          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div ng-show="datasign==undefined || x!=selectedmenuitem">
+                              <div ng-click="selectedProduct(x,'pluse')" style="font-weight: 400; font-size: medium"> +
+                              </div>
+                            </div>
+                            <div ng-show="datasign=='pluse' && x==selectedmenuitem">
+                              <div ng-click="selectedProduct(x,'minus')" style="font-weight: 400; font-size: medium">
+                                {{sign}}
+                              </div>
+                            </div>
+                            <div ng-show="datasign=='minus' && x==selectedmenuitem">
+                              <div ng-click="selectedProduct(x,'pluse')" style="font-weight: 400; font-size: medium">
+                                {{sign}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div ng-show="selectoption=='product'&& selectoption!='Detergents' || selectoption==undefined">
+
+             <!--  <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2" style="padding: 0px;">
+                
+               <div class=" right-inner-addon ">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input type="text" ng-model="product"
+                         class="form-control typeahead "
+                          typeahead-min-length="3"
+                            uib-typeahead="typeaheadList.product for typeaheadList in GetProductList($viewValue) "
+                          typeahead-on-select="productselected(product)"
+                          typeahead-loading="loadingLocations"
+                          typeahead-no-results="noResults" autocomplete="off"
+                          typeahead-template-url="customTemplate.html"
+                          placeholder="search product"
+                         required
+                          >
+                      </div>
+
+
+
+              </div> -->
+            <div class=" dashbordbg-navbar col-xs-12 col-sm-12 col-md-12 col-lg-12 dashbordbg-navbar ">
+              
+              <div class="row">
+                <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <h3 class="capital"> {{'Retaillang.Brands' | i18n}}</h3>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="pathindicatorsize"><p class="startpathname">
+                        <a ui-sref="dashBoard">{{'Retaillang.DASHBOARD' | i18n}}></a>
+
+
+                        <span class="currentpathname capital">{{'Retaillang.PRODUCTS' | i18n}}</span></p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12  col-md-2  col-lg-2">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                      <div ng-if="role=='retailer'" class="capital">
+                        {{ 'Retaillang.select-area' | i18n }}
+                      </div>
+
+                      <div ng-if="role=='cpg'" >
+                        {{ 'Retaillang.DataSource' | i18n }}
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                      <div ng-if="role=='retailer'">
+                        
+  <select class="form-control" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getRecord(selectedOption.store_id);"></select>
+
+                      </div>
+
+
+                      <div ng-if="role=='cpg'">
+                        <div ng-if="ctrl.treeDropdownstatus">
+                          <tree-dropdown class="tree-dropdown" data="ctrl.treeData" selected="ctrl.selected"
+                                         callback="getcpgrecord();"></tree-dropdown>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      {{ 'Retaillang.ReportTimePeriod' | i18n }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div style="cursor: default; " id="reporttime-product" class="form-control ">
+                        <span></span>
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i><b
+                        class=" calendaralign"></b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      {{ 'Retaillang.CompareTimeperiod' | i18n }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                      <div class="right-inner-addon ">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+                        <input type="text" name="daterange" class="form-control indexfontsize" style="cursor: default;"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3  col-lg-4"></div>
+                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4 fontChange">
+                  <span class="glyphicon glyphicon-stop"></span> <span ng-bind="ReportTimePeriod"></span>
+                </div>
+                <div class="col-xs-12 col-sm-8  col-md-4  col-lg-4 chnageFontColor">
+                  <span class="glyphicon glyphicon-stop"></span> {{compareTimePeriod}}
+                </div>
+              </div>
+
+              <hr>
+        <div class="row dashbordbg-baranddonutchart">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="row topproducts">
+           <div ng-if="role=='retailer'">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  
+              <h4 class="capital"> 
+              {{'Retaillang.PRODUCTS' | i18n}} </h4>
+              <br>
+
+
+   <div class="row ">
+
+  <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+  </div>
+                    <div ng-if="barChartData.length>0" class="col-xs-12 col-sm-8 col-md-6 col-lg-5 right-inner-addon ">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input type="text" ng-model="product"
+                         class="form-control typeahead "
+                          typeahead-min-length="3"
+                            uib-typeahead="typeaheadList.product for typeaheadList in GetProductList($viewValue) "
+                          typeahead-on-select="productselected(product)"
+                          typeahead-loading="loadingLocations"
+                          typeahead-no-results="noResults" autocomplete="off"
+                          typeahead-template-url="customTemplate.html"
+                          placeholder="search product"
+                         required
+                          >
+                      </div>
+                    
+                  </div>
+ 
+
+
+              <div class="topproducts">
+              <div ng-if="spin">
+              <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+              spinner-start-active="false">
+              </span>
+               </div>
+             <div ng-if="alltopDepartments && barChartData.length>0">
+            <topproductbarchart style="height: {{chartheight}}"></topproductbarchart>
+            </div>
+
+              <div ng-if="barChartData.length==0">
+             <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+              </div>
+
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <a class="allProducts space" ng-click="allproductshow();">{{ 'Retaillang.AllProducts' | i18n }}
+                            <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                      </div>
+
+                    </div>
+                   
+                  <hr>
+                  </div>
+
+                        <div ng-if="role=='cpg'">
+
+                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <!--<h3>{{ 'dashboard.TopProducts' | i18n }}</h3>-->
+                      <h4 class="capital"> Products</h4>
+                      <br>
+                      <div class="topproducts">
+                        <div ng-if="spin">
+                          <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+                                spinner-start-active="false"></span>
+                        </div>
+                        <div ng-if="alltopDepartments">
+                          <topproductbarchart style="height: {{chartheight}}"></topproductbarchart>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <a class="allProducts space" ng-click="allproductshow();">{{ 'Retaillang.AllProducts' | i18n }}
+                            <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                      </div>
+
+                    </div>
+                   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <div class="row">
+
+                        <div ng-if="role=='retailer'">
+
+                          <h4 class="space capital"> {{ 'Retaillang.Departments' | i18n }}</h4>
+                        </div>
+
+                        <div ng-if="role=='cpg'">
+
+                          <h4 class="space capital"> {{ 'Retaillang.Categories' | i18n }}</h4>
+                        </div>
+
+
+                        <br>
+                        <div class="">
+                          <div ng-if="spin">
+                            <span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1"
+                                  spinner-start-active="false"></span>
+                          </div>
+                        <div ng-if="deparmentbarchartData.length>0">
+
+                       
+
+                          <topdepartments style="height: {{departmentchartheight}}"></topdepartments>
+                          </div>
+
+                      <div ng-if="deparmentbarchartData.length==0">
+                          <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <div ng-if="role=='retailer'">
+                              <a class="allProducts space" ng-click="alldepartment();">{{ 'Retaillang.AllDepartments' |
+                                i18n }} <span class="fa fa-pie-chart"></span></a>
+                            </div>
+
+                            <div ng-if="role=='cpg'">
+                              <a class="allProducts space"   ng-click="alldepartment();">{{ 'Retaillang.allCategories' |
+                                i18n }} <span class="fa fa-pie-chart"></span></a> <!-- ng-click="alldepartment();" -->
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+
+                  <br>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </section>

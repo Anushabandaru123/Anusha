@@ -1,0 +1,231 @@
+<div class="header" xmlns:align="http://www.w3.org/1999/xhtml" ng-controller="headerCtrl">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div ng-if="role=='retailer'">
+        <img class="img-responsive  navbar-brand " 
+          style="cursor:default;"
+         ng-src="{{logopath}}" width="140px;" height="100px" />
+        </div>
+        <div ng-if="role=='cpg'">
+
+         <img class="img-responsive  navbar-brand  imgfont " 
+         ng-src="{{logopath}}" width="120px;" height="150px" />
+
+      <!--  <img class="img-responsive  navbar-brand  imgfont " 
+         ng-src="{{logopath}}" width="155px;" height="150px" /> -->
+
+        </div>
+         <div ng-if="role=='distributor'">
+        <img class="img-responsive  navbar-brand  imgfont " 
+         ng-src="{{logopath}}" width="155px;" height="150px" />
+        </div>
+        </div>
+        <div class="collapse navbar-collapse" id="js-navbar-collapse"  style="background-color:white;" >
+
+        <div ng-show="role=='retailer'">
+
+        <ul class="nav navbar-nav">
+        <li><!-- <span class="dashboard-on demo1" id="rotate" ></span> -->
+        <!-- <a class=" demo1" ui-sref="dashBoard"></a> -->
+        <a class="{{getActiveNavClass('/dashBoard')}} headerborder headernavmar leftheaderborder " ui-sref="dashBoard">
+        <img class=""  ng-src="{{dashabord}}">
+
+        {{ 'Retaillang.dashBoard' | i18n }}</a></li>
+        <li><a
+              class=" {{getActiveNavClass('/Campaigns')}} 
+                     {{getActiveNavClass('/campaignList/:id')}} {{getActiveNavClass('/campaignStart')}}
+                     {{getActiveNavClass('/SaveCampaigns/:id')}} {{getActiveNavClass('/campaignUpdate')}} {{getActiveNavClass('/CampaignLaunchDetails/:id')}} {{getActiveNavClass('/CampaignLaunch')}}
+                     {{getActiveNavClass('/campaignListActive')}}
+                     {{getActiveNavClass('/campaignListArchive')}}
+                     {{getActiveNavClass('/campaignListPending')}}
+                     {{getActiveNavClass('/CampaignLaunch-active/:id')}}
+                     {{getActiveNavClass('/CampaignLaunch-archieved/:id')}}
+                     {{getActiveNavClass('/sendinvite/:id')}} headerborder "
+               ui-sref="campaignListActive({status: 'Active'}) ">
+               <img class="" ng-src="{{campaign}}">
+              <!--  <span class="glyphicon glyphicon-stats demo1"></span> -->
+               {{ 'Retaillang.campaigns' | i18n }}</a></li>
+         <li><a class="
+                 {{getActiveNavClass('/couponactiveList')}} 
+                 {{getActiveNavClass('/couponPastList')}} 
+                 {{getActiveNavClass('/coupon')}} 
+                 {{getActiveNavClass('/couponUpcomingList')}}
+                 {{getActiveNavClass('/couponreports/:id')}}
+                 {{getActiveNavClass('/savecoupon')}} headerborder" 
+                 ui-sref="couponUpcomingList">
+                  <!-- <! <span class="glyphicon glyphicon-list-alt demo1"></span> -->
+                 <img class="" ng-src="{{coupon}}">
+                 Coupons</a></li>  
+        <li><a class="
+              {{getActiveNavClass('/allproducts')}}
+              {{getActiveNavClass('/Department')}} {{getActiveNavClass('/Product-detail')}} headerborder"
+               ui-sref="allproducts">
+               <img class="" ng-src="{{products}}">
+               <!-- <span class="glyphicon glyphicon-list-alt demo1"></span> -->
+
+               {{ 'Retaillang.brandproducts' | i18n }}</a>
+               </li>
+               
+           
+        <li><a class="
+              {{getActiveNavClass('/SalesRegions')}}
+              {{getActiveNavClass('/storeComparision')}} headerborder"
+               ui-sref="SalesRegions"> 
+                <img class="" ng-src="{{sales}}">
+
+             <!-- <span class="glyphicon glyphicon-map-marker"></span>  -->
+
+               {{ 'Retaillang.SalesRegions' | i18n }}</a></li> 
+
+               <li >
+              <a class="{{getActiveNavClass('/manageUsers')}} headerborder" ui-sref="manageUsers">
+                <img class="" ng-src="{{admin}}">
+                 Admin Hub</a>
+           </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              
+              <li><a style="cursor: pointer;padding-top: 30px;" class="logoutmargin"  ng-click="login();">
+               {{ 'Retaillang.logOut' | i18n }}</a></li>
+              
+            </ul>
+          </div>
+
+          <div ng-show="role =='cpg'">
+
+            <ul class="nav navbar-nav cpgnav">
+              <li><a class="{{getActiveNavClass('/dashBoard')}} headerborder  leftheaderborder" ui-sref="dashBoard">
+              
+              <!-- <span class="glyphicon  glyphicon-th-list demo1" id="rotate"></span> -->
+
+              <img class=""  ng-src="{{dashabord}}">
+
+
+              {{ 'Retaillang.dashBoard' | i18n }}</a></li>
+              <li>
+              <a class="{{getActiveNavClass('/Campaigns')}}   
+                        {{getActiveNavClass('/campaignList/:id')}} {{getActiveNavClass('/campaignStart')}} 
+                        {{getActiveNavClass('/campaignUpdate')}} 
+                        {{getActiveNavClass('/CampaignLaunchDetails/:id')}} {{getActiveNavClass('/CampaignLaunch')}}
+                        {{getActiveNavClass('/campaignListActive')}}
+                        {{getActiveNavClass('/campaignListArchive')}}
+                        {{getActiveNavClass('/campaignListPending')}}
+                        {{getActiveNavClass('/CampaignLaunch-active')}}
+                        {{getActiveNavClass('/CampaignLaunch-archieved')}} headerborder "
+               ui-sref="campaignListActive({status: 'Active'}) ">
+ 
+               <!-- <span class="glyphicon glyphicon-stats demo1"></span>  -->
+               <img class="" ng-src="{{campaign}}">
+               {{ 'Retaillang.campaigns' | i18n }}</a></li>
+                <li><a class="
+                 {{getActiveNavClass('/couponactiveList')}} 
+                 {{getActiveNavClass('/couponPastList')}} 
+                 {{getActiveNavClass('/coupon')}} 
+                 {{getActiveNavClass('/couponUpcomingList')}}
+                 
+                 {{getActiveNavClass('/couponreports/:id')}}
+                 {{getActiveNavClass('/savecoupon')}} headerborder" 
+                 ui-sref="couponUpcomingList"> 
+
+                 <!-- <span class="glyphicon glyphicon-list-alt demo1"></span> -->
+
+                 <img class="" ng-src="{{coupon}}">
+
+                 Coupons</a></li>
+
+              <li><a class="{{getActiveNavClass('/allproducts')}} {{getActiveNavClass('/Department')}} {{getActiveNavClass('/Product-detail')}} headerborder  " ui-sref="allproducts"> 
+
+              <!-- <span class="glyphicon glyphicon-list-alt demo1"></span> -->
+              <img class="" ng-src="{{products}}">
+              {{ 'Retaillang.brandproducts' | i18n }}</a></li>              
+                
+                <li><a class="{{getActiveNavClass('/SalesRegions')}}
+              {{getActiveNavClass('/storeComparision')}} headerborder " ui-sref="SalesRegions">
+            <!--   <img class="" ng-src="{{sales}}">  -->
+               <img class="" ng-src="{{sales}}">
+              {{ 'Retaillang.SalesRegions' | i18n }}</a></li>
+
+               <li>
+             <a class="{{getActiveNavClass('/manageUsers')}} headerborder"ui-sref="manageUsers">
+                 <img class="" ng-src="{{admin}}">
+                   Admin Hub</a>
+            </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right ">
+            <li><a style="cursor: pointer ;padding-top: 28px; " class="logoutmargin" ng-click="login();">{{ 'Retaillang.logOut' | i18n }}</a></li>
+            </ul>
+
+
+
+          </div>
+
+          <div ng-show="role=='distributor'">
+            <ul class="nav navbar-nav cpgnav">
+              <li><a class="{{getActiveNavClass('/dashBoard')}} headerborder  leftheaderborder" ui-sref="dashBoard">
+              <!-- <span class="glyphicon  glyphicon-th-list demo1" id="rotate"></span> -->
+               <img class=""  ng-src="{{dashabord}}">
+              {{ 'Retaillang.dashBoard' | i18n }}</a></li>
+             <li>
+              <a class="{{getActiveNavClass('/Campaigns')}}   
+                        {{getActiveNavClass('/campaignList/:id')}} {{getActiveNavClass('/campaignStart')}} 
+                        {{getActiveNavClass('/campaignUpdate')}} 
+                        {{getActiveNavClass('/CampaignLaunchDetails/:id')}} {{getActiveNavClass('/CampaignLaunch')}}
+                        {{getActiveNavClass('/campaignListActive')}}
+                        {{getActiveNavClass('/campaignListArchive')}}
+                        {{getActiveNavClass('/campaignListPending')}}
+                        {{getActiveNavClass('/CampaignLaunch-active')}}
+                        {{getActiveNavClass('/CampaignLaunch-archieved')}} headerborder "
+               ui-sref="campaignListActive({status: 'Active'}) ">
+              <img class="" ng-src="{{campaign}}">
+               {{ 'Retaillang.campaigns' | i18n }}</a></li>
+               
+              <li><a class="{{getActiveNavClass('/allproducts')}} {{getActiveNavClass('/Department')}} {{getActiveNavClass('/Product-detail')}} headerborder  " ui-sref="allproducts"> 
+              <!-- <span class="glyphicon glyphicon-list-alt demo1"></span> -->
+              <img class="" ng-src="{{products}}">
+              {{ 'Retaillang.brandproducts' | i18n }}</a></li>
+              <li>
+
+             
+              <li><a class="{{getActiveNavClass('/SalesRegions')}}
+              {{getActiveNavClass('/storeComparision')}} headerborder " ui-sref="SalesRegions">
+              <img class="" ng-src="{{sales}}">
+
+              <!-- <span class="glyphicon glyphicon-map-marker"></span>  -->
+
+              {{ 'Retaillang.SalesRegions' | i18n }}</a></li>
+
+                <li><a class="
+              {{getActiveNavClass('/manageUsers')}}
+              headerborder"
+               ui-sref="manageUsers">
+               <img class="" ng-src="{{admin}}">
+             
+
+              Admin Hub</a>
+               </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right ">
+              <li><a style="cursor: pointer;padding-top: 28px; " class="logoutmargin" ng-click="login();">{{ 'Retaillang.logOut' | i18n }}</a></li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

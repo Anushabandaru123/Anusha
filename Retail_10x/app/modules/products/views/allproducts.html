@@ -1,0 +1,659 @@
+  <div ng-include src="'modules/dashboard/views/header.html'"></div>
+  <style>
+
+  .dropdown-menu {
+    
+    max-height: 280px;
+    overflow: auto;
+  }
+  /*.active { background-color: red;}*/
+a {
+    cursor: pointer;
+}
+  </style>
+  <div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+  <script type="text/ng-template" id="customTemplate.html">
+          <a>
+         <!--  <img ng-src="{{match.model.image}}" width="30"> -->
+          <span ng-bind-html="match.model.product | uibTypeaheadHighlight:query"></span>
+          <span></span>
+          <span ng-bind-html="match.model.price | uibTypeaheadHighlight:query"></span>
+          <br>
+          <span style="font-size:13px !important" ng-bind-html="match.model.upc | uibTypeaheadHighlight:query"></span>
+          </a>
+ </script>
+<section class="products">
+<div ng-controller="allproductCtrl">
+<div class="container-fluid">
+<!--  <div class="MaskLayer"
+           ng-class="{isClosed : !masked}">
+
+        <div class="MaskLayer-Content">
+          <p>
+
+          </p>
+        </div>
+      </div> -->
+       <!-- <div id="content"> -->
+         <!-- <div id="printSectionId"> -->
+<div class="row row_margin " >
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+<div class="row"  style="padding-right: 6px;" >              
+<div class=" newright-inner-addon">
+<i ng-if="!loadingLocations" class="glyphicon glyphicon-search prdghcolor">  
+</i>
+<i ng-if="loadingLocations" class="loader">
+</i>  
+<!-- ng-focus="onFocused()" typeahead-open-on-focus -->
+<input  type="text" ng-model="product"
+        class="form-control prdctserch typeahead "
+        typeahead-min-length="3"
+        uib-typeahead="typeaheadList.upc for typeaheadList in GetProductList($viewValue) "
+        typeahead-on-select="productselected(product)"
+        typeahead-loading="loadingLocations"
+        typeahead-no-results="noResults" autocomplete="off"
+        typeahead-template-url="customTemplate.html"
+        placeholder="Product search"    
+        required>  
+</div>
+</div>
+<br>
+<div class="row " style="padding-right: 6px;margin-top:-5px !important;margin-bottom:2px;font-size:11px;">
+<div ng-if="role=='retailer'">
+<div class="capital"><b>filters </b></div>
+</div>
+</div>
+     
+<div ng-if="role=='retailer'" class="row" style="padding-right:6px;">
+<select class="form-control prdctwidth prdct_color" data-ng-options="o.store_name for o in List" data-ng-model="selectedOption" ng-change="getRecord(selectedOption.store_id);">
+</select>
+<br>
+</div>
+<div ng-if="role=='distributor'">
+<select class="form-control prdctwidth prdct_color" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);"></select>
+<br>
+</div>
+<!-- <div ng-if="role=='cpg'" class="row" style="padding-right: 6px;">
+ --> 
+  <!-- <div ng-if="dropdown.treeDropdownstatus">
+  <product-dropdown class="tree-dropdown" data="dropdown.treeData" 
+  selected="dropdown.selected" callback="getcpgrecord();" style="padding-left:0px;">
+  </product-dropdown>
+  </div>
+  <br>
+  </div> -->
+<!-- <div ng-if="role=='cpg'&&showstorelist" class="row"  
+   style="padding-right: 6px;">
+<select id="mySelect" class="form-control indexfontsize capital" data-ng-options="store.store_name for store in storeList" data-ng-model="selectedstore" ng-change="storecallback(selectedstore);">
+</select>
+<br>
+</div> -->
+<div ng-if="role=='retailer'&&departmentList.length>1" class="row" style="padding-right: 6px;">
+<select  id="mySelect1"  class="form-control indexfontsize prdctwidth prdct_color" data-ng-options="department.departmentDescription for department in departmentList" data-ng-model="selecteddepartment" ng-change="departmentcallback(selecteddepartment);"></select>
+</div>
+<br>
+<div class="row" ng-if="categoriesList.length>0" style="padding-right: 6px;">
+ <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" 
+      style="background-color: white;border: 0px solid #150202" >
+ <div class="row">
+ <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+ <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 prdheight">
+<b> Categories </b>
+ </div>
+ </div>
+
+      <div class="row">
+      <div  ng-if="alltopDepartments&&role!='distributor'" class="list-group" style=" height: 194px; overflow-y: scroll;overflow-x:hidden;color:#555">
+
+      <div  id="mySelect" class="list-departmet-items" ng-class="{'selectedlist':categoryselected.Name==x.category_description} "  ng-repeat="x in categoriesList"> 
+      <div  id="{{x.category_description}}" ng-if="(categoryselected.Name==x.category_description)&& (x.category_description.length>0)" ng-click="categorycallback(x);" style="color: black">
+            {{ x.category_description}}
+      </div>
+
+      <div id="{{x.category_description}}" ng-if="(categoryselected.Name!=x.category_description)&& (x.category_description.length>0)" ng-click="categorycallback(x);">
+            {{ x.category_description}}
+      </div>
+      </div>
+      </div>
+
+      <div  ng-if="alltopDepartments&&role=='distributor'" class="list-group" style=" height: 194px; overflow-y: scroll;overflow-x:hidden;color:#555">
+
+      <div  id="mySelect" class="list-departmet-items" ng-class="{'selectedlist':categoryselected.Name==x.category_description} "  ng-repeat="x in categoriesList" > 
+      <div id="{{x.category_description}}" ng-if="(categoryselected.Name==x.category_description)&& (x.category_description.length>0)" ng-click="distributorcategorycallback(x);" style="color: black">
+            {{ x.category_description}}
+      </div>
+
+      <div id="{{x.category_description}}" ng-if="(categoryselected.Name!=x.category_description)&& (x.category_description.length>0)" ng-click="distributorcategorycallback(x);">
+            {{ x.category_description}}
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <br>
+               
+      <div ng-if="role=='retailer'" class="row" style="padding-right: 6px;" >
+      <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " 
+          style="background-color:white;border: 0px solid #150202">
+
+      <div class="row">
+      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+      <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 prdheight">
+                       <b> Manufacturers</b>
+      </div>
+      </div>
+
+      <div class="row">
+
+      <div  ng-if="showmanufacturerList" class="list-group" style=" height: 250px; overflow-y: scroll;overflow-x:hidden;color: #555">
+      <div id="mySelect" class="list-departmet-items" ng-class="{'selectedlist':manufacturerselected.Name==x.mfg_name} "   ng-repeat="x in manufacturerList" >
+      
+      <div id="{{x.mfg_name}}" ng-if="(manufacturerselected.Name==x.mfg_name)&& (x.mfg_name.length>0)"  ng-click="manufacturercallback(x);" style="color: black">
+              {{ x.mfg_name}}
+      </div>
+
+      <div id="{{x.mfg_name}}" ng-if="(manufacturerselected.Name!=x.mfg_name)&& (x.mfg_name.length>0)"  ng-click="manufacturercallback(x);">
+              {{ x.mfg_name}}
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+       </div>
+
+ <!-- second column -->
+           <!-- <div id="toNewWindow"> -->
+           
+      <div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 dashbordbg-navbar xsmargin" >
+      <!--     
+      <div class="row"   style="text-align:right; margin-right:40px;">
+      <div class="col-xs-12 col-sm-11 col-md-11 col-lg-11"></div>
+      <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" >
+      <div ng-click="printToCart()" style="text-align:right; margin-right:40px;">
+      <span  class="glyphicon glyphicon-print" ></span>
+      </div>  
+      </div>
+      </div>
+ -->
+              
+      <div class="row newdashbordbg-navbar indmargin" style="margin-top:0"  >
+
+
+        <div class="row" ng-if="role=='cpg'" style="margin-top:-7px">
+        <div class="col-xs-12 col-sm-12  col-md-4 col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >           <h5><b>SALES AREA</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd"> 
+             <div class=" newright-inner-addon" >
+                <i ng-if="!loadingLocations" class="glyphicon glyphicon-search prdghcolor" style="right:13px;padding: 9px 10px;">  </i>
+                <i ng-if="loadingLocations" class="loader" style="right:13px;padding: 16px 10px;"></i>            
+              <input class="form-controldropdown typeahead" type="text" id="dmaValue"
+                     ng-model="dma" typeahead-min-length="3"
+                     uib-typeahead="dmaList.name for dmaList in getDmaList($viewValue)"
+                     typeahead-loading="loadingLocations"
+                     typeahead-no-results="noResults" autocomplete="off"
+                     placeholder="Enter DMA"  
+                     typeahead-on-select="selectDMA(dma)"  
+                     required style="width:100%"> 
+            </div>            
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >          <h5><b>Retailers</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+              <div ng-if="ctrl.treeDropdownstatus">              
+                 <product-dropdown class="tree-dropdown " data="ctrl.treeData" selectdata="ctrl.selected" callback="getcpgrecord();" style="padding-left:0px;">
+                 </product-dropdown>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >         <h5><b>Brands</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+           
+                <select class="form-controldropdown" data-ng-options="brand.brand_name for brand in BrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);" style="width:100%;color:black;"></select>
+             
+          </div>
+        </div>
+      </div>
+
+    </div>
+          
+
+
+
+
+
+
+
+    <div class="row" styile="margin-left:0px; margin-top:7px;">
+         
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 prdctmargin" style=" padding-right: 0px; padding-left:20px;">
+         <div class="row">      
+       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+      <!-- <div ng-if="role=='retailer'">
+      <div ng-if="showdropdown"> -->
+  <select class="form-control bgcolor prdctwidth navpadding" ng-options="names.name for names in reporttimeranges " ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);"></select>
+  </div>
+  </div>
+  </div>
+
+
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 prdctmargin " style="padding-right: 0px;">
+  <div class="row">
+  <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5 fontChange nopadding dtpkrfont dtmargin prdctalign" >
+  <span class="glyphicon glyphicon-stop"></span>
+        {{ 'Retaillang.ReportTimePeriod' | i18n }} 
+  </div>
+  <div class="col-xs-7 col-sm-8 col-md-7 col-lg-7 leftpadding" style="padding-right: 12px;text-align:left;">
+
+
+ <div style="cursor: default; " id="reporttime-product" class="form-control prdctfont xspadding navpadding">
+  <span></span>
+  <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+ <b class="calendaralign"></b> 
+ </div> 
+ </div>
+ </div>
+ </div>
+
+
+
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 prdctmargin " style="padding-right: 0px;">
+  <div class="row">
+  <div class="col-xs-5 col-sm-4 col-md-5 col-lg-5 chnageFontColor nopadding dtpkrfont dtmargin prdctalign">
+  <span class="glyphicon glyphicon-stop"></span>
+        {{ 'Retaillang.CompareTimeperiod' | i18n }}
+  </div>
+  <div class="col-xs-7 col-sm-8 col-md-7 col-lg-7 leftpadding"  style="padding-right: 12px;">
+  <div class="prdct-right-inner-addon ">
+  <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign "></i>
+   <input type="text"  name="daterange" class="form-control prdctfont xspadding navpadding" style="cursor: default;"/>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>          
+
+
+
+
+
+
+
+  <div class="row " style="margin-top:-7px;">     
+    <label for="mySelect" class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group prdmargin" style="padding: 0px;margin-top: 45px;color:#777777;font-size:14px;padding-right:0px !important;"> 
+             &nbsp;&nbsp; SORT BY :</label>
+    <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 form-group prdctsortmargin" style="padding:0px;">
+          <select id="mySelect" name="sort" class="form-control indexfontsize input-group prdct_color capital sortborder stmargin" data-ng-options="sortingoption.sortName  for sortingoption  in sortingoptions" data-ng-model="selectedoption" ng-change="sortingcallback(selectedoption);"></select> 
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-6 col-lg-7" style="margin-top: 45px"></div>
+   <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" style="margin-top: 47px">
+      <div ng-click="printToCart()" >
+      <span  class="glyphicon glyphicon-print" ></span>
+      </div>  
+      </div>
+  
+</div>
+
+  <div class="row dashbordbg-baranddonutchart" style="margin-top:-25px">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="row topproducts">
+         
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+  <div ng-if="role=='retailer'||role=='cpg'||role=='distributor'">
+    <br>
+
+  <div class="MaskLayer" ng-class="{isClosed : !masked}">
+
+  <div class="MaskLayer-Content">
+  <p>
+  </p>
+  </div>
+  </div> 
+
+<div class="topproducts">
+<div ng-if="productsspinner">
+<span us-spinner="{radius:10,width:5,length:10}" spinner-key="spinner-1" spinner-start-active="false">
+</span>
+</div>
+<div ng-if="productchartdata.length>0">
+<div style="min-height: 500px;">
+<div ng-if="showproductsbarchart && productchartdata.length>0">
+<allproducts-directive id="manufacturerid" data="productchartdata" 
+            chartheight="chartheight" sorttype="selectedoption"> 
+</allproducts-directive>
+</div>
+</div>
+</div>
+<div ng-if="productchartdata.length==0">
+<center><span style="color: black">
+{{ 'Retaillang.NoresultFound' | i18n }}
+</span>
+</center>
+</div>
+<div class="row">
+<!--<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"></div> -->
+<div ng-if="noofpages.length&&totalnoOfProducts>50">
+<div ng-if="noofpages.length>6">
+<div ng-if="currentpage>10">
+<!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7"> -->
+<center>
+<div ng-if="totalnoOfProducts>(currentpage*50)">
+     {{((currentpage-1)*50)+1}}-{{currentpage*50}} of {{totalnoOfProducts}}
+</div>
+<div ng-if="totalnoOfProducts<(currentpage*50)">
+                {{((currentpage-1)*50)+1}}-{{totalnoOfProducts}} of {{totalnoOfProducts}}
+</div>
+</center>
+<!-- </div> -->
+</div>
+<div ng-if="currentpage<=10">
+<!-- <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6"> -->
+<center>
+<div ng-if="totalnoOfProducts>(currentpage*50)">
+   {{((currentpage-1)*50)+1}}-{{currentpage*50}} of {{totalnoOfProducts}}
+</div>
+<div ng-if="totalnoOfProducts<(currentpage*50)">
+    {{((currentpage-1)*50)+1}}-{{totalnoOfProducts}} of {{totalnoOfProducts}}
+</div>
+</center>
+<!-- </div> -->
+</div>
+</div>
+<div ng-if="noofpages.length<3">
+<!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="padding-right: 28px;"> -->
+<center>
+<div ng-if="totalnoOfProducts>(currentpage*50)">
+    {{((currentpage-1)*50)+1}}-{{currentpage*50}} of {{totalnoOfProducts}}
+</div>
+<div ng-if="totalnoOfProducts<(currentpage*50)">
+    {{((currentpage-1)*50)+1}}-{{totalnoOfProducts}} of {{totalnoOfProducts}}
+</div>
+</center>
+<!--  </div> -->
+</div>
+<div ng-if="noofpages.length>3&&noofpages.length<6">
+<!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"> -->
+<center>
+<div ng-if="totalnoOfProducts>(currentpage*50)">
+                {{((currentpage-1)*50)+1}}-{{currentpage*50}} of {{totalnoOfProducts}}
+              </div>
+              <div ng-if="totalnoOfProducts<(currentpage*50)">
+                {{((currentpage-1)*50)+1}}-{{totalnoOfProducts}} of {{totalnoOfProducts}}
+              </div>
+
+              
+              </center>
+             <!--  </div> -->
+              </div>
+
+
+
+             </div></div>
+
+            <div class="row">
+              <!-- <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"></div>
+             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-7"> -->
+             <center>
+               <div ng-if="totalnoOfProducts>50">
+
+             <ul ng-if="noofpages.length" class="pagination">
+
+          <li ng-class="{disabled:currentpage === 1}">
+              <a 
+              ng-click="setPaginationdata(currentpage-1)">
+             Previous</a>
+             </li>
+             <li ng-repeat="object in noofpages" ng-class="{active:currentpage === object}">
+             <a  ng-click="setPaginationdata(object)">{{object}}</a>
+             </li>
+            <li ng-class="{disabled:currentpage === totalnoofpages}">
+            <a ng-click="setPaginationdata(currentpage+1)">
+            
+             Next</a>
+             </li>
+            </ul>
+            </div>
+             <!-- </div> -->
+             </center>
+            </div>
+            </div>
+            </div>     
+            </div> 
+            <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+               <!-- for the department pie chart-->
+            <div ng-if="role=='retailer'">
+            <div ng-if="departmentsection">
+            <div class="row">
+            <center>
+            <span class="capital">
+              <b>{{ 'Retaillang.AllDepartments' | i18n }}</b>
+              </span>
+            </center>
+            </div>
+            <div class="row">
+            <div ng-if="showpiechart&&donutchartData.length>0">
+            <departmentpiechart-directive 
+              id="piechartid" 
+              data="donutchartData" 
+              index="donutchartindex" 
+              color="indexcolor">  
+            </departmentpiechart-directive>
+            </div>
+            <div ng-if="donutchartData.length == 0"> 
+            <center>
+            <span style="color: black">
+            {{ 'Retaillang.NoresultFound' | i18n }}
+            </span>
+            </center>
+                     
+            </div>
+            </div>
+            <div class="row" style="overflow-y: auto; max-height: 1000px;">
+            <div ng-if="showbarchart && alldeparmentbarchartData.length>0">
+            <alldepartmentbarchart-directive id="barchartid" data="alldeparmentbarchartData"  chartheight="departmentchartheight">
+            </alldepartmentbarchart-directive>
+            </div>
+            <div ng-if="alldeparmentbarchartData.length == 0">
+            <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+            </div>
+            </div>
+            </div>
+            <div ng-if="categoriessection">
+                 <!--categories donut chart and pie chart-->
+            <div class="row">
+            <center>
+            <span class="capital">
+            <div ng-if="selectedcategory.category_description=='ALL CATEGORIES'&&manufacturerselected.Name!='ALL MANUFACTURERS'">
+              <b>{{selecteddepartment.departmentDescription}}
+              <br>
+              {{manufacturerselected.Name}}</b>
+            </div>
+            <div ng-if="manufacturerselected.Name=='ALL MANUFACTURERS'">
+             <b>{{selecteddepartment.departmentDescription}}
+             </b>
+            </div>
+            </span>
+            </center>
+            </div>
+            <div class="row">
+              <!--donut chart-->
+            <div ng-if="categoriesbarchart && categoriesdonutchartdata.length > 0">
+            <categoriespiechart-directive 
+            id="categoriespiechartid" 
+            data="categoriesdonutchartdata" 
+            index="categoriesdonutchartindex" 
+            color="categoriesindexcolor">  
+            </categoriespiechart-directive>
+            </div>
+            </div>
+            <div class="row" style="overflow-y: auto; max-height: 1000px;">
+            <div ng-if="categoriesbarchart && categoriesdata.length > 0">
+            <categoriesunderdepartment-directive 
+            id="Categoriesid" 
+            data="categoriesdata" 
+            chartheight="categorieschartheight">
+            </categoriesunderdepartment-directive>
+            </div>
+            <div ng-if="categoriesdata.length == 0">
+            <center>
+            <span style="color: black">
+               {{ 'Retaillang.NoresultFound' | i18n }}
+            </span>
+            </center>
+            </div>
+            </div>
+            </div>
+            <div ng-if="manufacturerssection">
+            <div class="row">
+            <center>
+            <span class="capital">
+<!-- 
+            <div 
+            ng-if="selecteddepartment.departmentDescription!='ALLDEPARTMENT&&selectedcategory.category_description=='ALL CATEGORIES'">
+            <b>{{selecteddepartment.departmentDescription}}
+            </div> -->
+
+            <b>{{manufacturerselected.Name}}</b>
+            </span>
+            </center>
+            </div>
+            <div class="row">
+            <div ng-if="manufacturerchart && manufacturerdonutchartData.length>0">
+            <manufacturerpiechart-directive 
+               id="manufacturerpiechartid" 
+               data="manufacturerdonutchartData" 
+               index="manufacturerdonutchartindex" 
+               color="manufacturerindexcolor">  
+            </manufacturerpiechart-directive>
+            </div>
+
+            <div ng-if="manufacturerdonutchartData.length == 0">
+            <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+            </span>
+            </center>
+            </div>
+            </div>
+            <div class="row" style="overflow-y: auto; max-height: 1000px;">
+            <div ng-if="manufacturerchart && manufacturerbarhcartdata.length > 0">
+            <manufacturersundercategories-directive 
+               id="manufacturerbartchartid" 
+               data="manufacturerbarhcartdata" 
+               chartheight="manufacturerchartheight">
+            </manufacturersundercategories-directive>
+            </div>
+            <div ng-if="categoriesdata.length == 0">
+            <center>
+            <span selecteddepartmenttyle="color: black">
+                {{ 'Retaillang.NoresultFound' | i18n }}
+            </span>
+            </center>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div ng-if="role=='cpg'||role=='distributor'">
+            <div ng-if="allcategoriesforcpg">
+            <div class="row">
+            <center>
+            <span class="capital">
+              <b>all categories</b>
+            </span>
+            </center>
+            </div>
+            <div class="row">
+              <!--donut chart-->
+            <div ng-if="categoriesbarchart && categoriesdonutchartdata.length>0">
+            <categoriespiechart-directive 
+            id="categoriespiechartid" 
+            data="categoriesdonutchartdata" 
+            index="categoriesdonutchartindex" 
+            color="categoriesindexcolor">  
+            </categoriespiechart-directive>
+            </div>
+            </div>
+            <div class="row" style="overflow-y: auto; max-height: 1000px;">
+            <div ng-if="categoriesbarchart && categoriesdata.length > 0">
+           <categoriesunderdepartment-directive 
+           id="Categoriesid" 
+           data="categoriesdata" 
+           chartheight="categorieschartheight">
+           </categoriesunderdepartment-directive>
+           </div>
+           <div ng-if="categoriesdata.length == 0">
+           <center>
+           <span style="color: black">
+             {{ 'Retaillang.NoresultFound' | i18n }}
+           </span>
+           </center>
+           </div>
+           </div>
+           </div>
+           <div ng-if="allmanufacturersforcpg">
+           <div class="row">
+           <center>
+           <span class="capital">
+              <b>{{categoryselected.Name}}</b>
+              </span>
+           </center>
+           </div>
+           <div class="row">
+           <div ng-if="manufacturerchart && manufacturerdonutchartData.length>0">
+            <manufacturerpiechart-directive 
+               id="manufacturerpiechartid" 
+               data="manufacturerdonutchartData" 
+               index="manufacturerdonutchartindex" 
+               color="manufacturerindexcolor">  
+            </manufacturerpiechart-directive>
+            </div>
+            <div ng-if="manufacturerdonutchartData.length ==0">
+            <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}
+            </span>
+            </center>
+            </div>
+            </div>
+            <div class="row" style="overflow-y: auto; max-height: 1000px;">
+            <div ng-if="manufacturerchart && manufacturerbarhcartdata.length >0">
+            <manufacturersundercategories-directive 
+              id="manufacturerbartchartid" 
+              data="manufacturerbarhcartdata" 
+              chartheight="manufacturerchartheight">
+            </manufacturersundercategories-directive>
+            </div>
+           <div ng-if="categoriesdata.length == 0">
+           <center>
+           <span style="color: black">
+               {{ 'Retaillang.NoresultFound' | i18n }}
+           </span>
+           </center>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div> <!--end of main 3 column-->
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>
+  </section>

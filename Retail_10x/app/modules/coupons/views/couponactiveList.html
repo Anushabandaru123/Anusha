@@ -1,0 +1,260 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<section class="products">
+<div ng-controller="couponListCtrl">
+<div class="container-fluid">
+<div class="row row_margin">
+<div class="row dashbordbg-navbar cmplistnav">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2 " style="padding-right:60px;">
+<div class="row cmplistverticalLine">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group ">
+<div class="list-group">
+<div class="indexfontsize" class="sidebar-menu-item">
+<div class="row capital">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div ng-if="coupon_status=='Pending'||coupon_status=='null'" class="selected-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="couponUpcomingList({status: 'Pending'})">
+UPCOMING</a>
+</div>
+<div ng-if="coupon_status!=='Pending'&&coupon_status!=='null'" class="campaign-link" style="margin-left:20px;margin-top:20px;">
+<a ui-sref="couponUpcomingList({status: 'Pending'})">
+UPCOMING</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="coupon_status==='Active'||coupon_status==='null'" class="selected-link cmplistmargin">
+<a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+</div>
+<div ng-if="coupon_status!=='Active'||coupon_status==='null'" class="campaign-link cmplistmargin">
+<a ui-sref="couponactiveList({status: 'Active'})">Active</a>
+</div>
+</div>
+</div>
+<hr>
+<div class="row capital">
+<div class="indexfontsize col-xs-10 col-sm-10 col-md-12 col-lg-12 ellipsis">
+<div ng-if="coupon_status==='Archive'" class="selected-link cmplistmargin">
+<a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+</div>
+<div ng-if="coupon_status!=='Archive'" class="campaign-link cmplistmargin">
+<a ui-sref="couponPastList({status: 'Archive'})">PAST</a>
+</div>
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10" style="padding-right:38px;margin-left:0px;">
+<!-- <div ng-if="coupon_status=='Active'"> -->
+<div class='row campaignListmargin' ng-repeat="list in couponrecords">
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-2 col-lg-2">
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5  col-lg-5">
+<div class="row">
+<h4 ng-click="CouponDetailBeforeLaunch(list)"  
+    class="capital"  
+    style="outline: none;font-weight: bold;color:black;">
+    {{list.couponName}}
+</h4> 
+</div>
+<div class="row">
+<div ng-if="list.dicount.discount_id==1">
+<h3 style="color: red;margin-top: 0px ! important">${{list.dicount.discount_lower}} Off</h3>
+</div>
+
+<div ng-if="list.dicount.discount_id==2">
+<h3 style="color: red;margin-top: 0px ! important">
+  Save {{list.dicount.discount_lower}}%</h3>
+</div>
+
+<div ng-if="list.dicount.discount_id==3">
+<h3 style="color: red;margin-top: 0px ! important">Buy {{list.dicount.discount_lower}} Get {{list.dicount.discount_upper}} Free</h3>
+</div>
+</div>
+<!-- <div class="row">
+<img class="img-responsive" ng-src="{{list.imagePath}}"  width="140" height="100">
+</div> -->
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5" align="right" >
+<div class="row">
+<center>
+<div class="col-xs-7 col-sm-7 col-md-6 col-lg-6 compagin_font" style="padding: 0px;">
+<p><span style=" color: grey;" >From:</span>
+<span>{{list.sdate}}</span> 
+</p>
+</div>
+</center>
+<center>
+<div class="col-xs-5 col-sm-5 col-md-6 col-lg-6 compagin_font" style="padding: 0px;margin-top: 10px;">
+<span style="color: grey;" >To: </span>
+<span>{{list.edate}}</span> 
+</div>
+</center>
+</div>
+</div>
+</div>
+
+
+<div class="row" style="margin-top:13px;">
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:-6px;">
+<img class="img-responsive" ng-src="{{list.imagePath}}"  width="140" height="100">
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
+<div class="line-divider"></div>
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<div class="hidden-xs hidden-sm col-md-6 col-lg-6">
+<div class="row">
+<!--<div ng-if="list.campaignRatio!=''"> -->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<!-- {{list.campaignRatio}}  -->               
+<div ng-if="list.campaignRatioStatus=='increase'">
+<div style="color: #009800; font-size: 30px;margin-left:-7px !important;font-weight: normal;margin-top: 0px;">
+    {{list.campaignRatio+'%'}}
+<!-- <span style="color: #009800;margin-left:-3px;" class=" fa fa-arrow-up">
+</span> -->
+<img  ng-src="images/arrow-up-green.png">
+</div>
+</div>
+<div ng-if="list.campaignRatioStatus=='decrease'">
+<div style="color: red; font-size: 30px;margin-left:-7px !important;font-weight: normal;margin-top: 0px;">
+  {{list.campaignRatio+'%'}}
+<!--<span style="color: red;margin-left: -3px; " class=" fa fa-arrow-down">
+</span> -->
+<img  ng-src="images/arrow-down-red.png">
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<p style="color: grey; font-size: 11px;font-weight: normal;    margin-top: 0px;">
+        COMPARED TO MONTHLY AVERAGE
+</p>
+</div>
+<!-- </div> -->
+</div>
+</div>
+                         
+<div class="col-xs-6 col-sm-6 hidden-md hidden-lg">
+<div class="row">
+<div ng-if="list.campaignRatio!=''">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<div ng-if="list.campaignRatioStatus=='increase'">
+<div style="color: #009800; font-size: 30px;margin-left:-7px !important;font-weight: normal;margin-top: 0px;">
+    {{list.CouponRatio+'%'}}
+<!--<span style="color: #009800;margin-left: -3px;" class=" fa fa-arrow-up"></span>-->
+<img  ng-src="images/arrow-up-green.png">
+</div>
+</div>
+<div ng-if="list.campaignRatioStatus=='decrease'">
+<div style="color: red; font-size: 30px;margin-left:-7px !important;font-weight: normal;margin-top: 0px;">
+    {{list.CouponRatio+'%'}}
+<!-- <span style="color: red;margin-left: -3px; " class=" fa fa-arrow-down "></span> -->
+<img  ng-src="images/arrow-down-red.png">
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<p style="color: grey; font-size: 11px;font-weight: normal;    margin-top: 0px;">
+COMPARED TO MONTHLY AVERAGE</p>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden-xs hidden-sm col-md-6 col-lg-6 verticalLine">
+<div class="row">
+<div ng-if="list.total!=null">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<div style=" color: #009800; font-size: 24px;margin-top: 15px">
+${{ list.total | number : 2}}
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<p style="color: grey; font-size: 11px;font-weight: normal;    margin-top: 0px;">COUPON  SALES TO DATE</p>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 hidden-md hidden-lg verticalLine">
+<div class="row">
+<div ng-if="list.total!=''&&list.total!=null">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<div style=" color: #009800; font-size: 24px;margin-top: 10px;">
+  {{ list.total | number : 2}}
+</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
+<p style="color: grey; font-size: 11px;font-weight: normal;    margin-top: 0px;">COUPON  SALES TO DATE</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 verticalLine compagin_top">
+<md-card>
+<coupon-table data='list'></coupon-table>
+</md-card>
+</div>
+</div>
+<div class="line-divider"></div> 
+</div>
+</div>
+<br>
+<br>
+<div class="line-divider"></div> 
+<!-- linechart hidden..... -->
+<div class="row">
+<div ng-if="list.showchart">
+<div class="hidden-xs hidden-sm hidden-md  hidden-lg"
+      style="padding-right:40px; padding-bottom:0px">
+<div class="page_dashboard_box_well">
+<div class="page_dashboard_box_title "> {{'Retaillang.linechart_box1_title' | i18n}}
+</div>
+<div class="page_dashboard_box_number">
+       ${{ list.total | number : fractionSize}}
+</div>
+<div class="page_dashboard_box_index_outer">
+<div class="page_dashboard_box_index_title cmplistfont">{{'Retaillang.Index' | i18n}}
+</div>
+<div class="{{getjatStyle(list.index)}}" id="index_dashboard_sales">{{list.index}}
+</div>
+</div>
+<couponlist-directive 
+    id="list.id" 
+    data="list.datachart" 
+    record="list">
+</couponlist-directive>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div ng-show="len == 0 ">
+<div class="row campaigns-border campaignListmargin">
+<center><h2> No {{coupon_status+" "}} Coupons</h2></center>
+</div>
+</div>
+<!--</div>-->
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+
+
+
+

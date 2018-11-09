@@ -1,0 +1,253 @@
+
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+
+
+<section class="products">
+<div ng-controller="savecampaignCtrl">
+<div  class="container-fluid">
+<div class="row row_margin  dashbordbg-navbar">
+       
+<div class="row savecampaginmargin">   
+<div ng-if="spinner">
+<span us-spinner="{radius:10, width:5, length: 10}" spinner-key="spinner-1" spinner-start-active="false"></span>
+</div>
+
+<div class="savecamptop" > 
+You Created <b>{{getsavevalue.campaignName}}</b>. <br><br>
+Invite the following manufacturers to participate to this campaign: 
+<b ng-repeat="record in getsavevalue.selectedManufactures">
+  {{record.Manufacturer}} 
+<b ng-if="getsavevalue.selectedManufactures.length>$index+1">,</b>
+</b>
+<!--name.lastname@nathansfamous.com, name.lastname@lays.com, name.lastname@heinz.com -->
+<br><br>
+<div style="text-align:center;">
+<button type="submit" class="savecampaignForm-btn savecampbutton" ng-click="sendinvite()" style="float:center">SEND CAMPAGIN INVITE</button> 
+</div> 
+</div>
+</div>
+
+<div class="row" style="margin-top:55px;">
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2"></div>
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+<div class="row " style="margin-left:5px;">
+      <h4><b>{{getsavevalue.campaignName}}</b></h4>
+</div>
+<br>
+
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+    <b> DETAILS </b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 ">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="savecampfont"> Comments</div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+     <b>{{getsavevalue.description}}</b>
+<!-- <b> Looking for 10 floor displays and one pallet</b> -->
+</div>
+</div>
+<div class="row savecamprowmargin">
+<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="savecampfont"> Start </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 date date-icon">
+<b>{{getsavevalue.campaignstartdate}}</b>
+</div> 	
+</div>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="savecampfont"> End </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 date date-icon">
+<b>{{getsavevalue.campaignenddate}}</b>
+</div> 	
+</div>
+</div>
+</div> 
+<div class="row savecamprowmargin ">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="savecampfont"> Deadline for Sign Up </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 date date-icon">
+<b>{{getsavevalue.campaigndeadlineSignupDate}}</b>
+</div> 
+</div>
+</div>
+</div>
+<!-- first row end....... -->
+<br><br>
+<div ng-if="getsavevalue.adsheets.length>0">
+<div class="line-divider"></div> 
+<br><br>
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+      <b>AD SHEET</b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div ng-repeat="record in getsavevalue.adsheets">
+<a href="{{record.file_path}}" target="_blank">
+  {{record.orginalName}}</a>
+</div>
+</div>
+</div> 	
+
+<!-- second row end...... -->
+<br><br>
+</div>
+<div ng-if="getsavevalue.additionalsheets.length>0">
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+     <b>ADDITIONAL SHEETS</b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div ng-repeat="record in getsavevalue.additionalsheets">
+     <!-- {{record.orginalName}} -->
+<a href="{{record.file_path}}" target="_blank">
+  {{record.orginalName}}</a>
+</div>
+</div>
+</div> 
+<br><br>
+</div>  
+<div class="line-divider"></div> 
+<br><br>
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+     <b>PRODUCTS</b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 " >
+<div ng-repeat="record in getsavevalue.products" ng-if="record.id>0">
+<!-- {{record.Name}} -->
+<div class="row" >
+<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+<b>{{record.Name}}</b>
+</div>
+<div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+    {{record.price}}
+</div>
+<div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+     {{record.mfgName}}
+</div>
+<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+     {{record.id}}
+</div>
+</div>
+<div class="row">
+<div class="line-divider"></div> 
+</div>
+</div>
+</div>
+</div> 
+<!-- third row end...... -->
+<br><br>
+<div class="line-divider"></div> 
+<br><br>
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+    <b>PROMOTION TYPE</b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div ng-repeat="record in  getsavevalue.promotionstypes" 
+     ng-if="record.id>0">
+    {{record.promotion}}
+</div>
+</div>
+</div> 
+<br><br>
+<div class="line-divider"></div> 
+<br><br>
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 cmppadding1">
+     <b>STORES</b>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 savecampfont">
+<div ng-repeat="record in getsavevalue.selectedstores"> 
+      {{record.storeName}}
+</div>
+</div>
+</div>
+<br><br>
+<div class="line-divider"></div> 
+<br>
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+</div>
+<div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 ">
+<button type="submit" ng-click="edit();" class="btn  editbutton" >EDIT</button>  
+<button type="submit" class="btn  deletebutton"
+        ng-click="cancelmodal();" >DELETE</button>  
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2"></div>
+</div>
+</div>
+
+<div  class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-4 col-md-6 col-sm-4 col-xs-4"></div>
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+<center>
+<div class="modal fade" id="cancelcampaign" role="dialog" style="margin-top: 100px">
+<div class="modal-dialog">
+<div class="modal-contents model-invalid">
+<div class="modal-header">
+<h4 class="model-invalid-title"> Delete Campaign</h4>
+</div>
+</div>
+<div class="modal-body">
+<br>
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="titlepromocode"><span class="glyphicon glyphicon-remove-sign msgred"></span>
+      Do you want to delete this campaign?<br>
+</div>
+</div>
+</div>
+</div><br>
+</div>
+<div class="modal-footer" style="padding-bottom: 8px">
+  <center>
+         <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+       <button type="button" class=" btn btn-primary" data-dismiss="modal">
+       {{ 'Retaillang.Cancelbtn' |
+                          i18n }}
+      </button>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+      <button type="button"
+      class=" btn btn-primary capital" ng-click="campaigndelete();"
+      >Delete
+                        </button>
+       </div>
+      </div>
+    </center>
+      </div>
+    </div>
+    </center>
+</div>
+    <div class="col-lg-4 col-md-2 col-sm-4 col-xs-4"></div>
+
+  </div>
+
+</div>
+
+
+
+   </div>
+   </div>
+</section>  	

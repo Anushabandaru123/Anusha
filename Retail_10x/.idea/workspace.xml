@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a8ac1bba-64e2-4576-b1b3-6067589cbf1a" name="Default" comment="" />
+    <ignored path="Retail10x.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Retail10x" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/modules/componets/scripts/topdepartmentsDirective.js" />
+        <option value="$PROJECT_DIR$/app/modules/componets/scripts/topproductsDirective.js" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/maptemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/piecharttemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/salesperformancetemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/topdepartmentstemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/topproductstemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/libraries/scripts/dateRangePicker.js" />
+        <option value="$PROJECT_DIR$/app/modules/login/scripts/loginController.js" />
+        <option value="$PROJECT_DIR$/app/modules/products/scripts/productService.js" />
+        <option value="$PROJECT_DIR$/app/modules/salesregions/scripts/salesRegionController.js" />
+        <option value="$PROJECT_DIR$/app/modules/salesregions/scripts/salesRegionService.js" />
+        <option value="$PROJECT_DIR$/app/styles/languages/en-US/Retaillang.json" />
+        <option value="$PROJECT_DIR$/app/styles/views/dashBoard.scss" />
+        <option value="$PROJECT_DIR$/app/styles/views/login.scss" />
+        <option value="$PROJECT_DIR$/app/styles/views/products.scss" />
+        <option value="$PROJECT_DIR$/app/modules/componets/views/barcharttemplate.html" />
+        <option value="$PROJECT_DIR$/app/modules/products/scripts/productController.js" />
+        <option value="$PROJECT_DIR$/app/modules/componets/scripts/barchartdirectives.js" />
+        <option value="$PROJECT_DIR$/app/modules/dashboard/scripts/headerController.js" />
+        <option value="$PROJECT_DIR$/app/modules/dashboard/scripts/dashBoardService.js" />
+        <option value="$PROJECT_DIR$/app/modules/dashboard/views/header.html" />
+        <option value="$PROJECT_DIR$/app/modules/products/scripts/individualproductController.js" />
+        <option value="$PROJECT_DIR$/app/modules/shared/scripts/serviceFactory.js" />
+        <option value="$PROJECT_DIR$/dist/scripts/scripts.34dd58cd.js" />
+        <option value="$PROJECT_DIR$/app/scripts/app.js" />
+        <option value="$PROJECT_DIR$/dist/scripts/scripts.785d6f32.js" />
+        <option value="$PROJECT_DIR$/app/modules/componets/scripts/tree-dropdown.js" />
+        <option value="$PROJECT_DIR$/dist/scripts/scripts.e0634ba9.js" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/scripts/campaignModule.js" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/scripts/campaignListController.js" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/scripts/northgatePresentationController.js" />
+        <option value="$PROJECT_DIR$/app/modules/dashboard/scripts/dashBoardController.js" />
+        <option value="$PROJECT_DIR$/app/modules/componets/scripts/campaignlistDirective.js" />
+        <option value="$PROJECT_DIR$/app/modules/salesregions/views/salesRegions.html" />
+        <option value="$PROJECT_DIR$/app/modules/dashboard/views/dashboard.html" />
+        <option value="$PROJECT_DIR$/app/modules/products/views/individualdept.html" />
+        <option value="$PROJECT_DIR$/app/modules/products/views/product.html" />
+        <option value="$PROJECT_DIR$/app/modules/salesregions/views/storeComparisionScreen.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campagnDetailArchive.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaign-details.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaignArchiveList.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaignDetailBeforeLaunch.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaignPendingList.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaigns.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaignstart.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/northgatePresentation.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/updatecampaign.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/views/campaignsList.html" />
+        <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/app/modules/campaign/scripts/campaignController.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER">
+    <gruntfile path="$PROJECT_DIR$/Gruntfile.js" />
+  </component>
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="width" value="1040" />
+    <option name="height" value="728" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="campaign" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Retail10x" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="campaign" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="editor.config.accepted" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Retail10x\app\styles" />
+      <recent name="C:\Retail10x\app\modules\dashBoard\scripts" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8ac1bba-64e2-4576-b1b3-6067589cbf1a" name="Default" comment="" />
+      <created>1470028693090</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1470028693090</updated>
+      <workItem from="1470028694622" duration="1763000" />
+      <workItem from="1470030494591" duration="1884000" />
+      <workItem from="1470032420285" duration="1781000" />
+      <workItem from="1470034263076" duration="2092000" />
+      <workItem from="1470036395858" duration="2141000" />
+      <workItem from="1470041096234" duration="1941000" />
+      <workItem from="1470045410157" duration="1778000" />
+      <workItem from="1470047223440" duration="1892000" />
+      <workItem from="1470049143004" duration="1885000" />
+      <workItem from="1470051058020" duration="1847000" />
+      <workItem from="1470052936307" duration="2049000" />
+      <workItem from="1470055016208" duration="1802000" />
+      <workItem from="1470056852800" duration="1569000" />
+      <workItem from="1470058682445" duration="1199000" />
+      <workItem from="1470060507347" duration="1798000" />
+      <workItem from="1470113903501" duration="1213000" />
+      <workItem from="1470115725168" duration="828000" />
+      <workItem from="1470118590523" duration="2032000" />
+      <workItem from="1470120654902" duration="1863000" />
+      <workItem from="1470122564234" duration="1816000" />
+      <workItem from="1470127273319" duration="1931000" />
+      <workItem from="1470129254221" duration="1876000" />
+      <workItem from="1470131155620" duration="1800000" />
+      <workItem from="1470132981302" duration="1857000" />
+      <workItem from="1470134867614" duration="1585000" />
+      <workItem from="1470136689913" duration="1269000" />
+      <workItem from="1470138600276" duration="1961000" />
+      <workItem from="1470141109887" duration="1549000" />
+      <workItem from="1470146231675" duration="1762000" />
+      <workItem from="1470203745306" duration="1765000" />
+      <workItem from="1470205619866" duration="1992000" />
+      <workItem from="1470207653423" duration="596000" />
+      <workItem from="1470210797362" duration="1076000" />
+      <workItem from="1470215381873" duration="1800000" />
+      <workItem from="1470218721279" duration="1020000" />
+      <workItem from="1470220572805" duration="2026000" />
+      <workItem from="1470222696204" duration="1824000" />
+      <workItem from="1470224545300" duration="1502000" />
+      <workItem from="1470226479560" duration="1763000" />
+      <workItem from="1470228335085" duration="1634000" />
+      <workItem from="1470230170262" duration="1805000" />
+      <workItem from="1470232542395" duration="1125000" />
+      <workItem from="1470234833245" duration="597000" />
+      <workItem from="1470289161789" duration="1789000" />
+      <workItem from="1470290979753" duration="1886000" />
+      <workItem from="1470292888821" duration="2151000" />
+      <workItem from="1470295142780" duration="1601000" />
+      <workItem from="1470297033762" duration="1186000" />
+      <workItem from="1470301939213" duration="1792000" />
+      <workItem from="1470303851008" duration="1888000" />
+      <workItem from="1470305766151" duration="1796000" />
+      <workItem from="1470307585213" duration="1813000" />
+      <workItem from="1470309424121" duration="1288000" />
+      <workItem from="1470311905072" duration="1620000" />
+      <workItem from="1470313856931" duration="2010000" />
+      <workItem from="1470315910997" duration="1788000" />
+      <workItem from="1470317744773" duration="1788000" />
+      <workItem from="1470320876367" duration="1856000" />
+      <workItem from="1470322759495" duration="1231000" />
+      <workItem from="1470324342054" duration="1506000" />
+      <workItem from="1470375448332" duration="2078000" />
+      <workItem from="1470377549774" duration="2102000" />
+      <workItem from="1470379675630" duration="1886000" />
+      <workItem from="1470381586486" duration="1869000" />
+      <workItem from="1470383483833" duration="997000" />
+      <workItem from="1470387648442" duration="1841000" />
+      <workItem from="1470389513210" duration="1802000" />
+      <workItem from="1470391340067" duration="1908000" />
+      <workItem from="1470393279433" duration="1795000" />
+      <workItem from="1470395099579" duration="1800000" />
+      <workItem from="1470396924476" duration="1859000" />
+      <workItem from="1470398807887" duration="1791000" />
+      <workItem from="1470400629388" duration="1870000" />
+      <workItem from="1470402526223" duration="1865000" />
+      <workItem from="1470404422310" duration="1578000" />
+      <workItem from="1470407733248" duration="1852000" />
+      <workItem from="1470409615813" duration="1812000" />
+      <workItem from="1470632579776" duration="1622000" />
+      <workItem from="1470634960353" duration="1794000" />
+      <workItem from="1470636810016" duration="1734000" />
+      <workItem from="1470640219020" duration="1830000" />
+      <workItem from="1470642133691" duration="1309000" />
+      <workItem from="1470646594581" duration="1793000" />
+      <workItem from="1470648413599" duration="1886000" />
+      <workItem from="1470650325408" duration="1766000" />
+      <workItem from="1470652289434" duration="1577000" />
+      <workItem from="1470654129709" duration="598000" />
+      <workItem from="1470656169400" duration="598000" />
+      <workItem from="1470657988002" duration="1773000" />
+      <workItem from="1470659837179" duration="1688000" />
+      <workItem from="1470661674178" duration="994000" />
+      <workItem from="1470720883011" duration="1802000" />
+      <workItem from="1470722724251" duration="1828000" />
+      <workItem from="1470724848653" duration="610000" />
+      <workItem from="1470831666297" duration="15000" />
+      <workItem from="1470839447853" duration="1725000" />
+      <workItem from="1470899159269" duration="17000" />
+      <workItem from="1470999868285" duration="974000" />
+      <workItem from="1471679389240" duration="45000" />
+      <workItem from="1471865685447" duration="705000" />
+      <workItem from="1471935560764" duration="28000" />
+      <workItem from="1472050686777" duration="1593000" />
+      <workItem from="1472115223762" duration="20000" />
+      <workItem from="1472213648465" duration="1849000" />
+      <workItem from="1472215559172" duration="1266000" />
+      <workItem from="1472224004047" duration="1192000" />
+      <workItem from="1472227064158" duration="17000" />
+      <workItem from="1472290157410" duration="1473000" />
+      <workItem from="1472291746487" duration="2292000" />
+      <workItem from="1472294064676" duration="2222000" />
+      <workItem from="1472296417686" duration="1845000" />
+      <workItem from="1472298287930" duration="1852000" />
+      <workItem from="1472300166928" duration="1802000" />
+      <workItem from="1472302023992" duration="1846000" />
+      <workItem from="1472303900984" duration="1799000" />
+      <workItem from="1472306462824" duration="1613000" />
+      <workItem from="1472448500275" duration="764000" />
+      <workItem from="1472464894274" duration="16000" />
+      <workItem from="1472655566628" duration="559000" />
+      <workItem from="1472719943455" duration="92000" />
+      <workItem from="1473517369389" duration="144000" />
+      <workItem from="1473658748233" duration="56000" />
+      <workItem from="1473861007251" duration="1652000" />
+      <workItem from="1473867325421" duration="23000" />
+      <workItem from="1474004556877" duration="172000" />
+      <workItem from="1474004823171" duration="10000" />
+      <workItem from="1474005283930" duration="277000" />
+      <workItem from="1474006339909" duration="13000" />
+      <workItem from="1474007188561" duration="603000" />
+      <workItem from="1474008400324" duration="13000" />
+      <workItem from="1474031265264" duration="138000" />
+      <workItem from="1474032318021" duration="377000" />
+      <workItem from="1474033763348" duration="22000" />
+      <workItem from="1475936029046" duration="419000" />
+      <workItem from="1476107327293" duration="24000" />
+      <workItem from="1476684787957" duration="388000" />
+      <workItem from="1476685258453" duration="1069000" />
+      <workItem from="1476689632863" duration="945000" />
+      <workItem from="1476693842568" duration="344000" />
+      <workItem from="1476697282983" duration="913000" />
+      <workItem from="1476698219729" duration="1788000" />
+      <workItem from="1476700033843" duration="1831000" />
+      <workItem from="1476701892903" duration="1839000" />
+      <workItem from="1476703800192" duration="2200000" />
+      <workItem from="1476706033832" duration="1691000" />
+      <workItem from="1476707851608" duration="599000" />
+      <workItem from="1476709806593" duration="624000" />
+      <workItem from="1477132294869" duration="773000" />
+      <workItem from="1477667557492" duration="247000" />
+      <workItem from="1478068087311" duration="813000" />
+      <workItem from="1478848724583" duration="35000" />
+      <workItem from="1479387024734" duration="1034000" />
+      <workItem from="1479909233499" duration="69000" />
+      <workItem from="1483518062605" duration="3000" />
+      <workItem from="1483607163407" duration="221000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="205174000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="0" width="1040" height="728" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28515625" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding>
+            <marker date="1483607397298" expanded="true" signature="1505:1656" ph="..." />
+            <marker date="1483607397298" expanded="true" signature="1598:1624" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/campaign/views/campaignsList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/campaign/views/campaignsList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3655">
+          <caret line="13" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-962">
+          <caret line="74" column="27" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
+          <folding>
+            <marker date="1483607397298" expanded="true" signature="1505:1656" ph="..." />
+            <marker date="1483607397298" expanded="true" signature="1598:1624" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/campaign/scripts/campaignController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9843">
+          <caret line="136" column="41" selection-start-line="136" selection-start-column="41" selection-end-line="136" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

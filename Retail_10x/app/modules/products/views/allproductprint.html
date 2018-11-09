@@ -1,0 +1,331 @@
+<style>
+@page {
+    
+    margin-bottom: 1.5cm;
+    margin-right:-5px;
+ } 
+
+ @media print {
+    html, body {
+        height: 99%;    
+    }
+}
+
+ 
+
+ #chartdiv > div > div > a { display: none !important; }
+ </style>
+<section class="products">
+<div ng-controller="printproductCtrl">
+
+<!-- <div id="myModal" class="modal fade "  role="dialog">
+  <div class="modal-dialog" style="width: 90%; margin: 67px;">
+    <div class="modal-content">        
+     <div class="modal-body" >
+ -->
+
+   <div id="printSectionId">
+   <div class="row" style="margin-top:0px;">
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"  style="margin-top:33px;">
+   <div ng-if="getprintvalue.role=='retailer'" class="row" style="padding-right: 13px;margin-left:-5px;">
+   <input type="text" class="printborder form-control prdctwidth prdct_color" data-ng-model="getprintvalue.selectedOption.store_name" >
+   </div>
+   <div ng-if="getprintvalue.role=='cpg'" class="row" style="padding-right: 6px;">
+   <input id="mySelect" class="form-control indexfontsize capital" data-ng-model="getprintvalue.selectedretailer.retailer_name" > 
+   </div>
+   </div>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="margin-top:33px;">
+   <div ng-if="getprintvalue.role=='cpg'&&showstorelist" class="row"  style="padding-right: 13px">
+   <input id="mySelect" class="form-control indexfontsize capital"  data-ng-model="getprintvalue.selectedstore" >
+   </div>
+   <div ng-if="getprintvalue.role=='retailer'" class="row" style="padding-right: 13px">
+   <input id="mySelect" class="printborder form-control indexfontsize prdctwidth prdct_color" data-ng-model="getprintvalue.department.departmentDescription" >
+   </div>
+   </div>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+   <div class="row" style="padding-right: 13px">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 0px solid #150202" >
+   <div class="row">
+   <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+   <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 prdheight">
+        <b> Categories </b>
+   </div>
+   </div>
+   <div class="row">
+   <input id="mySelect" class="printborder form-control indexfontsize prdctwidth prdct_color" data-ng-model="getprintvalue.category.Name" >   
+   </div>
+   </div>
+   </div>
+   </div>
+   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+   <div  class="row" style="padding-right:6px;">
+   <div class="row">
+   <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+   <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 prdheight">
+        <b> Manufacturers</b>
+   </div>
+   </div>
+   <input id="mySelect" class="printborder form-control list-group  indexfontsize prdctwidth prdct_color" data-ng-model="getprintvalue.manufacturer.Name" >
+   </div>
+   </div>
+   </div>
+   <div class="row">
+   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3" style="  margin-top:20px;padding-right:6px;margin-left:-5px">
+   <input type="text" class="printborder form-control bgcolor prdctwidth navpadding"  ng-model="daylast"  >
+   </div>
+     <!-- <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1"></div> -->
+   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3  ">
+   <div class="row">
+   <div class="col-xs-5 col-sm-12 col-md-12 col-lg-12">
+   <span class="glyphicon glyphicon-stop"></span>
+          REPORT TIME
+   </div>
+   </div>
+   <!--  <div class="col-xs-7 col-sm-12 col-md-7 col-lg-7 leftpadding" style="padding-right: 12px;text-align:left;"> -->
+   <div class="row" style="padding-right: 3px; margin-left: -10px;">
+   <input type="text" style="cursor:default;" ng-model="getprintvalue.reporttimeperiod" class="printborder form-control prdctfont xspadding navpadding">
+   <!--  <span></span>
+   <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i> -->
+   <!-- <b class="calendaralign"></b>  -->
+   </div>
+   </div>
+   <!-- </div> -->
+   <!-- <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1"></div> -->
+   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+   <div class="row">
+   <div class="col-xs-5 col-sm-12 col-md-12 col-lg-12 ">
+   <span class="glyphicon glyphicon-stop"></span>
+          COMPARE TIME
+   </div>
+   </div>
+   <!--  <div class="col-xs-7 col-sm-12 col-md-7 col-lg-7 leftpadding"  style="padding-right: 12px;"> -->
+   <div class="row prdct-right-inner-addon" style="padding-right:3px;margin-left:-10px;">
+   <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign "></i> -->
+   <input type="text" ng-model="getprintvalue.comparetimepeiod" class=" printborder form-control prdctfont xspadding navpadding" style="cursor: default;"/>
+   </div>
+   <!-- </div> -->
+   </div>
+   <!-- </div> -->   
+   <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3"></div>        
+   </div>
+   <!-- <div class="row " >     
+   <label for="mySelect" class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group " style="padding: 0px;margin-top: 45px;color:#777777;font-size:14px;padding-right:0px !important;text-align:left"> 
+      SORT BY :
+   </label>
+   <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 form-group " style="padding:0px;margin-left: -39px;">
+   <input id="mySelect" name="sort" class="form-control indexfontsize input-group prdct_color capital sortborder stmargin" data-ng-model="getprintvalue.selectsort.sortName">
+    </div>
+    </div> -->
+
+   <div class="row " >     
+   <label for="mySelect" class="col-xs-12 col-sm-2 col-md-2 col-lg-1 form-group prdmargin" style="padding: 0px;margin-top: 45px;color:#777777;font-size:14px;padding-right:0px !important;"> 
+   &nbsp;&nbsp; SORT BY :</label>
+   <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 form-group" style="padding:0px;">
+   <input id="mySelect" name="sort" class="form-control indexfontsize input-group prdct_color capital sortborder stmargin"  data-ng-model="getprintvalue.selectsort.sortName" >
+   </div>
+   </div>
+   <div class="row dashbordbg-baranddonutchart">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+   <div class="row topproducts" style="margin-left:-52px;margin-top:32px;">
+   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+   <div ng-if="getprintvalue.role=='retailer'||getprintvalue.role=='cpg'||getprintvalue.role=='distributor'">
+   <br>
+   <div class="MaskLayer" ng-class="{isClosed : !masked}">
+   <div class="MaskLayer-Content">
+   <p>  </p>
+   </div>
+   </div> 
+   <!-- <div class="row">
+   <div ng-if="getprintvalue.showpiechart && getprintvalue.donutchartData.length>0" >
+   <departmentpiechart-directive 
+   id="getprintvalue.piechartid" 
+   data="getprintvalue.donutchartData" 
+   index="getprintvalue.donutchartindex" 
+   color="getprintvalue.indexcolor">  
+   </departmentpiechart-directive>
+   </div>
+   <div ng-if="getprintvalue.donutchartData.length == 0"> 
+    <center>
+   <span style="color: black">
+      {{ 'Retaillang.NoresultFound' | i18n }}
+   </span>
+    </center>         
+    </div>
+   </div> -->
+   <div class="topproducts">
+   <div ng-if="getprintvalue.productchartdata.length>0" >
+   <div style="min-height: 630px;margin-top:2px;">
+   <div ng-if="getprintvalue.showbarchart && getprintvalue.productchartdata.length>0">
+   <allproducts-directive id="getprintvalue.manufacturerid" data="getprintvalue.productchartdata"  chartheight="getprintvalue.chartheight" sorttype="getprintvalue.selectsort"> 
+   </allproducts-directive>
+   </div>
+   </div>
+   </div>
+   <div ng-if="getprintvalue.productchartdata.length==0">
+   <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span></center>
+   </div>
+   </div>
+   </div>     
+   </div>
+   <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" >
+    <!-- for the department pie chart-->
+   <div ng-if="getprintvalue.role=='retailer'">
+   <div ng-if="getprintvalue.departmentsection">
+   <div class="row" style="margin-bottom:20px;margin-left:-120px;">
+   <center>
+   <span class="capital">
+   <b>{{ 'Retaillang.AllDepartments' | i18n }}</b>
+   </span>
+   </center>
+   </div>
+   <div class="row">
+   <div ng-if="getprintvalue.showpiechart && getprintvalue.donutchartData.length>0" >
+   <departmentpiechart-directive 
+   id="getprintvalue.piechartid" 
+   data="getprintvalue.donutchartData" 
+   index="getprintvalue.donutchartindex" 
+   color="getprintvalue.indexcolor">  
+   </departmentpiechart-directive>
+   </div>
+   <div ng-if="getprintvalue.donutchartData.length == 0"> 
+   <center>
+   <span style="color: black">
+      {{ 'Retaillang.NoresultFound' | i18n }}
+   </span>
+   </center>         
+   </div>
+   </div>
+   <div class="row" style="margin-top:5px;">
+   <div ng-if="getprintvalue.showdepartmentbarchart && getprintvalue.alldeparmentbarchartData.length>0">
+   <alldepartmentbarchart-directive 
+   id="getprintvalue.barchartid" 
+   data="getprintvalue.alldeparmentbarchartData" chartheight="getprintvalue.departmentchartheight">
+   </alldepartmentbarchart-directive>
+   </div>
+   <div ng-if="getprintvalue.alldeparmentbarchartData.length == 0">
+   <center><span style="color: black">
+   {{ 'Retaillang.NoresultFound' | i18n }}</span>
+   </center>
+   </div>
+   </div>
+   </div>
+   <div ng-if="getprintvalue.categoriessection" style="margin-top:45px;">
+     <!--categories donut chart and pie chart-->
+  <div class="row" style="margin-top:45px;">
+  <center>
+  <span class="capital">
+  <div ng-if="getprintvalue.selectedcategory.category_description=='ALL CATEGORIES'
+  &&getprintvalue.manufacturer.Name!='ALL MANUFACTURERS'">
+  <b>{{getprintvalue.manufacturer.Name}}</b>
+  </div>
+  <div ng-if="getprintvalue.selectedcategory.category_description=='ALL CATEGORIES'">
+  <b>{{getprintvalue.department.departmentDescription}} </b>
+  </div>
+  </span>
+  </center>
+  </div>
+  <div class="row" >
+              <!--donut chart-->
+  <div ng-if="getprintvalue.categoriesbarchart && getprintvalue.categoriesdonutchartdata.length > 0">
+  <categoriespiechart-directive id="categoriespiechartid" data="getprintvalue.categoriesdonutchartdata" index="getprintvalue.categoriesdonutchartindex" color="getprintvalue.categoriesindexcolor">  
+  </categoriespiechart-directive>
+  </div>
+  </div>
+
+  <div class="row">
+  <div ng-if="getprintvalue.categoriesbarchart && getprintvalue.categoriesdata.length > 0">
+  <categoriesunderdepartment-directive id="getprintvalue.Categoriesid" data="getprintvalue.categoriesdata" chartheight="getprintvalue.categorieschartheight">
+  </categoriesunderdepartment-directive>
+  </div>
+  <div ng-if="getprintvalue.categoriesdata.length == 0">  
+  <center>
+  <span style="color: black">
+    {{ 'Retaillang.NoresultFound' | i18n }}
+  </span>
+  </center>
+  </div>
+  </div> 
+  </div>
+  <div ng-if="getprintvalue.manufacturerssection">
+  <div class="row" >
+  <center>
+  <span class="capital">
+        <b>{{getprintvalue.category.Name}}</b>
+  </span>
+  </center>
+  </div>
+  <div class="row">
+  <div ng-if="getprintvalue.manufacturerchart && getprintvalue.manufacturerdonutchartData.length>0">
+  <manufacturerpiechart-directive  id="manufacturerpiechartid" data="getprintvalue.manufacturerdonutchartData" index="getprintvalue.manufacturerdonutchartindex" 
+  color="getprintvalue.manufacturerindexcolor">  
+  </manufacturerpiechart-directive>
+  </div>
+  <div ng-if="getprintvalue.manufacturerdonutchartData.length == 0">
+  <center><span style="color: black">{{ 'Retaillang.NoresultFound' | i18n }}</span>
+  </center>
+  </div>
+  </div>
+
+  <div class="row">
+  <div ng-if="getprintvalue.manufacturerchart && getprintvalue.manufacturerbarhcartdata.length > 0">
+  <manufacturersundercategories-directive  
+  id="manufacturerbartchartid"  
+  data="getprintvalue.manufacturerbarhcartdata"  
+  chartheight="getprintvalue.manufacturerchartheight">
+  </manufacturersundercategories-directive>
+  </div>
+  <div ng-if="getprintvalue.categoriesdata.length == 0">
+  <center>
+  <span style="color: black">
+        {{ 'Retaillang.NoresultFound' | i18n }}
+  </span>
+  </center>
+  </div>
+  </div>
+  </div>
+            </div>
+  <div ng-if="getprintvalue.role=='cpg'||getprintvalue.role=='distributor'">
+  <div class="row">
+  <center>
+  <span class="capital">
+  <b>all categories</b>
+  </span>
+  </center>
+  </div>
+  <div class="row">
+              <!--donut chart-->
+  <div ng-if="getprintvalue.categoriesbarchart && getprintvalue.categoriesdonutchartdata.length > 0">
+  <categoriespiechart-directive 
+  id="categoriespiechartid" 
+  data="getprintvalue.categoriesdonutchartdata" 
+  index="getprintvalue.categoriesdonutchartindex" 
+  color="getprintvalue.categoriesindexcolor">  
+  </categoriespiechart-directive>
+  </div>
+  </div>
+  <div class="row">
+  <div ng-if="getprintvalue.categoriesbarchart && getprintvalue.categoriesdata.length > 0">
+  <categoriesunderdepartment-directive id="getprintvalue.Categoriesid" data="getprintvalue.categoriesdata" chartheight="getprintvalue.categorieschartheight">
+  </categoriesunderdepartment-directive>
+  </div>
+  <div ng-if="getprintvalue.categoriesdata.length == 0">
+  <center>
+  <span style="color: black">
+        {{ 'Retaillang.NoresultFound' | i18n }}
+  </span>
+  </center>
+  </div>
+  </div>
+  </div>
+ <!--  </div>  --><!--end of main 3 column-->
+  </div>
+  </div>
+  <br>
+  </div>
+  </div>
+  <!-- </div>
+  </div>
+  </div>
+  </div> -->
+  </div>
+  </section>

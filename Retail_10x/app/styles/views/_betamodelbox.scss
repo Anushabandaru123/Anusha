@@ -1,0 +1,91 @@
+.modal-contents{
+  border-radius:1px;
+  /* color:white !important;*/
+  padding-bottom:0px ;
+
+
+
+}
+.modal-header{
+  border-radius:0px;
+  /*
+  color:white !important;
+  */
+
+}
+
+.close{
+  background-color: white;
+  color: red;
+  font-weight: bold;
+
+}
+
+.msggreen{
+
+  color: green;
+}
+
+.msgred{
+  color: red;
+}
+
+.titlepromocode{
+
+  /*  font-weight: bold;*/
+  font-size: 16px;
+
+}
+
+.modal .modal-dialog {
+  width: 350px;
+  margin: 0px;
+  background-color: white;
+  border: grey;
+
+}
+.modal-body{
+  background-color: white;
+  color: #515151;
+}
+.modal .modal-footer {
+  border-top: 1px solid grey;
+  padding: 2px;
+  text-align: left;
+  background-color: #ffffff;
+  width: 350px;
+}
+
+.button123{
+  background-color: #f1f1f1;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.model-valid{
+  background-color: #31bc86;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+
+.modal-title{
+  color: white;
+  font-weight: bold;
+}
+
+.model-invalid-title{
+  color: white;
+  font-weight: bold;
+}
+
+
+.model-invalid{
+  background-color: #31bc86;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+

@@ -1,0 +1,192 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+<div ui-view></div>
+
+
+
+<section class="manageUsers">
+  <div ng-controller="adminCtrl">
+    <div class="container-fluid">
+       <div class="row row_margin firstdashbordbg-navbar">
+
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
+          	 <div class="row adminlistverticalLine" style="margin-right: 10px;">
+          	    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 admintextfont">
+          		    <b> MANAGE USERS </b>
+          	      <hr> </div>
+          	  
+          	           
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 " style="padding-right: 30px;">
+              <div class="row adminuserfont" >
+           		 Manage Users
+              </div>
+
+              <div class="row admincreatetext" >
+           	     Create and manage all your user list here.Assign appropriate category(s) to your users so that they can integrate with all your campaign and couponing stragetgies.
+                 <hr style="margin-right: 0px;margin-bottom: 15px;border: 1px solid #ccc">
+              </div>
+
+              <div class="row" style=" margin-left:-15px;" ng-repeat="userlist in userlist">
+              	<div id="user_{{userlist.login_id}}">
+              	  <div class="row">
+              	  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 ">
+              	 	<div class="row">
+              	 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 adminlist" >
+              	 	        {{userlist.first_name}} {{userlist.last_name}}
+              	 	    </div>
+                 
+              	 	    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 adminpost" >
+              	 	        {{userlist.designation}}
+              	 	    </div>
+
+              	 	    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 adminpost" >
+              	 	       {{userlist.email}} | {{userlist.mobile}}
+              	 	    </div>
+              	 	</div>
+              	 </div>
+              	 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+              	     <div class="row">
+              	 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 adminlist" style="text-align:right" ng-repeat="category in userlist.categories">
+                           <div ng-if="category.category_description!= '0'">
+                             {{category.category_description}}
+                           </div>              	 	     
+              	 	     </div>
+
+              	 	    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                      
+              	 	      <div class="glyphicon glyphicon-pencil admineditgly" ng-click="edituser(userlist)"></div>
+                   
+              	 	    </div>
+              	 	</div>
+              	 </div> 
+              	 </div> <hr style="margin-right: 0px; border: 1px solid #ccc">             	        	              
+              </div>
+              <form id="myForm"> 
+              <div id="edituser_{{userlist.login_id}}" style="display:none">
+                <div class="row" style="background-color: #DAEAF2;margin-top:-19px;margin-bottom: 7px;sssspadding-right: 30px;">              	
+              	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    <div class="row" style="margin-top: 15px;" >
+                    	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                    	   <div class="row" >
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 3px;">
+                    	   	  	  First name
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    	   	  	  <input type="text" id="fname{{userlist.login_id}}" class="admininputbox" ng-model="getFname" ng-click="changebtncolor(userlist)" ng-init="getFname =userlist.first_name">
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+
+                    	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                    		 <div class="row">
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 3px;" >
+                    	   	  	  Last name
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    	   	  	  <input type="text" id="lname{{userlist.login_id}}" class="admininputbox"  ng-model="getLname" ng-click="changebtncolor(userlist)">
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+
+                    	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                    		 <div class="row">
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 3px;">
+                    	   	  	 Title/Role
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    	   	  	  <input type="text" id="role{{userlist.login_id}}" class="admininputbox" ng-model="getDesignation" ng-click="changebtncolor(userlist)" ng-init="getDesignation =userlist.designation">
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+                    </div>
+              	 </div>
+
+
+              	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    <div class="row" style="margin-top: 15px;" >
+                    	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                    	   <div class="row">
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 5px;">
+                    	   	  	 Email
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    	   	  	  <input type="email" id="email{{userlist.login_id}}" class="admininputbox" value="{{userlist.email}}" ng-model="getEmail" ng-click="changebtncolor(userlist)">
+                                 
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+
+                    	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                    	   <div class="row">
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 5px;">
+                               <div ng-if="CheckMobileFlag== true ">
+                    	   	  	  Phone
+                              </div>
+                               <div ng-if="CheckMobileFlag== false">
+                                Phone - {{errorMessage}}
+                              </div>
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                    	   	  	 <div class="row">
+                    	   	  	 	<div class="col-xs-3 col-sm-4 col-md-4 col-lg-4 ">
+                    	   	  	 		<input type="tel" id="countrycode{{userlist.login_id}}" class="admininputbox" ng-model="countrycode" ng-click="changebtncolor(userlist)">
+                    	   	  	 	</div>
+                    	   	  	 	<div class="col-xs-9 col-sm-8 col-md-8 col-lg-8 ">
+                    	   	  	 		<input type="tel" id="phone{{userlist.login_id}}" class="admininputbox" style="margin-left: -19px;" ng-model="getnumber" ng-click="changebtncolor(userlist)">
+                    	   	  	 	</div>
+                    	   	  	 </div>
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+
+                    	<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
+                    		<div class="row" >
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " style="margin-bottom: 5px;">
+                    	   	  	 Category
+                    	   	  </div>
+                    	   	  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+                              
+                                <div ng-dropdown-multiselect="" id="category{{userlist.login_id}}" options="getcategory" selected-model="selectedCategory" checkboxes="true" extra-settings="selectedCategorysettings" ng-click=" getelement(userlist)"> </div> 
+                             
+                    	   	  </div>
+                    	   </div>
+                    	</div>
+                    </div>
+              	 </div>
+                 
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 " >
+              	 <div class="row" >
+              	 	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 "></div>
+              	    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+              	    	<div class="row" style=" margin-top:15px;margin-right: 5px;">
+              	    	    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+              	    	    	 <button type="button" class="adminbtnfont" ng-click="cancelbtnclick(userlist)" id="reset">Cancel</button>
+              	    		</div>
+              	    		<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+              	    			 <span><button type="submit" id="btnClick{{userlist.login_id}}" class="adminsavebtn" ng-click="UpdateUser(userlist)">Save
+              	    			 </button></span>
+              	    		</div>
+              	    	</div>
+              	    </div>                    
+              	 </div>
+              	</div>
+
+              </div>
+             </div>
+
+           </form>
+
+               </div>
+              
+          
+         </div>
+
+      </div>
+    </div>
+  </div>
+</section>

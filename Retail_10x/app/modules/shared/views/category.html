@@ -1,0 +1,45 @@
+<section class="container category">
+  <div class="row">
+
+    <article class="col-sm-3">
+      <div class="dropdown input " id="waves">
+        <button class="btn btn-default dropdown-toggle" type="button" ng-click="fetchWaves(data-toggle)"
+                data-toggle="dropdown" aria-expanded="true">
+          {{'common.waves' | i18n}}
+
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="waves">
+          <li role="presentation" ng-repeat="wave in waves"><input type="radio" id="{{wave.wave_id}}"><label
+            for="{{wave.wave_id}}" name="NAME" value="{{wave.wave_id}}">{{wave.wave_name}}</label></li>
+        </ul>
+      </div>
+
+    </article>
+    <article class="col-sm-3">
+      <div class="dropdown input" id="states">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                aria-expanded="true">
+          {{'common.state' | i18n}}
+
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+          <li role="presentation" ng-repeat="state in states"><input type="radio" id="{{wave.wave_id}}"><label
+            for="{{wave.wave_id}}" name="NAME" value="{{wave.wave_id}}">{{wave.wave_name}}</label></li>
+        </ul>
+      </div>
+    </article>
+    <article class="col-sm-3">
+      <div class="dropdown input" id="locations">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown2"
+                aria-expanded="true">
+          {{'common.location' | i18n}}
+
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">
+          <li role="presentation" ng-repeat="location in locations"><input type="radio" id="{{wave.wave_id}}"><label
+            for="{{wave.wave_id}}" name="NAME" value="{{wave.wave_id}}">{{wave.wave_name}}</label></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>

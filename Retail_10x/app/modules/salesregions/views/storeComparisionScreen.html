@@ -1,0 +1,324 @@
+<div ng-include src="'modules/dashboard/views/header.html'"></div>
+
+<div ng-include src="'modules/dashboard/views/idlemodel.html'"></div>
+
+
+<section class="selesRegions">
+<div ng-controller="storecomparisionCtrl">
+<div class="container-fluid">
+<div class="MaskLayer" ng-class="{isClosed : !masked}">
+<div class="MaskLayer-Content">
+    <p></p>
+</div>
+</div>
+
+<div class="row row_margin">
+<div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+<div class="row">
+<div class="col-sm-12 col-md-12 col-lg-12 list-group" style="padding:0px;">
+<select class="form-control indexfontsize" ng-model="selectedvalue"
+    ng-options="names.region for names in topregions" ng-change="selectRegions(selectedvalue);" >
+</select>
+<div class="list-group">
+<div class="list-group" style=" height:700px;overflow-y:auto;">
+<div ng-repeat="x in topstoresList| orderBy:'-amt'" > 
+<div ng-if="x.status=='plus'" id="mySelect" class="list-departmet-items " >
+<div class="row">
+<div class="col-xs-10 col-sm-9 col-md-9 col-lg-10" style="padding:0px;">
+<div ng-click="storeselected(x);" style="word-wrap:break-word;" class="capital">
+    {{x.retailerName+' '+ x.content}}
+</div>
+</div>
+<div class="col-xs-2 col-sm-3 col-md-3 col-lg-2">
+<div   ng-click="storeselected(x);" >
+                   +
+</div>
+</div>
+</div>
+</div>
+<div ng-if="x.status=='minus'" class="selectedlist list-departmet-items" id="mySelect" >
+<div class="row">
+<div class="col-xs-10 col-sm-9 col-md-9 col-lg-10" style="padding:0px;">
+<div ng-click="storeselected(x);" style="color: white" class="capital">
+    {{x.retailerName+' '+ x.content}}
+</div>
+</div>
+<div class="col-xs-2 col-sm-3 col-md-3 col-lg-2">
+<div   ng-click="storeselected(x);" >
+                   -
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-9 col-md-10 col-lg-10 dashbordbg-navbar">
+<div class="row" ng-if="role!=='cpg'">
+<div class="col-xs-12 col-sm-12  col-md-3 col-lg-3">
+<h3>{{selectedvalue.region}}</h3></div>
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 prdctmargin" style=" padding-right: 0px;">
+<div class="row">      
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<select class="form-control bgcolor salesfont" ng-options="names.name for names in reporttimeranges " ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);"></select>
+</div>
+</div>
+</div>  
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fontChange">
+<span class="glyphicon glyphicon-stop"></span>
+      {{ 'Retaillang.ReportTimePeriod' | i18n }}
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div style="cursor: default;" id="reportrange" class="form-control indexfontsize deptbrdr ">
+       <span></span>
+    <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 chnageFontColor">
+    <span class="glyphicon glyphicon-stop"></span>
+           {{ 'Retaillang.CompareTimeperiod' | i18n }}
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="right-inner-addon">
+    <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign"></i>
+    <input type="text" name="daterange" class="form-control indexfontsize deptbrdr " style="cursor: default;"/>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+
+<div class="row" ng-if="role== 'cpg'">
+   <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+     <div class="row" >
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <h3 class="capital">Sales Regions</h3>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="pathindicatorsize">
+            <p class="startpathname capital">
+            <a ui-sref="dashBoard">
+               {{'Retaillang.DASHBOARD' | i18n}}>
+            </a>
+            <span class="currentpathname capital">
+               {{'Retaillang.SALESREGION' | i18n}}
+            </span>
+            </p>
+           </div>
+       </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 newdashbordbg-navbar " style="margin: 0px 0px 0px 0px;">
+      <div class="row"  style="margin-top:-7px">
+      <div class="col-xs-12 col-sm-12  col-md-4  col-lg-4 newdemo ">
+       <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd capital" >          <h5><b>Brands</b></h5>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dbpaddd">
+           
+                <select class="form-controldropdown" data-ng-options="brand.brand_name for brand in CPGBrandsList" data-ng-model="selectedBrand" ng-change="brandChange(selectedBrand);" style="width:100%;color:black;"></select>
+             
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="row" style="margin-top:10px;margin-left:0px">
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 newdemo" style="margin-top:5px;">
+        
+             <select class="form-control bgcolor" ng-options="names.name for names in reporttimeranges" ng-model="selectedtimeperiod" ng-change="timerange(selectedtimeperiod);">
+             </select>
+         
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 newdemo" style="margin-top:5px;margin-left: 0px;">
+      <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 fontChange cpgdashbord">
+            <span class="glyphicon glyphicon-stop"></span>
+                {{ 'Retaillang.ReportTimePeriod' | i18n }}
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-7 col-lg-7" style="padding-left: 0px;">
+             <div  style="cursor: default; " id="reportrange" class="form-control indexfontsize deptbrdr ">
+             <span></span>
+              <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign "></i>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 newdemo" style="margin-top:5px;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 chnageFontColor cpgdashbord">
+            <span class="glyphicon glyphicon-stop" ></span> 
+            {{ 'Retaillang.CompareTimeperiod' | i18n }}
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-7 col-lg-7 " style="padding-left: 0px;">
+            <div class="dash-right-inner-addon">
+               <i class="glyphicon glyphicon-calendar fa fa-calendar calendaralign salesdtpkr"></i>
+                <input style="cursor: default;" type="text" name="daterange" class="form-control indexfontsize deptbrdr "/>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  </div>
+  
+
+ 
+  
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+     <div class="row">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="pathindicatorsize">
+      <p class="startpathname">
+      <a ui-sref="dashBoard capital">{{'Retaillang.DASHBOARD' | i18n}}></a>
+     <a ui-sref="SalesRegions capital">{{'Retaillang.SALESREGION' | i18n}}</a>
+         >
+      <span class="currentpathname capital">West</span>
+       </p></div>
+       </div>
+      </div>
+
+      <div class="row salesiconfont">
+      <div class="btn-group" class="charttype-btn-group">
+      <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('line');"><img
+          ng-src="{{imgline}}"></button>
+      <button type="button" class="charttype_radio_outer_btn" ng-click="selectgraph('bar');"><img
+       ng-src="{{imgbar}}"></button>
+      </div>
+       </div>
+    
+      <br>
+          <hr>
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+
+     
+       <google-map-component ng-if="geoSalesData[0]" data="geoSalesData[0]"
+     ></google-map-component>
+      
+
+      <!-- <div ng-if="role!='retailer'">
+          <salesregionmap-directive storedata="storeObj"></salesregionmap-directive>
+      </div> -->
+
+      
+     
+     <!-- <salesregionmap-directive storedata="storeObj"></salesregionmap-directive> -->
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+     <span class="sales-chart-heading" style="font-size: 25px;">{{selectedvalue.region}}</span>
+         </div>
+         </div>
+         <hr>
+       <div ng-if="selectedgraph=='bar'">
+      <div ng-repeat="product in selectedproducts">
+      <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <span style="text-transform: uppercase" ng-if="role=='retailer'">
+                   {{product.storename}}
+       </span>
+      <span style="text-transform: uppercase" ng-if="role=='cpg'||role=='distributor'">
+                   {{product.retailer+' '+product.storename}}
+      </span>
+      </div>
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <div class="page_dashboard_box_index_outer salesboxheight">
+      <div class="page_salesRegion_box_index_title">{{'Retaillang.Index' | i18n}}</div>
+      <div class="{{getindexStyle(product.index)}}" id="index_dashboard_sales">{{product.index}}</div>
+      </div>
+      </div>
+      </div>
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <storechartbar 
+      id="product.chartId" 
+      data="product.data" 
+      storeid="product.storeid"
+      retailerid="product.retailerId">
+      </storechartbar>
+      </div>
+      </div>
+      <hr>
+      </div>
+      </div>
+      <div ng-if="selectedgraph=='line'">
+      <div ng-repeat="List in selectedStoresforLinechart">
+
+      <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-6 col-lg-6">
+
+      <span style="text-transform: uppercase" ng-if="role=='retailer'">
+                   {{List.storename}}
+      </span>
+      <span style="text-transform: uppercase" ng-if="role=='cpg'||role=='distributor'">
+                   {{List.retailer+' '+List.storename}}
+      </span>
+      </div>
+      </div>
+
+      <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+       <div class="page_dashboard_box_well">
+         <div class="page_dashboard_box_title"> {{'Retaillang.linechart_box1_title' | i18n}}
+        <span class="page_dashboard_box_tooltip">&nbsp;</span></div>
+        <div class="page_dashboard_box_number">
+         ${{List.total | number : 2}}
+         </div>
+         <div class="page_dashboard_box_index_outer">
+         <div class="page_salesRegion_box_index_title">{{'Retaillang.Index' | i18n}}</div>
+        <div class="{{getindexStyle(List.spIndex)}}" id="index_dashboard_sales">{{List.spIndex}}</div>
+        </div>
+       <storecompare-directive 
+       id="List.chartId" 
+       data="List.data" 
+       storeid="List.storeid" 
+       dates="reportdateobject"
+       retailerid="List.retailerId">
+       </storecompare-directive>
+      </div>
+       </div>
+       </div>
+        <hr>
+       </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

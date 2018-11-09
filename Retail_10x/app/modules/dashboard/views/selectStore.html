@@ -1,0 +1,11 @@
+
+<div ng-controller="dateRangePickerCtrl">
+<select class="form-control capital" ng-model="selectedStoreId" ng-change="getRecord();">
+  <option value="allStores" selected="selected">All Stores</option>
+  <option value="" selected="selected">
+    {{ 'Retaillang.selectArea' | i18n }}
+  </option>
+  <option ng-repeat="states in List track by $index" value={{states.store_id}}>{{states.store_name}}
+  </option>
+</select>
+</div>
